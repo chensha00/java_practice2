@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.OrderStatement">
+
+    <!-- 定义结果集-->
+    <resultMap id="orderStatement" type="domain.OrderStatement">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="orderDetailId" column="ORDER_DETAIL_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="buyerId" column="BUYER_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="sellerId" column="SELLER_ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="number" column="NUMBER" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="amount" column="AMOUNT" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result property="finishTime" column="FINISH_TIME" jdbcType="DATETIME" javaType="java.util.Date"/>
+    </resultMap>
+    <!--定义查询列 -->
+    <sql id="columns">
+        `ID`,`ORDER_DETAIL_ID`,`BUYER_ID`,`SELLER_ID`,`NUMBER`,`AMOUNT`,`FINISH_TIME`
+    </sql>
+    <!-- 查询所有-->
+    <select id="find" resultType="java.util.Map" resultMap="test">
+        SELECT <include refid="columns"/> FROM `order_statement`
+    </select>
+    <!-- 分页查询所有-->
+    <select id="findPage" resultType="java.util.Map" resultMap="test">
+        SELECT <include refid="columns"/> FROM `order_statement` LIMIT 0,5;
+    </select>
+    <!-- 按条件查询-->
+    <select id="findByCondition" resultType="java.util.List" parameterType="java.util.Map" resultMap="test">
+        SELECT <include refid="columns"/> FROM order WHERE ${key} = #{VALUE };
+    </select>
+    <!-- 按id查询-->
+    <select id="findById" resultType="java.util.List" parameterType="java.util.Map" resultMap="test">
+        SELECT <include refid="columns"/> FROM order WHERE `ID` = ${id};
+    </select>
+    <!-- 添加-->
+    <insert id="add" parameterType="domain.OrderStatement">
+        INSERT INTO `test` (`ORDER_DETAIL_ID`,`BUYER_ID`,`SELLER_ID`,`NUMBER`,`AMOUNT`,`FINISH_TIME`) VALUES
+        (${orderDetailId},${buyerId},${sellerId},#{number},#{amount},#{finishTime})
+    </insert>
+    <!-- 编辑-->
+    <update id="update" parameterType="domain.OrderStatement">
+        UPDATE `order_statement` SET `ORDER_DETAIL_ID`=${orderDetailId},`BUYER_ID`=${buyerId},`SELLER_ID`=${sellerId},
+        `NUMBER`=#{number},`AMOUNT`=#{amount},`FINISH_TIME`=#{finishTime} WHERE `ID`=${id}
+        <![CDATA[
+        ]]>
+    </update>
+    <!--删除多条-->
+    <delete id="deleteByIds" parameterType="domain.OrderStatement">
+        DELETE FROM `order_statement` WHERE  `ID` IN
+        <foreach collection="ids" item="testId" open="("
+                 separator="," close=")">
+            ${testId}
+        </foreach>
+    </delete>
+    <!--删除一条-->
+    <delete id="deleteById" parameterType="domain.Test">
+        DELETE  FROM `order_statement` WHERE  `ID`= ${id}
+    </delete>
+</mapper>

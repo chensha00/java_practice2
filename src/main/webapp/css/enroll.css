@@ -1,0 +1,10 @@
+body {
+    font: 12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b体,sans-serif;
+    color: #666;
+}
+.birthdate{
+    font-size: 20px;
+    color: #a8a8a8;
+    width: 150px;
+    height: 50px;
+}

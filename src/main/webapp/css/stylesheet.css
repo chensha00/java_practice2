@@ -1,0 +1,133 @@
+/*边距及填充设置*/
+* {
+    margin:0;
+    padding: 0;
+}
+/*html样式*/
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+/*div通用样式*/
+div{
+    font-size: 18px;
+}
+/*body通用样式*/
+body{
+    font: 14px 'Microsoft Yahei','\5FAE\8F6F\96C5\9ED1','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: 'Microsoft Yahei','微软雅黑','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    color: #000;
+    line-height: 20px;
+}
+/*a标签通用样式*/
+a{
+    text-decoration: none;
+    color: #000;
+}
+/*a标签伪类通用样式*/
+a:hover{
+    color:#ff5501;
+    text-decoration: none;
+    outline: none;
+    font-size: 20px;
+}
+/*li标签通用样式设置*/
+li{
+    list-style: none;
+    line-height: 40px;
+    width:150px;
+}
+/*span标签通用样式*/
+span{
+    font-weight: bold;
+    font-size:22px;
+}
+/*id为head-banner的样式*/
+#head-banner{
+    margin-top: 10px;
+    height:100px;
+    width:1510px;
+    background-color:deepskyblue;
+}
+/*类名为banner的样式*/
+.banner{
+    display: inline;
+    margin-top: 10px;
+}
+/*id为account-info的样式*/
+#account-info{
+    margin-left:30px;
+    width:40%;
+    height: 100px;
+}
+/*id为forward样式*/
+#forward{
+    margin-left:690px;
+    width:40%;
+    height:auto;
+}
+/*id为log-out的样式*/
+#log-out{
+    margin-right:24px;
+    float:right;
+}
+/**/
+#blank{
+    height:40px;
+}
+/*id为cur-time的样式*/
+#cur-time{
+    font-weight: normal;
+    font-size: 18px;
+}
+/*设置id为menu元素的样式*/
+#menu{
+    background-color:cornflowerblue;
+    height:inherit;
+    width:1510px;
+}
+/*设置class为menu的元素的样式*/
+.menu{
+    height: auto;
+    width:150px;
+    line-height: 40px;
+    margin-top: 30px;
+    margin-left:15%;
+    font-size: 22px;
+    background-color:aqua;;
+
+}
+/*id为display的样式*/
+#display{
+    position:relative;
+    height:auto;
+    width:100%;
+    margin-top:50px;
+    background-color: lightgrey;
+}
+
+/*设置id为direction元素的样式*/
+#direction{
+    width: 15%;
+    margin-left:5%;
+}
+
+/*设置class为order-operate的元素的样式*/
+.order-operate{
+    height: 80px;
+    font-size:20px;
+    width:200px;
+    margin-right:150px;
+    background-color: aqua;
+}
+/*id为pay-this-order元素样式*/
+#pay-this-order{
+    margin-top:50px;
+    height:500px;
+    width:100%;
+}
+/*id为pay-pic的元素设置样式*/
+#pay-pic{
+    width:1510px;
+}

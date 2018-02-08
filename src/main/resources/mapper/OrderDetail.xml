@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.OrderDetail">
+
+    <!-- 定义结果集-->
+    <resultMap type="domain.OrderDetail" id="orderDetailMyBatis">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="sellerId" column="SELLER_ID" jdbcType="java.lang.Long"/>
+        <result property="buyerId" column="BUYER_ID" jdbcType="domain.Buyer"/>
+        <result property="orderId" column="ORDER_ID" jdbcType="domain.Order"/>
+        <result property="amount" column="AMOUNT" jdbcType="java.lang.Double"/>
+        <result property="isSuccess" column="IS_SUCCESS" jdbcType="java.lang.Boolean"/>
+        <result property="orderStatus" column="ORDER_STATUS" jdbcType="java.lang.Byte"/>
+        <result property="orderNumber" column="ORDER_NUMBER" jdbcType="java.lang.String"/>
+        <result property="creationTime" column="CREATION_TIME" jdbcType="java.util.Date"/>
+        <result property="finishTime" column="FINISH_TIME" jdbcType="java.util.Date"/>
+    </resultMap>
+    <!--定义查询列 -->
+    <sql id="columns">
+     ID,SELLER_ID,BUYER_ID,ORDER_ID,AMOUNT,IS_SUCCESS,ORDER_STATUS,ORDER_NUMBER,CREATION_TIME,FINISH_TIME
+    </sql>
+    <!-- 查询所有-->
+    <select id="selectAll" resultType="java.util.Map" resultMap="orderDetailMyBatis">
+      SELECT <include refid="columns"/> FROM order_detail
+    </select>
+    <!--按照id查询-->
+    <select id="getById" resultType="domain.OrderDetail">
+        SELECT <include refid="columns"/> FROM order_detail WHERE id=${id}
+    </select>
+    <!-- 按条件查询-->
+    <select id="queryCondition" resultType="java.util.List" parameterType="java.util.Map" resultMap="test">
+        SELECT <include refid="columns"/> FROM order_detail WHERE ${key} = #{VALUE };
+    </select>
+    <!--按条件分页查询-->
+    <select id="queryConditionPage" resultType="java.util.List" parameterType="java.util.Map" resultMap="test">
+        SELECT <include refid="columns"/> FROM order_detail WHERE ${key} = #{VALUE } LIMIT 0,5;
+    </select>
+
+    <!-- 添加-->
+    <insert id="insert" parameterType="domain.OrderDetail">
+      INSERT INTO `order_detail` (`ID`, `SELLER_ID`,`BUYER_ID`,`ORDER_ID`,`AMOUNT`,`IS_SUCCESS`,`ORDER_STATUS`,`ORDER_NUMBER`,`CREATION_TIME`,`FINISH_TIME`)
+              VALUES (${id}, #{sellerId,jdbcType=Long},#{buyerId,jdbcType=Long},#{orderId,jdbcType=Long},#{orderId,jdbcType=Long},#{amount,jdbcType=Double}
+              #{isSuccess,jdbcType=Boolean},#{orderStatus,jdbcType=Byte},#{orderNumber,jdbcType=String},,#{creationTime,jdbcType=String},#{finishTime,jdbcType=String})
+    </insert>
+    <!-- 更新-->
+    <update id="update" parameterType="domain.OrderDetail">
+        UPDATE `order_detail` SET `id`=${id},`sellerId`=${sellerId},`buyerId`=${buyerId},`orderId`=${orderId},`amount`=${amount},`isSuccess`=${isSuccess},`orderStatus`=${orderStatus}
+                 `orderNumber`=${orderNumber},`creationTime`=${creationTime},`finishTime`=${finishTime}
+        <if test="@Ognl@isNotEmpty(id)">
+        WHERE (`id`=${id})
+        </if>
+        <!--原样输出-->
+        <![CDATA[
+        ]]>
+    </update>
+    <!--删除-->
+    <delete id="delete" parameterType="java.util.Arrays">
+        DELETE FROM  order_detail WHERE  id IN
+            <if test="@Ognl@isNotEmpty(ids)">
+            <foreach collection="ids" item="orderDetailId" open="("
+            separator="," close=")">
+            ${testId}
+            </foreach>
+        </if>
+    </delete>
+</mapper>

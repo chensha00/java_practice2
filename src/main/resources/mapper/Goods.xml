@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.Goods">
+
+    <!-- 定义结果集-->
+    <resultMap type="domain.Goods" id="goods">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="type" column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="priIce" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result property="addr" column="ADDR" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="makeTime" column="MAKE_TIME" jdbcType="DATETIME" javaType="java.util.Date"/>
+        <result property="expirationTime" column="EXPIRATION_TIME" jdbcType="DATE" javaType="java.util.Date"/>
+        <result property="unit" column="UNIT" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+    <!--定义查询列 -->
+    <sql id="columns">
+        ID,NAME,TYPE ,PRICE,ADDR,MAKE_TIME,EXPIRATION_TIME,UNIT
+    </sql>
+    <!-- 查询所有-->
+    <select id="getTestAll" resultType="java.util.Map" resultMap="goods">
+        SELECT <include refid="columns"/> FROM test
+    </select>
+    <select id="getById" resultType="domain.Goods">
+        SELECT <include refid="columns"/> FROM test
+    </select>
+    <!-- 添加-->
+    <insert id="save" parameterType="domain.Goods">
+        INSERT INTO `test` (`id`, `NAME`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIMA`,`UNIT`) VALUES (${id}, #{name,jdbcType=VARCHAR},#{type,jdbaType=VARCHER},${price,jabaType=DECOMAL},#{addr,jdbcType=VARCHAR},#{makeTime,jdbcType=DATETIME},#{expirationTime,jdbcType=DATE},#{unit,jdbcType=VARCHAR})
+    </insert>
+    <!-- 编辑-->
+    <update id="update" parameterType="domain.Goods">
+        UPDATE `test` SET `id`='7', `NAME`='test mybaties'
+       <where>
+        <if test="@Ognl@isNotEmpty(id)">
+            AND (`id`=${id})
+        </if>
+        </where>
+        <![CDATA[
+        ]]>
+    </update>
+
+    <delete id="delete" parameterType="java.util.Map">
+        <!-- ids,name -->
+        DELETE FROM  test WHERE  id IN
+        <if test="@Ognl@isNotEmpty(ids)">
+            <foreach collection="ids" item="goodsId" open="("
+                     separator="," close=")">
+                ${testId}
+            </foreach>
+        </if>
+
+        <!--<foreach collection="roleIds" item="roleId" open="("-->
+        <!--separator="," close=")">-->
+        <!--#{roleId}-->
+        <!--</foreach>-->
+    </delete>
+
+</mapper>

@@ -1,0 +1,33 @@
+.Login{
+    float: right;
+    margin-right: 3px;
+}
+.home{
+    float: right;
+    margin-right: 5px;
+}
+.shop_name{
+    text-align:center;
+    font-size:30px;
+    color:#ff9fb4;
+}
+.pho{
+    float:left;
+    width: 210px;
+    height: 250px;
+    margin-left: 400px;
+}
+.know{
+    width:700px;height:300px;float:right;
+}
+.details{
+    text-align:center;
+     height: 80px;
+}
+.buy{
+    background-color: #ffc029;
+    width: 160px;height: 40px;
+}
+.goodsDiv{
+    float: right;
+}
