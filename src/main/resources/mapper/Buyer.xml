@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        <mapper namespace="com.zyht.domain.Buyer">
-    <resultMap id="buyer" type="com.zyht.domain.Buyer">
+<mapper namespace="com.zyht.domain.Buyer">
+    <!--定义结果集-->
+    <resultMap id="buyerTable" type="com.zyht.domain.Buyer">
         <id column="ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result column="NAME" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="SEX" property="sex" jdbcType="CHAR" javaType="java.lang.String"/>
@@ -18,16 +19,85 @@
         ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING
     </sql>
     <!--按id查-->
-    <select id="queryById" resultType="com.zyht.domain.Buyer">
-        SELECT <include refid="columns"/> FROM buyer WHERE ID=${id}
+    <select id="queryById" parameterType="java.lang.Long" resultType="com.zyht.domain.Buyer">
+        SELECT <include refid="columns"/> FROM buyer WHERE ID=#{_param}
     </select>
     <!--按条件查询-->
-    <select id="queryByCondition" resultType="java.util.List" parameterType="java.util.Map">
-        SELECT ID, NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING FROM buyer WHERE ${key}=#{value}
+    <select id="queryByCondition" resultMap="buyerTable" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM buyer
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="sex!=null">
+                AND SEX=#{sex}
+            </if>
+            <if test="age!=null">
+                AND AGE=${age}
+            </if>
+            <if test="idNumber!=null">
+                AND ID_NUMBER=#{idNumber}
+            </if>
+            <if test="tel!=null">
+                AND TEL=#{tel}
+            </if>
+            <if test="permanentAddr!=null">
+                AND PERMANENT_ADDR=#{permanentAddr}
+            </if>
+            <if test="profession!=null">
+                AND PROFESSION=#{profession}
+            </if>
+            <if test="workUnit!=null">
+                AND WORK_UNIT=#{workUnit}
+            </if>
+            <if test="saving!=null">
+                AND SAVING=${saving}
+            </if>
+        </where>
+    </select>
+    <!--按条件查询并分页-->
+    <select id="queryByConditionWithPage" resultMap="buyerTable" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM buyer
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="sex!=null">
+                AND SEX=#{sex}
+            </if>
+            <if test="age!=null">
+                AND AGE=${age}
+            </if>
+            <if test="idNumber!=null">
+                AND ID_NUMBER=#{idNumber}
+            </if>
+            <if test="tel!=null">
+                AND TEL=#{tel}
+            </if>
+            <if test="permanentAddr!=null">
+                AND PERMANENT_ADDR=#{permanentAddr}
+            </if>
+            <if test="profession!=null">
+                AND PROFESSION=#{profession}
+            </if>
+            <if test="workUnit!=null">
+                AND WORK_UNIT=#{workUnit}
+            </if>
+            <if test="saving!=null">
+                AND SAVING=${saving}
+            </if>
+        </where>
+        LIMIT #{startRow},#{size}
     </select>
     <!--按id删除-->
-    <delete id="deleteById" parameterType="com.zyht.domain.Buyer">
-        DELETE FROM buyer WHERE ID=${id}
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM buyer WHERE ID=#{_param}
     </delete>
     <!--按条件批量删除-->
     <delete id="deleteByIds" parameterType="java.util.Map">
@@ -38,7 +108,7 @@
     </delete>
     <!--单行添加数据-->
     <insert id="insertBuyer" parameterType="com.zyht.domain.Buyer">
-        INSERT INTO buyer(ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(DEFAUTL,#{name},#{sex},${age},#{idNumber},#{tel},#{permanentAddr},#{profession},#{workUnit},${saving})
+        INSERT INTO buyer(ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(DEFAULT,#{name},#{sex},${age},#{idNumber},#{tel},#{permanentAddr},#{profession},#{workUnit},${saving})
     </insert>
     <!--批量插入数据-->
     <insert id="insertBuyers" parameterType="java.util.Map">
