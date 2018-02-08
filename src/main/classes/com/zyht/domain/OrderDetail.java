@@ -74,6 +74,18 @@ public class OrderDetail {
      */
     private Date finishTime;
     /**
+     * 留言
+     */
+    private String message;
+    /**
+     * 物流状态：1--未发货，2--已发货，3--派送，4--已收货，5--退货
+     */
+    private Byte expressStatus;
+    /**
+     * 买家评价：1--差评，2--一般，3--不错，4--满意，5--非常满意
+     */
+    private Byte comment;
+    /**
      * @Title: OrderDetail
      * @Description: 空参数构造函数
      * @author caoxin
@@ -431,23 +443,47 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
+    public Byte getComment() {
+        return comment;
+    }
+
+    public void setComment(Byte comment) {
+        this.comment = comment;
+    }
+
+    public Byte getExpressStatus() {
+        return expressStatus;
+    }
+
+    public void setExpressStatus(Byte expressStatus) {
+        this.expressStatus = expressStatus;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
     public String toString() {
         return "OrderDetail{" +
                 "amount=" + amount +
                 ", id=" + id +
                 ", buyerId=" + buyerId +
-                ", buyer=" + buyer +
                 ", sellerId=" + sellerId +
-                ", seller=" + seller +
                 ", goodsId=" + goodsId +
-                ", goods=" + goods +
                 ", orderId=" + orderId +
-                ", order=" + order +
                 ", isSuccess=" + isSuccess +
                 ", orderStatus=" + orderStatus +
                 ", orderNumber='" + orderNumber + '\'' +
                 ", creationTime=" + creationTime +
                 ", finishTime=" + finishTime +
+                ", message='" + message + '\'' +
+                ", expressStatus=" + expressStatus +
+                ", comment=" + comment +
                 '}';
     }
 }
