@@ -9,9 +9,7 @@ package com.zyht.dao;/**********************************************************
  */
 
 import com.zyht.domain.Buyer;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +29,7 @@ public interface BuyerDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteBuyerById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int deleteBuyerById(Long id);
 
     /**
      * @Title: deleteBuyerByIds
@@ -42,7 +40,7 @@ public interface BuyerDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteBuyerByIds(Long[] ids,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int deleteBuyerByIds(Long[] ids);
     /**
      * @Title: updateBuyer
      * @Description: 添加或者修改买家信息
@@ -53,7 +51,7 @@ public interface BuyerDao {
      * @throw SQLException
      */
 
-    public Buyer updateBuyer(Buyer buyer,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int updateBuyer(Buyer buyer);
     /**
      * @Title: insertOrUpdateBuyer
      * @Description: 添加或者修改买家信息
@@ -63,7 +61,7 @@ public interface BuyerDao {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public Buyer insertBuyer(Buyer buyer,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int insertBuyer(Buyer buyer);
     /**
      * @Title: queryBuyerById
      * @Description: 通过ID查询买家信息表
@@ -74,7 +72,7 @@ public interface BuyerDao {
      * @throw SQLException
      */
 
-    public Buyer queryBuyerById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Buyer queryBuyerById(Long id);
     /**
      * @Title: queryBuyerByCondition
      * @Description: 通过条件查询买家信息
@@ -84,7 +82,7 @@ public interface BuyerDao {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public List<Buyer> queryBuyerByCondition(Map<String,String> stringBuyerMap,Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<Buyer> queryBuyerByCondition(Map<String,Object> stringBuyerMap);
     /**
      * @Title: findBuyerByCondition
      * @Description: 通过条件批量查询买家信息
@@ -94,5 +92,5 @@ public interface BuyerDao {
      * @return java.util.List<domain.Buyer>
      * @throw SQLException
      */
-    public List<Buyer> queryBuyerByCondition(Map<String,String> stringBuyerMap,Integer startRow,Integer size, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<Buyer> queryBuyerByConditionPage(Map<String,Object> stringBuyerMap);
 }
