@@ -1,17 +1,14 @@
 package com.zyht.service;
 
 import com.zyht.common.util.DateTransferUtil;
-import com.zyht.common.util.JdbcUtils;
 import com.zyht.common.util.OrderState;
-import com.zyht.dao.BuyerDaoImpl;
+import com.zyht.dao.BuyerDao;
 import com.zyht.domain.*;
 import com.zyht.exception.BuyException;
 import com.zyht.exception.FetchException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -22,8 +19,10 @@ import java.util.*;
  * @Description
  * @Date 2018/1/16
  */
-@Service("buyerServiceImpl")
+@Service("buyerService")
 public class BuyerServiceImpl implements BuyerService {
+    @Autowired
+    private BuyerDao buyerDao;
     /**
      * @param goodsList
      * @return sum 账单总金额
@@ -51,35 +50,35 @@ public class BuyerServiceImpl implements BuyerService {
      * @date 2018/1/16
      */
     @Override
-    public OrderDetail buy(Double bill, Goods goods, Seller seller, Buyer buyer) throws BuyException {
+    public List<OrderDetail> buy(Double bill, Map<GoodsSellerRelation,Double> buyList, Buyer buyer) throws BuyException {
         OrderDetail orderDetail = null;
         Order order = null;
         OrderDetailServiceImpl orderDetailServiceImpl=new OrderDetailServiceImpl();
         OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
+        List<OrderDetail> orderDetails=new ArrayList<>();
         //在订单表数据库中生成一条订单信息
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
         try {
             order = new Order( buyer.getId(), bill, false, OrderState.UNPAID.getStateNum(), UUID.randomUUID().toString(), new Date(), DateTransferUtil.stringToDate("2018-02-01 18:12:33"));
             orderServiceImpl.insertOrder(order);
-            Map<String,String> query=new HashMap<String,String>();
+            Map<String,Object> query=new HashMap<String,Object>();
             query.put("NUMBER",order.getNumber());
             order=orderServiceImpl.queryOrderByCondition(query).get(0);
-            orderDetail = new OrderDetail( buyer.getId(), seller.getId(), goods.getId(), order.getId(), bill, false, OrderState.UNPAID.getStateNum(), order.getNumber(), order.getCreationTime(), DateTransferUtil.stringToDate("2018-02-01 18:12:33"));
-            connection.setAutoCommit(false);
-            //向订单详情表插入数据
-            orderDetailServiceImpl.insertOrder(orderDetail);
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
+            Set<GoodsSellerRelation> listSet=buyList.keySet();
+            Iterator<GoodsSellerRelation> list=listSet.iterator();
+            while(list.hasNext()){
+                GoodsSellerRelation eachGoods=list.next();
+                Double eachBill=buyList.get(eachGoods)*eachGoods.getPrice();
+                orderDetail = new OrderDetail( buyer.getId(), eachGoods.getSellerId(), eachGoods.getGoodsId(), order.getId(), eachBill, false, OrderState.UNPAID.getStateNum(), order.getNumber(), order.getCreationTime(), DateTransferUtil.stringToDate("2018-02-01 18:12:33"));
+                orderDetails.add(orderDetail);
             }
+            //向订单详情表插入数据
+            for(OrderDetail od:orderDetails){
+                orderDetailServiceImpl.insertOrder(od);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement);
         }
         //支付该订单
         if (buyer.getSaving().doubleValue() < bill.doubleValue()) {
@@ -87,15 +86,17 @@ public class BuyerServiceImpl implements BuyerService {
             order.setIsSuccess(false);
             order.setOrderStatus(OrderState.ABORTION.getStateNum());
             order.setFinishTime(new Date());
-            //修改订单详情相关状态
-            orderDetail.setIsSuccess(false);
-            orderDetail.setOrderStatus(OrderState.ABORTION.getStateNum());
-            orderDetail.setFinishTime(new Date());
             orderServiceImpl.updateOrder(order);
-            orderDetailServiceImpl.updateOrder(orderDetail);
+            //修改订单详情相关状态
+            for(OrderDetail od:orderDetails){
+                od.setIsSuccess(false);
+                od.setOrderStatus(OrderState.ABORTION.getStateNum());
+                od.setFinishTime(new Date());
+                orderDetailServiceImpl.updateOrder(od);
+            }
             throw new BuyException(buyer.getName() + ":账单总额大于账户余额，交易失败！");
         }
-        return orderDetail;
+        return orderDetails;
     }
 
     /**
@@ -113,7 +114,7 @@ public class BuyerServiceImpl implements BuyerService {
         OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
         Map<String,String> query=new HashMap<String,String>();
         query.put("ORDER_NUMBER",order.getNumber());
-        List<OrderDetail> orderDetails=new ArrayList<OrderDetail>();
+        List<OrderDetail> orderDetails=new LinkedList<OrderDetail>();
         orderDetails=orderDetailServiceImpl.queryOrderByCondition(query);
         if (buyer.getSaving().doubleValue() >= order.getAmount().doubleValue()) {
             //订单及订单详情的状态修改为已支付
@@ -182,7 +183,7 @@ public class BuyerServiceImpl implements BuyerService {
     }
    /**
      * @param id, connection, preparedStatement
-     * @return java.lang.Integer
+     * @return int
      * @Title: deleteBuyerById
      * @Description: 通过买家ID删除
      * @author caoxin
@@ -190,35 +191,25 @@ public class BuyerServiceImpl implements BuyerService {
      * @throw SQLException
      */
     @Override
-    public Integer deleteBuyerById(Long id) {
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
-        Integer operationRows = null;
+    public int deleteBuyerById(Long id) {
+//        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+//        BuyerDao buyerDaoImpl =(BuyerDao) SpringContextUtil.getBean("buyerDao");
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
 
         //根据传入的id在buyer表中删除对应的数据并返回受影响的行数
-        try {
+
             //关闭事务自动提交
-            connection.setAutoCommit(false);
-            operationRows = buyerDaoImpl.deleteBuyerById(id, connection, preparedStatement);
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement);
-        }
-        return operationRows;
+//            connection.setAutoCommit(false);
+        return buyerDao.deleteBuyerById(id);
+
     }
 
     /**
-     * @param ids, connection, preparedStatement
-     * @return java.lang.Integer
+     * @param ids
+     * @return int
      * @Title: deleteBuyerByIds
      * @Description: 通过ID批量删除买家
      * @author caoxin
@@ -226,34 +217,34 @@ public class BuyerServiceImpl implements BuyerService {
      * @throw SQLException
      */
     @Override
-    public Integer deleteBuyerByIds(Long[] ids) {
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
-        Integer operationRows = null;
+    public int deleteBuyerByIds(Long[] ids) {
+//        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
+//        Integer operationRows = null;
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
         //根据传入的id数组进行删除操作
-        try {
+//        try {
             //关闭事务自动提交
-            connection.setAutoCommit(false);
-            operationRows = buyerDaoImpl.deleteBuyerByIds(ids, connection, preparedStatement);
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement);
-        }
-        return operationRows;
+//            connection.setAutoCommit(false);
+           return  buyerDao.deleteBuyerByIds(ids);
+//        } catch (SQLException e) {
+//            try {
+//                connection.rollback();
+//            } catch (SQLException e1) {
+//                e1.printStackTrace();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            JdbcUtils.release(connection, preparedStatement);
+//        }
+//        return operationRows;
     }
 
     /**
-     * @param buyer, connection, preparedStatement
-     * @return domain.Buyer
+     * @param buyer
+     * @return int
      * @Title: updateBuyer
      * @Description: 修改买家信息
      * @author caoxin
@@ -261,34 +252,35 @@ public class BuyerServiceImpl implements BuyerService {
      * @throw SQLException
      */
     @Override
-    public Buyer updateBuyer(Buyer buyer) {
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
+    public int updateBuyer(Buyer buyer) {
+//        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
         //根据传入的用户进行更新
-        try {
+//        try {
             //关闭事务自动提交
-            connection.setAutoCommit(false);
-            buyerDaoImpl.updateBuyer(buyer, connection, preparedStatement);
+//            connection.setAutoCommit(false);
 
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement);
-        }
-        return buyer;
+
+//        } catch (SQLException e) {
+//            try {
+//                connection.rollback();
+//            } catch (SQLException e1) {
+//                e1.printStackTrace();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            JdbcUtils.release(connection, preparedStatement);
+//        }
+//        int line=0;
+        return buyerDao.updateBuyer(buyer);
     }
 
     /**
-     * @param buyer, connection, preparedStatement
-     * @return domain.Buyer
+     * @param buyer
+     * @return int
      * @Title: insertBuyer
      * @Description: 添加买家信息
      * @author caoxin
@@ -296,32 +288,32 @@ public class BuyerServiceImpl implements BuyerService {
      * @throw SQLException
      */
     @Override
-    public Buyer insertBuyer(Buyer buyer) {
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
+    public int insertBuyer(Buyer buyer) {
+//        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
         //插入传入的买家信息
-        try {
-            connection.setAutoCommit(false);
-            buyerDaoImpl.insertBuyer(buyer, connection, preparedStatement);
+//        try {
+//            connection.setAutoCommit(false);
+        return buyerDao.insertBuyer(buyer);
+//        } catch (SQLException e) {
+//            try {
+//                connection.rollback();
+//            } catch (SQLException e1) {
+//                e1.printStackTrace();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            JdbcUtils.release(connection, preparedStatement);
+//        }
 
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement);
-        }
-        return buyer;
+
     }
 
     /**
-     * @param id, connection, preparedStatement
+     * @param id
      * @return domain.Buyer
      * @Title: queryBuyerById
      * @Description: 通过ID查询买家信息表
@@ -331,22 +323,15 @@ public class BuyerServiceImpl implements BuyerService {
      */
     @Override
     public Buyer queryBuyerById(Long id) {
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
-        ResultSet resultSet = null;
-        Buyer buyerForOperation = null;
+//        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+//        BuyerDao buyerDao =(BuyerDao) SpringContextUtil.getBean("buyerDao");
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
         //按传入的买家id查询buyer表
-        try {
-            buyerForOperation = buyerDaoImpl.queryBuyerById(id, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement, resultSet);
-        }
-        return buyerForOperation;
+
+        return buyerDao.queryBuyerById(id);
     }
 
     /**
@@ -360,23 +345,16 @@ public class BuyerServiceImpl implements BuyerService {
      */
 
     @Override
-    public List<Buyer> queryBuyerByCondition(Map<String, String> stringBuyerMap) {
-        List<Buyer> buyersForOperation = null;
-        ResultSet resultSet = null;
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
+    public List<Buyer> queryBuyerByCondition(Map<String, Object> stringBuyerMap) {
+//        List<Buyer> buyersForOperation = null;
+//        ResultSet resultSet = null;
+//        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
         //根据条件查询buyer表并返回查询结果
-        try {
-            buyersForOperation = buyerDaoImpl.queryBuyerByCondition(stringBuyerMap, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement, resultSet);
-        }
-        return buyersForOperation;
+        return buyerDao.queryBuyerByCondition(stringBuyerMap);
     }
 
     /**
@@ -389,22 +367,16 @@ public class BuyerServiceImpl implements BuyerService {
      * @throw SQLException
      */
     @Override
-    public List<Buyer> queryBuyerByCondition(Map<String, String> stringBuyerMap, Integer startRow, Integer size) {
-        List<Buyer> buyersForOperation = null;
-        ResultSet resultSet = null;
-        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
+    public List<Buyer> queryBuyerByConditionPage(Map<String, Object> stringBuyerMap) {
+//        List<Buyer> buyersForOperation = null;
+//        ResultSet resultSet = null;
+//        BuyerDaoImpl buyerDaoImpl = new BuyerDaoImpl();
         //连接数据库
-        Connection connection = JdbcUtils.getConnection();
+//        Connection connection = JdbcUtils.getConnection();
         //预编译语句
-        PreparedStatement preparedStatement = null;
+//        PreparedStatement preparedStatement = null;
         //根据条件查询buyer表，并将结果分页显示
-        try {
-            buyersForOperation = buyerDaoImpl.queryBuyerByCondition(stringBuyerMap, startRow, size, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JdbcUtils.release(connection, preparedStatement, resultSet);
-        }
-        return buyersForOperation;
+        return  buyerDao.queryBuyerByConditionPage(stringBuyerMap);
+
     }
 }

@@ -33,7 +33,7 @@ public interface BuyerService {
      * @param buyMoney 购买金额 buyNum 购买数量 goods 商品 seller 卖家 orderState 订单状态
      * @throws BuyException
      */
-    public OrderDetail buy(Double buyMoney, Goods goods, Seller seller, Buyer buyer)throws BuyException;
+    public List<OrderDetail> buy(Double buyMoney, Map<GoodsSellerRelation,Double> buyList,Buyer buyer)throws BuyException;
     /**
      * @Title: pay
      * @Description: 支付账单
@@ -62,7 +62,7 @@ public interface BuyerService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteBuyerById(Long id)throws SQLException;
+    public int deleteBuyerById(Long id);
 
     /**
      * @Title: deleteBuyerByIds
@@ -73,7 +73,7 @@ public interface BuyerService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteBuyerByIds(Long[] ids)throws SQLException;
+    public int deleteBuyerByIds(Long[] ids);
     /**
      * @Title: updateBuyer
      * @Description: 添加或者修改买家信息
@@ -84,7 +84,7 @@ public interface BuyerService {
      * @throw SQLException
      */
 
-    public Buyer updateBuyer(Buyer buyer)throws SQLException;
+    public int updateBuyer(Buyer buyer);
     /**
      * @Title: insertOrUpdateBuyer
      * @Description: 添加或者修改买家信息
@@ -94,7 +94,7 @@ public interface BuyerService {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public Buyer insertBuyer(Buyer buyer)throws SQLException;
+    public int insertBuyer(Buyer buyer);
     /**
      * @Title: queryBuyerById
      * @Description: 通过ID查询买家信息表
@@ -115,7 +115,7 @@ public interface BuyerService {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public List<Buyer> queryBuyerByCondition(Map<String,String> stringBuyerMap)throws SQLException;
+    public List<Buyer> queryBuyerByCondition(Map<String,Object> stringBuyerMap);
     /**
      * @Title: findBuyerByCondition
      * @Description: 通过条件批量查询买家信息
@@ -125,5 +125,5 @@ public interface BuyerService {
      * @return java.util.List<domain.Buyer>
      * @throw SQLException
      */
-    public List<Buyer> queryBuyerByCondition(Map<String,String> stringBuyerMap,Integer startRow,Integer size)throws SQLException;
+    public List<Buyer> queryBuyerByConditionPage(Map<String,Object> stringBuyerMap);
 }
