@@ -69,6 +69,10 @@ public class Account  {
      */
     private Date updateTime;
     /**
+     * 账户支付密码 6位字符串
+     */
+    private String payPassword;
+    /**
       * @Title: Account
       * @Description: 空参构造器
       * @author caoxin
@@ -339,6 +343,14 @@ public class Account  {
         this.seller = seller;
     }
 
+    public String getPayPassword() {
+        return payPassword;
+    }
+
+    public void setPayPassword(String payPassword) {
+        this.payPassword = payPassword;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -349,9 +361,10 @@ public class Account  {
                 ", isCanceled=" + isCanceled +
                 ", isDelete=" + isDelete +
                 ", buyerId=" + buyerId +
-                ", sellerId=" + sellerId +
                 ", addTime=" + addTime +
                 ", updateTime=" + updateTime +
+                ", payPassword='" + payPassword + '\'' +
+                ", sellerId=" + sellerId +
                 '}';
     }
 }
