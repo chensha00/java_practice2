@@ -79,14 +79,12 @@ public class GoodsSellerRelation {
     @Override
     public String toString() {
         return "GoodsSellerRelation{" +
-                "goods=" + goods +
-                ", id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", inventory=" + inventory +
                 ", price=" + price +
                 ", goodsId=" + goodsId +
                 ", sellerId=" + sellerId +
-                ", seller=" + seller +
                 '}';
     }
 

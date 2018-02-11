@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyht.domain.GoodsSellerRelation">
+    <resultMap id="goodsSellerRelation" type="com.zyht.domain.GoodsSellerRelation">
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="INVENTORY" property="inventory" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+        <result column="PRICE" property="price" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <result column="GOODS_ID" property="goodsId" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="SELLER_ID" property="sellerId" jdbcType="BIGINT" javaType="java.lang.Long"/>
+    </resultMap>
+    <!--查询列-->
+    <sql id="columns">
+        ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID
+    </sql>
+    <!--按id查-->
+    <select id="queryById" resultMap="goodsSellerRelation" parameterType="java.lang.Long">
+        SELECT <include refid="columns"/> FROM goods_seller_relation WHERE ID=#{_param}
+    </select>
+    <!--按条件查询-->
+    <select id="queryByCondition" resultMap="goodsSellerRelation" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM goods_seller_relation
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="inventory!=null">
+                AND INVENTORY=${inventory}
+            </if>
+            <if test="price!=null">
+                AND PRICE=${price}
+            </if>
+            <if test="goodsId!=null">
+                AND GOODS_ID=${goodsId}
+            </if>
+            <if test="sellerId!=null">
+                AND SELLER_ID=${sellerId}
+            </if>
+        </where>
+    </select>
+    <!--按条件分页查询-->
+    <select id="queryByConditionWithPage" resultMap="goodsSellerRelation" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM goods_seller_relation
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="inventory!=null">
+                AND INVENTORY=${inventory}
+            </if>
+            <if test="price!=null">
+                AND PRICE=${price}
+            </if>
+            <if test="goodsId!=null">
+                AND GOODS_ID=${goodsId}
+            </if>
+            <if test="sellerId!=null">
+                AND SELLER_ID=${sellerId}
+            </if>
+        </where>
+        LIMIT ${startRow},${size}
+    </select>
+    <!--按id删除-->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM goods_seller_relation WHERE ID=#{_param}
+    </delete>
+    <!--按条件批量删除-->
+    <delete id="deleteByIds" parameterType="java.util.Map">
+        DELETE FROM goods_seller_relation WHERE ID IN
+        <foreach collection="ids" item="eachId" open="(" separator="," close=")">
+            ${eachId}
+        </foreach>
+    </delete>
+    <!--单行添加数据-->
+    <insert id="insertGsr" parameterType="com.zyht.domain.GoodsSellerRelation">
+        INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES(DEFAUTL,#{name},${inventory},${price},${goodsId},${sellerId})
+    </insert>
+    <!--批量插入数据-->
+    <insert id="insertGsrs" parameterType="java.util.Map">
+        INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES
+        <where>
+            <foreach collection="prices" item="eachPrice" separator=",">
+                (DEFAULT,#{name},${inventory},${eachPrice},${goodsId},${sellerId})
+            </foreach>
+        </where>
+    </insert>
+    <!--按id更新数据-->
+    <update id="updateGsr" parameterType="com.zyht.domain.GoodsSellerRelation">
+        UPDATE goods_seller_relation SET INVENTORY=${inventory},PRICE=${price},GOODS_ID=${goodsId},SELLER_ID=${sellerId} WHERE ID=${id}
+    </update>
+</mapper>
