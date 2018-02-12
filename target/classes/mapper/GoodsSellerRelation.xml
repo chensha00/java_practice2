@@ -79,7 +79,7 @@
     </delete>
     <!--单行添加数据-->
     <insert id="insertGsr" parameterType="com.zyht.domain.GoodsSellerRelation">
-        INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES(DEFAUTL,#{name},${inventory},${price},${goodsId},${sellerId})
+        INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES(DEFAULT,#{name},${inventory},${price},${goodsId},${sellerId})
     </insert>
     <!--批量插入数据-->
     <insert id="insertGsrs" parameterType="java.util.Map">

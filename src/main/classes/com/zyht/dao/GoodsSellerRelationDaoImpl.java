@@ -12,6 +12,7 @@ import com.zyht.base.Base;
 import com.zyht.domain.GoodsSellerRelation;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +61,9 @@ public class GoodsSellerRelationDaoImpl extends Base<GoodsSellerRelation> implem
 //            operatedRows++;
 //        }
 //        connection.commit();
-        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteByIds",ids);
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("ids",ids);
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteByIds",map);
     }
     /**
      * @Title: updateGoodsSellerRelation
