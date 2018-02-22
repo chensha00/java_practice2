@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author renxu
@@ -137,4 +138,11 @@ public class AccountServiceImpl implements AccountService {
             return result;//返回结果给用户
         }
     }
+
+    @Override
+    public List<Account> selectAll() {
+        return accountDao.queryAll() ;
+    }
+
+
 }
