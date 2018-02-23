@@ -5,7 +5,6 @@ import com.zyht.domain.*;
 import com.zyht.exception.BuyException;
 import com.zyht.exception.FetchException;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +104,16 @@ public interface BuyerService {
      * @throw SQLException
      */
 
-    public Buyer queryBuyerById(Long id)throws SQLException;
+    public Buyer queryBuyerById(Long id);
+    /**
+     * @Title: queryBuyerAccountById
+     * @Description: 通过ID查询买家信息表
+     * @author caoxin
+     * @date 2018/1/19
+     * @param id
+     * @return domain.Account
+     */
+    public Account queryBuyerAccountById(Long id);
     /**
      * @Title: queryBuyerByCondition
      * @Description: 通过条件查询买家信息

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyht.domain.Buyer">
+    <!--定义结果集-->
+    <resultMap id="buyerTable" type="com.zyht.domain.Buyer">
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="SEX" property="sex" jdbcType="CHAR" javaType="java.lang.String"/>
+        <result column="AGE" property="age" jdbcType="TINYINT" javaType="java.lang.Byte"/>
+        <result column="ID_NUMBER" property="idNumber" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="TEL" property="tel" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="PERMANENT_ADDR" property="permanentAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="PROFESSION" property="profession" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="WORK_UNIT" property="workUnit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="SAVING" property="saving" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+    </resultMap>
+    <!--查询列-->
+    <sql id="columns">
+        ID,NAME,SEX,AGE,ID_NUMBER AS IDNUMBER,TEL,PERMANENT_ADDR AS PERMANENTADDR,PROFESSION,WORK_UNIT AS WORKUNIT,SAVING
+    </sql>
+    <!--按id查-->
+    <select id="queryById" parameterType="java.lang.Long" resultType="com.zyht.domain.Buyer">
+        SELECT <include refid="columns"/> FROM buyer WHERE ID=#{_param}
+    </select>
+    <!--按条件查询-->
+    <select id="queryByCondition" resultMap="buyerTable" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM buyer
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="sex!=null">
+                AND SEX=#{sex}
+            </if>
+            <if test="age!=null">
+                AND AGE=${age}
+            </if>
+            <if test="idNumber!=null">
+                AND ID_NUMBER=#{idNumber}
+            </if>
+            <if test="tel!=null">
+                AND TEL=#{tel}
+            </if>
+            <if test="permanentAddr!=null">
+                AND PERMANENT_ADDR=#{permanentAddr}
+            </if>
+            <if test="profession!=null">
+                AND PROFESSION=#{profession}
+            </if>
+            <if test="workUnit!=null">
+                AND WORK_UNIT=#{workUnit}
+            </if>
+            <if test="saving!=null">
+                AND SAVING=${saving}
+            </if>
+        </where>
+    </select>
+    <!--按条件查询并分页-->
+    <select id="queryByConditionWithPage" resultMap="buyerTable" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM buyer
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="sex!=null">
+                AND SEX=#{sex}
+            </if>
+            <if test="age!=null">
+                AND AGE=${age}
+            </if>
+            <if test="idNumber!=null">
+                AND ID_NUMBER=#{idNumber}
+            </if>
+            <if test="tel!=null">
+                AND TEL=#{tel}
+            </if>
+            <if test="permanentAddr!=null">
+                AND PERMANENT_ADDR=#{permanentAddr}
+            </if>
+            <if test="profession!=null">
+                AND PROFESSION=#{profession}
+            </if>
+            <if test="workUnit!=null">
+                AND WORK_UNIT=#{workUnit}
+            </if>
+            <if test="saving!=null">
+                AND SAVING=${saving}
+            </if>
+        </where>
+        LIMIT #{startRow},#{size}
+    </select>
+    <!--按id删除-->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM buyer WHERE ID=#{_param}
+    </delete>
+    <!--按条件批量删除-->
+    <delete id="deleteByIds" parameterType="java.util.Map">
+        DELETE FROM buyer WHERE ID IN
+        <foreach collection="ids" item="eachId" open="(" separator="," close=")">
+            ${eachId}
+        </foreach>
+    </delete>
+    <!--单行添加数据-->
+    <insert id="insertBuyer" parameterType="com.zyht.domain.Buyer">
+        INSERT INTO buyer(ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(DEFAULT,#{name},#{sex},${age},#{idNumber},#{tel},#{permanentAddr},#{profession},#{workUnit},${saving})
+    </insert>
+    <!--批量插入数据-->
+    <insert id="insertBuyers" parameterType="java.util.Map">
+        INSERT INTO buyer(ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES
+        <where>
+            <foreach collection="names" item="eachName" separator=",">
+                (DEFAULT,#{eachName},#{sex},${age},#{idNumber},#{tel},#{permanentAddr},#{profession},#{workUnit},${saving})
+            </foreach>
+        </where>
+    </insert>
+    <!--按id更新数据-->
+    <update id="updateBuyer" parameterType="com.zyht.domain.Buyer">
+        UPDATE buyer SET NAME=#{name},SEX=#{sex},AGE=${age},ID_NUMBER=#{idNumber},TEL=#{tel},PERMANENT_ADDR=#{permanentAddr},PROFESSION=#{profession},WORK_UNIT=#{workUnit},SAVING=${saving} WHERE ID=${id}
+    </update>
+</mapper>

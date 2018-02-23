@@ -8,6 +8,7 @@ package com.zyht.dao;/**********************************************************
  * @version V1.0
  */
 
+import com.zyht.domain.Account;
 import com.zyht.domain.Buyer;
 
 import java.util.List;
@@ -25,9 +26,8 @@ public interface BuyerDao {
      * @Description: 通过买家ID删除
      * @author caoxin
      * @date 2018/1/19
-     * @param id, connection, preparedStatement
-     * @return java.lang.Integer
-     * @throw SQLException
+     * @param id
+     * @return int
      */
     public int deleteBuyerById(Long id);
 
@@ -36,9 +36,8 @@ public interface BuyerDao {
      * @Description: 通过ID批量删除买家
      * @author caoxin
      * @date 2018/1/19
-     * @param  ids, connection, preparedStatement
-     * @return java.lang.Integer
-     * @throw SQLException
+     * @param  ids
+     * @return int
      */
     public int deleteBuyerByIds(Long[] ids);
     /**
@@ -46,9 +45,8 @@ public interface BuyerDao {
      * @Description: 添加或者修改买家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param buyer, connection, preparedStatement
-     * @return domain.Buyer
-     * @throw SQLException
+     * @param buyer
+     * @return int
      */
 
     public int updateBuyer(Buyer buyer);
@@ -57,9 +55,8 @@ public interface BuyerDao {
      * @Description: 添加或者修改买家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param buyer, connection, preparedStatement
-     * @return domain.Buyer
-     * @throw SQLException
+     * @param buyer
+     * @return int
      */
     public int insertBuyer(Buyer buyer);
     /**
@@ -67,20 +64,28 @@ public interface BuyerDao {
      * @Description: 通过ID查询买家信息表
      * @author caoxin
      * @date 2018/1/19
-     * @param id, connection, preparedStatement
+     * @param id
      * @return domain.Buyer
-     * @throw SQLException
      */
 
     public Buyer queryBuyerById(Long id);
+    /**
+     * @Title: queryBuyerAccountById
+     * @Description: 通过ID查询买家信息表
+     * @author caoxin
+     * @date 2018/1/19
+     * @param id
+     * @return domain.Account
+     */
+
+    public Account queryBuyerAccountById(Long id);
     /**
      * @Title: queryBuyerByCondition
      * @Description: 通过条件查询买家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param stringBuyerMap, connection, preparedStatement
-     * @return domain.Buyer
-     * @throw SQLException
+     * @param stringBuyerMap
+     * @return java.util.List<domain.Buyer>
      */
     public List<Buyer> queryBuyerByCondition(Map<String,Object> stringBuyerMap);
     /**
@@ -88,9 +93,8 @@ public interface BuyerDao {
      * @Description: 通过条件批量查询买家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param stringBuyerMap, offset, size, connection, preparedStatement
+     * @param stringBuyerMap
      * @return java.util.List<domain.Buyer>
-     * @throw SQLException
      */
     public List<Buyer> queryBuyerByConditionPage(Map<String,Object> stringBuyerMap);
 }
