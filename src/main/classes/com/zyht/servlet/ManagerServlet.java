@@ -33,9 +33,6 @@ public class ManagerServlet extends HttpServlet{
 
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         AccountService accountService = (AccountService) context.getBean("accountService");
-
-        List<Account> list = accountService.selectAll();
-        req.setAttribute("accounts",list);
 //        冻结账户
         if(req.getParameter("frozen")!=null){
             Account account = new Account();
@@ -57,6 +54,10 @@ public class ManagerServlet extends HttpServlet{
             account2.setIsDelete(true);
             accountService.modifyUser(account2);
         }
+
+        List<Account> list = accountService.selectAll();
+        req.setAttribute("accounts",list);
+
         req.getRequestDispatcher("/jsp/accountList.jsp").forward(req,resp);
     }
 }
