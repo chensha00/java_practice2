@@ -44,7 +44,7 @@ public interface AccountDao {
      * @return java.domain.Account
      * @throw SQLException
      */
-    public Account modifyUser(Account account, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public int modifyUser(Account account);
     /**
      * @Title: logInAccount
      * @Description: 登录账户——查询数据
@@ -58,10 +58,19 @@ public interface AccountDao {
 
     /**
      * @Title: queryAllAccount
-     * @Description: 按条件查询账号
+     * @Description: 查询所有账户
      * @author DengHongbo
      * @date 2018/2/22 13:39
      * @return java.util.List<com.zyht.domain.Account>
      */
     public List<Account> queryAll();
+    /**
+     * @Title: queryOne
+     * @Description: 根据ID查询单个用户
+     * @author DengHongbo
+     * @date 2018/2/26 10:10
+     * @param id
+     * @return com.zyht.domain.Account
+     */
+    public Account queryOne(Long id);
 }

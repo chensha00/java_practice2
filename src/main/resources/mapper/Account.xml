@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="domain.Account">
+<mapper namespace="com.zyht.domain.Account">
     <!-- 定义结果集-->
-    <resultMap type="domain.Test" id="test">
+    <resultMap type="com.zyht.domain.Account" id="test">
         <id property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
         <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
-        <result property="is_frozen" column="IS_FROZEN" jdbcType="TINYINT"/>
-        <result property="is_canceled" column="IS_CANCELED" jdbcType="TINYINT"/>
-        <result property="is_delete" column="IS_DELETE" jdbcType="TINYINT"/>
-        <result property="buuyer_id" column="BUYER_ID" jdbcType="BIGINT"/>
-        <result property="seller_id" column="SELLER_ID" jdbcType="BIGINT"/>
-        <result property="add_time" column="ADD_TIME" jdbcType="DATETIME"/>
-        <result property="update_time" column="UPDATE_TIME" jdbcType="DATETIME"/>
+        <result property="isFrozen" column="IS_FROZEN" jdbcType="TINYINT"/>
+        <result property="isCanceled" column="IS_CANCELED" jdbcType="TINYINT"/>
+        <result property="isDelete" column="IS_DELETE" jdbcType="TINYINT"/>
+        <result property="buyerId" column="BUYER_ID" jdbcType="BIGINT"/>
+        <result property="sellerId" column="SELLER_ID" jdbcType="BIGINT"/>
+        <result property="addTime" column="ADD_TIME" jdbcType="DATE"/>
+        <result property="updateTime" column="UPDATE_TIME" jdbcType="DATE"/>
     </resultMap>
     <!--定义查询列 -->
     <sql id="columns">
-        id,ACCOUNT,PASSWORD,IS_FROZEN,IS_CANCELED,IS_DELETE,BUUYER_ID,SELLER_ID,ADD_TIME,UPDATE_TIME
+        ID,ACCOUNT,PASSWORD,IS_FROZEN,IS_CANCELED,IS_DELETE,BUYER_ID,SELLER_ID,ADD_TIME,UPDATE_TIME
     </sql>
     <!-- 查询所有-->
-    <select id="getTestAll" resultType="java.util.Map" resultMap="test">
-        SELECT <include refid="columns"/> FROM account
+    <select id="selectAll" resultMap="test">
+        SELECT
+        <include refid="columns"/>
+        FROM account
     </select>
-    <select id="getById" resultType="domain.Test">
-        SELECT <include refid="columns"/> FROM account
+    <!-- 按ID查询账户-->
+    <select id="selectId" resultMap="test" parameterType="java.lang.Long">
+        SELECT
+        <include refid="columns"/>
+        FROM account WHERE ID = #{id};
     </select>
-    <!-- 添加-->
-    <insert id="save" parameterType="domain.Test">
-        INSERT INTO `account` (`id`, `ACCOUNT`,`PASSWORD`,`IS_FROZEN`,`IS_CANCELED`,`IS_DELETE`,`BUYER_ID`,`SELLER_ID`,`ADD_TIME`,`UPDATE_TIME`) VALUES (${id}, #{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{is_frozen,jdbcType=TINYINT},#{is_canceled,jdbcType=TINYINT},#{is_delete,jdbcType=TINYINT},#{buyer_id,jdbcType=BIGINT},#{seller_id,jdbcType=BIGINT},#{add_time,jdbcType=DATETIME},#{update_time,jdbcType=DATETIME})
-    </insert>
-    <!-- 编辑-->
-    <update id="update" parameterType="domain.Test">
-        UPDATE `account` SET `id`='7', `NAME`='test mybaties'
-        <if test="@Ognl@isNotEmpty(id)">
-            WHERE (`id`=${id})
-        </if>
+    <!--&lt;!&ndash; 添加&ndash;&gt;-->
+    <!--<insert id="save" parameterType="domain.Test">-->
+    <!--INSERT INTO `account` (`id`, `ACCOUNT`,`PASSWORD`,`IS_FROZEN`,`IS_CANCELED`,`IS_DELETE`,`BUYER_ID`,`SELLER_ID`,`ADD_TIME`,`UPDATE_TIME`) VALUES (${id}, #{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{is_frozen,jdbcType=TINYINT},#{is_canceled,jdbcType=TINYINT},#{is_delete,jdbcType=TINYINT},#{buyer_id,jdbcType=BIGINT},#{seller_id,jdbcType=BIGINT},#{add_time,jdbcType=DATETIME},#{update_time,jdbcType=DATETIME})-->
+    <!--</insert>-->
+    <!--&lt;!&ndash; 编辑&ndash;&gt;-->
+    <update id="update" parameterType="com.zyht.domain.Account">
+        UPDATE `account` SET
+        ACCOUNT=#{account},PASSWORD=#{password},IS_FROZEN=#{isFrozen},IS_CANCELED=#{isCanceled},IS_DELETE=#{isDelete},BUYER_ID=#{buyerId},SELLER_ID=#{sellerId},ADD_TIME=#{addTime},UPDATE_TIME=#{updateTime}
+            WHERE ID=${id}
         <![CDATA[
         ]]>
     </update>
 
-    <delete id="delete" parameterType="java.util.Map">
-        <!-- ids,name -->
-        DELETE FROM  test WHERE  id IN
-        <if test="@Ognl@isNotEmpty(ids)">
-            <foreach collection="ids" item="testId" open="("
-                     separator="," close=")">
-                ${testId}
-            </foreach>
-        </if>
+    <!--<delete id="delete" parameterType="java.util.Map">-->
+    <!--&lt;!&ndash; ids,name &ndash;&gt;-->
+    <!--DELETE FROM  test WHERE  id IN-->
+    <!--<if test="@Ognl@isNotEmpty(ids)">-->
+    <!--<foreach collection="ids" item="testId" open="("-->
+    <!--separator="," close=")">-->
+    <!--${testId}-->
+    <!--</foreach>-->
+    <!--</if>-->
 
-        <!--<foreach collection="roleIds" item="roleId" open="("-->
-        <!--separator="," close=")">-->
-        <!--#{roleId}-->
-        <!--</foreach>-->
-    </delete>
+    <!--&lt;!&ndash;<foreach collection="roleIds" item="roleId" open="("&ndash;&gt;-->
+    <!--&lt;!&ndash;separator="," close=")">&ndash;&gt;-->
+    <!--&lt;!&ndash;#{roleId}&ndash;&gt;-->
+    <!--&lt;!&ndash;</foreach>&ndash;&gt;-->
+    <!--</delete>-->
 </mapper>

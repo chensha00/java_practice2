@@ -35,22 +35,26 @@ public class ManagerServlet extends HttpServlet{
         AccountService accountService = (AccountService) context.getBean("accountService");
 //        冻结账户
         if(req.getParameter("frozen")!=null){
-            Account account = new Account();
-            account.setId(Long.valueOf(req.getParameter("frozen")));
+            Account account = accountService.selectOne(Long.valueOf(req.getParameter("frozen")));
             account.setIsFrozen(true);
+            accountService.modifyUser(account);
+        }
+//        解除冻结
+        if(req.getParameter("not_frozen")!=null){
+            Account account = accountService.selectOne(Long.valueOf(req.getParameter("not_frozen")));
+            account.setIsFrozen(false);
             accountService.modifyUser(account);
         }
 //        注销账户
         if(req.getParameter("canceled")!=null){
-            Account account1 = new Account();
-            account1.setId(Long.valueOf(req.getParameter("canceled")));
+            Account account1 = accountService.selectOne(Long.valueOf(req.getParameter("canceled")));
             account1.setIsCanceled(true);
             accountService.modifyUser(account1);
         }
 //        删除账户
+        System.out.println(req.getParameter("delete"));
         if(req.getParameter("delete")!=null){
-            Account account2 = new Account();
-            account2.setId(Long.valueOf(req.getParameter("delete")));
+            Account account2 = accountService.selectOne(Long.valueOf(req.getParameter("delete")));
             account2.setIsDelete(true);
             accountService.modifyUser(account2);
         }
@@ -58,6 +62,6 @@ public class ManagerServlet extends HttpServlet{
         List<Account> list = accountService.selectAll();
         req.setAttribute("accounts",list);
 
-        req.getRequestDispatcher("/jsp/accountList.jsp").forward(req,resp);
+        req.getRequestDispatcher("/jsp/manager.jsp").forward(req,resp);
     }
 }

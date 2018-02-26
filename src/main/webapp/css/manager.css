@@ -15,10 +15,15 @@ body{
 
 
 #content {
-    margin: 0;
+    margin: auto;
     padding: 0;
-    width: 85%;
-    float: right;
+    width: 100%;
+    float: left;
+}
+
+#mytable {
+    margin: 0 auto;
+    width: 100% ;
 }
 
 

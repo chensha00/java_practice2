@@ -70,21 +70,22 @@ public class AccountDaoImpl extends Base<Account> implements AccountDao {
      * @throw SQLException
      */
     @Override
-    public Account modifyUser(Account account, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement = connection.prepareStatement("UPDATE account SET ID=?,ACCOUNT=?,PASSWORD=?,IS_FROZEN=?,IS_CANCELED=?,IS_DELETE=?,BUYER_ID=?,SELLER_ID=?,ADD_TIME=?,UPDATE_TIME=? WHERE ID=?");
-        preparedStatement.setLong(1,account.getId());
-        preparedStatement.setString(2,account.getAccount());
-        preparedStatement.setString(3,account.getPassword());
-        preparedStatement.setBoolean(4,account.getIsFrozen());
-        preparedStatement.setBoolean(5,account.getIsCanceled());
-        preparedStatement.setBoolean(6,account.getIsDelete());
-        preparedStatement.setLong(7,account.getBuyerId());
-        preparedStatement.setLong(8,account.getSellerId());
-        preparedStatement.setDate(9, new java.sql.Date(account.getAddTime().getTime()));
-        preparedStatement.setDate(10, new java.sql.Date(account.getUpdateTime().getTime()));
-        preparedStatement.setLong(11,account.getId());
-        preparedStatement.executeUpdate();
-        return account;
+    public int modifyUser(Account account) {
+//        preparedStatement = connection.prepareStatement("UPDATE account SET ID=?,ACCOUNT=?,PASSWORD=?,IS_FROZEN=?,IS_CANCELED=?,IS_DELETE=?,BUYER_ID=?,SELLER_ID=?,ADD_TIME=?,UPDATE_TIME=? WHERE ID=?");
+//        preparedStatement.setLong(1,account.getId());
+//        preparedStatement.setString(2,account.getAccount());
+//        preparedStatement.setString(3,account.getPassword());
+//        preparedStatement.setBoolean(4,account.getIsFrozen());
+//        preparedStatement.setBoolean(5,account.getIsCanceled());
+//        preparedStatement.setBoolean(6,account.getIsDelete());
+//        preparedStatement.setLong(7,account.getBuyerId());
+//        preparedStatement.setLong(8,account.getSellerId());
+//        preparedStatement.setDate(9, new java.sql.Date(account.getAddTime().getTime()));
+//        preparedStatement.setDate(10, new java.sql.Date(account.getUpdateTime().getTime()));
+//        preparedStatement.setLong(11,account.getId());
+//        preparedStatement.executeUpdate();
+//        return account;
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"update",account);
     }
     /**
      * @Title: longinAccount
@@ -124,5 +125,10 @@ public class AccountDaoImpl extends Base<Account> implements AccountDao {
     @Override
     public List<Account> queryAll() {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"selectAll");
+    }
+
+    @Override
+    public Account queryOne(Long id) {
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"selectId",id);
     }
 }
