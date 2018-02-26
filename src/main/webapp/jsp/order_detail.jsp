@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.zyht.domain.OrderDetail" %>
 <%@ page import="java.util.List" %>
@@ -130,6 +130,7 @@
                         <td>
                                 ${det.getFinishTime()}
                         </td>
+                        <c:choose>
                         <c:when test="${det.getOrderStatus()==1}"><!--当支付状态为1时发货，显示物流信息-->
                             <td>
                                 <button name="send" value="点击发货">点击发货</button>
@@ -152,7 +153,7 @@
                             <td></td>
                             <td></td>
                         </c:otherwise>
-
+                        </c:choose>
                         <th>
                             <button type="submit" name="id" value="${orders.getBuyerId()}">查看更多</button>
                         </th>
