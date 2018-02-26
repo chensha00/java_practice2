@@ -48,21 +48,29 @@ public class OrderServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("获得对象前");
+        req.setCharacterEncoding("UTF-8");
 //        ApplicationContext appCtx = SpringContextUtil.getApplicationContext();
 //        OrderService orderService = (OrderService) SpringContextUtil.getBean("orderService");
+
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         OrderService orderService = (OrderService)context.getBean("orderService");
-
-        System.out.println("获得对象后");
-        req.setCharacterEncoding("UTF-8");
-        List<Order> orderList = null;
+//        判断传入的是买家ID还是卖家ID，并将其放入map中
+        Object theId = null;
         Map<String, Object> stringMap = new HashMap<String, Object>();
-        Object obj = req.getAttribute("buyerid");
-        stringMap.put("BUYER_ID", obj);
-        orderList = orderService.queryOrderByCondition(stringMap);
+        if(req.getAttribute("buyerId")!=null) {
+            theId = req.getAttribute("buyerid");
+            stringMap.put("BUYER_ID", theId);
+        }
+        if(req.getAttribute("sellerId")!=null) {
+            theId = req.getAttribute("sellerid");
+            stringMap.put("SELLER_ID", theId);
+        }
+//        根据条件查询订单
+        List<Order> orderList = orderService.queryOrderByCondition(stringMap);
+//        在request中存放信息
         req.setAttribute("orderList", orderList);
-        req.setAttribute("theid",obj);
+        req.setAttribute("theid",theId);
+//        将request转发给页面
         req.getRequestDispatcher("jsp/order_info.jsp").forward(req,resp);
     }
 }
