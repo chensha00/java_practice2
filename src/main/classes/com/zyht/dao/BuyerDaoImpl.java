@@ -9,6 +9,7 @@ package com.zyht.dao;/**********************************************************
 */
 
 import com.zyht.base.Base;
+import com.zyht.domain.Account;
 import com.zyht.domain.Buyer;
 import org.springframework.stereotype.Repository;
 
@@ -29,9 +30,8 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
      * @Description: 通过买家ID删除
      * @author caoxin
      * @date 2018/1/19
-     * @param id, connection, preparedStatement
-     * @return java.lang.Integer
-     * @throw SQLException
+     * @param id
+     * @return int
      */
     @Override
     public int deleteBuyerById(Long id) {
@@ -47,9 +47,8 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
      * @Description: 通过ID批量删除买家
      * @author caoxin
      * @date 2018/1/19
-     * @param  ids, connection, preparedStatement
+     * @param  ids
      * @return java.lang.Integer
-     * @throw SQLException
      */
     @Override
     public int deleteBuyerByIds(Long[] ids){
@@ -72,9 +71,8 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
      * @Description: 修改买家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param buyer, connection, preparedStatement
-     * @return domain.Buyer
-     * @throw SQLException
+     * @param buyer
+     * @return int
      */
     @Override
     public int updateBuyer(Buyer buyer) {
@@ -100,9 +98,8 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
      * @Description: 添加买家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param buyer, connection, preparedStatement
-     * @return domain.Buyer
-     * @throw SQLException
+     * @param buyer
+     * @return int
      */
     @Override
     public int insertBuyer(Buyer buyer) {
@@ -133,7 +130,7 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
      * @Description: 通过ID查询买家信息表
      * @author caoxin
      * @date 2018/1/19
-     * @param id, connection, preparedStatement
+     * @param id
      * @return domain.Buyer
      * @throw SQLException
      */
@@ -170,13 +167,24 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
 //        return  buyer;
     }
     /**
+     * @Title: queryBuyerAccountById
+     * @Description: 通过ID查询买家信息表
+     * @author caoxin
+     * @date 2018/1/19
+     * @param id
+     * @return domain.Account
+     */
+    @Override
+    public Account queryBuyerAccountById(Long id){
+         return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"queryBaById",id);
+    }
+    /**
      * @Title: queryBuyerByCondition
      * @Description: 通过特定条件查询买家表
      * @author caoxin
      * @date 2018/1/19
-     * @param stringBuyerMap, connection, preparedStatement
+     * @param stringBuyerMap
      * @return java.util.List<domain.Buyer>
-     * @throw SQLException
      */
 
     @Override
@@ -226,7 +234,6 @@ public class BuyerDaoImpl extends Base<Buyer> implements BuyerDao{
      * @date 2018/1/19
      * @param stringBuyerMap
      * @return java.util.List<domain.Buyer>
-     * @throw SQLException
      */
     @Override
     public List<Buyer> queryBuyerByConditionPage(Map<String, Object> stringBuyerMap){

@@ -49,6 +49,10 @@ public class Buyer {
      */
     private Double saving;
     /**
+     * 账户
+     */
+    private Account account;
+    /**
      * @Title: Buyer
      * @Description: 构造函数
      * @author caoxin
@@ -280,6 +284,27 @@ public class Buyer {
      */
     public void setSaving(Double saving) {
         this.saving = saving;
+    }
+    /**
+     * @Title: getAccount
+     * @Description: 获取对应账户
+     * @author caoxin
+     * @date 2018/2/23
+     * @return com.zyht.domain.Account
+     */
+
+    public Account getAccount() {
+        return account;
+    }
+    /**
+     * @Title: setAccount
+     * @Description: 设置账户
+     * @author caoxin
+     * @date 2018/2/23
+     * @param account
+     */
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override

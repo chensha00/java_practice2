@@ -63,16 +63,19 @@ span{
 }
 /*id为forward样式*/
 #forward{
-    margin-left:690px;
+    margin-left:650px;
     width:40%;
     height:auto;
+}
+.function{
+    margin-right:30px;
+    float:right;
 }
 /*id为log-out的样式*/
 #log-out{
     margin-right:24px;
-    float:right;
 }
-/**/
+
 #blank{
     height:40px;
 }
@@ -130,4 +133,31 @@ span{
 /*id为pay-pic的元素设置样式*/
 #pay-pic{
     width:1510px;
+}
+#payword{
+    height:40px;
+}
+/*addr.jsp*/
+#this-form{
+    margin:50px;
+    margin-left:150px;
+    padding:10px;
+}
+.click{
+    height: 70px;
+    width:130px;
+    line-height: 40px;
+    margin-top: 5px;
+    font-size: 18px;
+    background-color:aqua;;
+
+}
+table{
+    font-size: 22px;
+    height:380px;
+    width:800px;
+    text-align: center;
+}
+#myaddr{
+    font-size: 22px;
 }
