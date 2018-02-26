@@ -3,6 +3,8 @@ package com.zyht.service;
 
 import com.zyht.domain.Account;
 
+import java.util.List;
+
 
 /**
  * Created by HAN on 2018/1/20.
@@ -46,4 +48,5 @@ public interface AccountService {
      */
     public Integer cancelUser(Account account);
 
+    public List<Account> selectAll();
 }

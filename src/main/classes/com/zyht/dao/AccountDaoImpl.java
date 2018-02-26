@@ -1,6 +1,7 @@
 package com.zyht.dao;
 
 
+import com.zyht.base.Base;
 import com.zyht.domain.Account;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author denghongbo
@@ -17,7 +19,7 @@ import java.sql.SQLException;
  * @date 2018/1/20
  */
 @Repository("accountDao")
-public class AccountDaoImpl implements AccountDao {
+public class AccountDaoImpl extends Base<Account> implements AccountDao {
     /**
      * @Title: cancelAccount
      * @Description: 注销账户
@@ -118,5 +120,9 @@ public class AccountDaoImpl implements AccountDao {
             }
         }
         return account1;
+    }
+    @Override
+    public List<Account> queryAll() {
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"selectAll");
     }
 }

@@ -55,6 +55,9 @@
                     }
                 })
             </script>
+    </div>
+    <div>
+        <a href="jump_prompt.jsp"><button class="buy">加入购物车</button></a>
         <p><button class="buy" type="submit">购买</button></p>
     </div>
     <div style="clear:both;"></div>

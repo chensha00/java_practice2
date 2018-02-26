@@ -6,6 +6,7 @@ import com.zyht.domain.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author denghongbo
@@ -54,4 +55,13 @@ public interface AccountDao {
      * @throw SQLException
      */
     public Account logInUser(Account account, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+
+    /**
+     * @Title: queryAllAccount
+     * @Description: 按条件查询账号
+     * @author DengHongbo
+     * @date 2018/2/22 13:39
+     * @return java.util.List<com.zyht.domain.Account>
+     */
+    public List<Account> queryAll();
 }
