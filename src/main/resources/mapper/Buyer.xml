@@ -13,14 +13,24 @@
         <result column="PROFESSION" property="profession" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="WORK_UNIT" property="workUnit" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="SAVING" property="saving" jdbcType="DECIMAL" javaType="java.lang.Double"/>
+        <association property="account" column="BUYER_ID" javaType="com.zyht.domain.Account" select="queryBaById">
+            <id column="A_ID" property="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <result column="PAY_PASSWORD" property="payPassword" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </association>
     </resultMap>
     <!--查询列-->
+    <sql id="buyerAccountColumns">
+        ID,PAY_PASSWORD AS PAYPASSWORD
+    </sql>
     <sql id="columns">
-        ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING
+        ID,NAME,SEX,AGE,ID_NUMBER AS IDNUMBER,TEL,PERMANENT_ADDR AS PERMANENTADDR,PROFESSION,WORK_UNIT AS WORKUNIT,SAVING
     </sql>
     <!--按id查-->
     <select id="queryById" parameterType="java.lang.Long" resultType="com.zyht.domain.Buyer">
         SELECT <include refid="columns"/> FROM buyer WHERE ID=#{_param}
+    </select>
+    <select id="queryBaById" parameterType="java.lang.Long" resultType="com.zyht.domain.Account">
+        SELECT <include refid="buyerAccountColumns"/> FROM account WHERE BUYER_ID=#{_param}
     </select>
     <!--按条件查询-->
     <select id="queryByCondition" resultMap="buyerTable" parameterType="java.util.Map">

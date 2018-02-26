@@ -14,16 +14,61 @@
         ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID
     </sql>
     <!--按id查-->
-    <select id="queryById" resultType="com.zyht.domain.GoodsSellerRelation">
-        SELECT <include refid="columns"/> FROM goods_seller_relation WHERE ID=${id}
+    <select id="queryById" resultMap="goodsSellerRelation" parameterType="java.lang.Long">
+        SELECT <include refid="columns"/> FROM goods_seller_relation WHERE ID=#{_param}
     </select>
     <!--按条件查询-->
-    <select id="queryByCondition" resultType="java.util.List" parameterType="java.util.Map">
-        SELECT <include refid="columns"/> FROM goods_seller_relation WHERE ${key}=#{value}
+    <select id="queryByCondition" resultMap="goodsSellerRelation" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM goods_seller_relation
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="inventory!=null">
+                AND INVENTORY=${inventory}
+            </if>
+            <if test="price!=null">
+                AND PRICE=${price}
+            </if>
+            <if test="goodsId!=null">
+                AND GOODS_ID=${goodsId}
+            </if>
+            <if test="sellerId!=null">
+                AND SELLER_ID=${sellerId}
+            </if>
+        </where>
+    </select>
+    <!--按条件分页查询-->
+    <select id="queryByConditionWithPage" resultMap="goodsSellerRelation" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM goods_seller_relation
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="inventory!=null">
+                AND INVENTORY=${inventory}
+            </if>
+            <if test="price!=null">
+                AND PRICE=${price}
+            </if>
+            <if test="goodsId!=null">
+                AND GOODS_ID=${goodsId}
+            </if>
+            <if test="sellerId!=null">
+                AND SELLER_ID=${sellerId}
+            </if>
+        </where>
+        LIMIT ${startRow},${size}
     </select>
     <!--按id删除-->
-    <delete id="deleteById" parameterType="com.zyht.domain.GoodsSellerRelation">
-        DELETE FROM goods_seller_relation WHERE ID=${id}
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM goods_seller_relation WHERE ID=#{_param}
     </delete>
     <!--按条件批量删除-->
     <delete id="deleteByIds" parameterType="java.util.Map">
@@ -34,14 +79,14 @@
     </delete>
     <!--单行添加数据-->
     <insert id="insertGsr" parameterType="com.zyht.domain.GoodsSellerRelation">
-        INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES(DEFAUTL,#{name},${inventory},${price},${goodsId},${sellerId})
+        INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES(DEFAULT,#{name},${inventory},${price},${goodsId},${sellerId})
     </insert>
     <!--批量插入数据-->
     <insert id="insertGsrs" parameterType="java.util.Map">
         INSERT INTO goods_seller_relation(ID,NAME,INVENTORY,PRICE,GOODS_ID,SELLER_ID)VALUES
         <where>
             <foreach collection="prices" item="eachPrice" separator=",">
-                (DEFAULT,#{name},${inventory},${price},${goodsId},${sellerId})
+                (DEFAULT,#{name},${inventory},${eachPrice},${goodsId},${sellerId})
             </foreach>
         </where>
     </insert>
