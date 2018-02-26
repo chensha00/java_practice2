@@ -24,6 +24,22 @@
         <url-pattern>/PayOrderServlet.htm</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>AddrServlet</servlet-name>
+        <servlet-class>com.zyht.servlet.AddrServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddrServlet</servlet-name>
+        <url-pattern>/AddrServlet.htm</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddrChangeServlet</servlet-name>
+        <servlet-class>com.zyht.servlet.AddrChangeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddrChangeServlet</servlet-name>
+        <url-pattern>/AddrChangeServlet.htm</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>LogOutServlet</servlet-name>
         <servlet-class>com.zyht.servlet.LogOutServlet</servlet-class>
     </servlet>
