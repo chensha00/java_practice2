@@ -37,7 +37,7 @@ public interface AccountService {
      * @param account 账户对象
      * @return Integer 1-修改成功 0-修改失败
      */
-    public Account modifyUser(Account account);
+    public int modifyUser(Account account);
     /**
      * @Title: cancelUser
      * @Description: 账户注销
@@ -47,6 +47,21 @@ public interface AccountService {
      * @return Integer 1-注销成功 0-注销失败
      */
     public Integer cancelUser(Account account);
-
+    /**
+     * @Title: selectAll
+     * @Description: 查询所有账户
+     * @author DengHongbo
+     * @date 2018/2/26 10:16
+     * @return java.util.List<com.zyht.domain.Account>
+     */
     public List<Account> selectAll();
+    /**
+     * @Title: selectOne
+     * @Description: 查询单个账户
+     * @author DengHongbo
+     * @date 2018/2/26 10:17
+     * @param id
+     * @return com.zyht.domain.Account
+     */
+    public Account selectOne(Long id);
 }

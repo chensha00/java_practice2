@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="pay-head">
-    <img src="/image/pay-order-head.jpg" id="pay-pic"/>
+    <img src="${pageContext.request.contextPath}/image/pay-order-head.jpg" id="pay-pic"/>
 </div>
 <form action="${pageContext.request.contextPath}/PayOrderServlet.htm" method="post">
     <div id="pay-this-order">
@@ -35,6 +35,8 @@
                 <td>${requestScope.ordernumber}</td>
                 <td>${requestScope.creationtime}</td>
             </tr>
+            <tr><td colspan="2">支付密码</td>
+                <td colspan="4"><input type="password" name="paypassword" id="payword"></td></tr>
             <tr>
                 <td colspan="6">
                     <button id="commit" class="order-operate" type="submit" name="id" value="${requestScope.id}">支付订单</button>

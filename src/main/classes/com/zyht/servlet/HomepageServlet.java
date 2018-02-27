@@ -28,8 +28,6 @@ import java.io.IOException;
  * @date 2018/1/27
  */
 public class HomepageServlet extends HttpServlet {
-
-    ApplicationContext applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
     /**
      * @Title: doGet
      * @Description: 重写doGet方法
@@ -50,8 +48,9 @@ public class HomepageServlet extends HttpServlet {
      * @throw IOException, ServletException
      */
     public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
+        ApplicationContext applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
 //        AccountServiceImpl accountServiceImpl=new AccountServiceImpl();
-        System.out.println("Enter successfully");
+//        System.out.println("Enter successfully");
         AccountServiceImpl accountServiceImpl= (AccountServiceImpl) applicationContext.getBean("accountService");
 //        Account account=new Account();
       Account account=(Account)applicationContext.getBean("account");

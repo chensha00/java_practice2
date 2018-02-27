@@ -3,7 +3,6 @@ package com.zyht.service;
 import com.zyht.common.util.JdbcConnectionUtils;
 import com.zyht.common.util.JdbcUtils;
 import com.zyht.dao.AccountDao;
-import com.zyht.dao.AccountDaoImpl;
 import com.zyht.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,8 @@ import java.util.List;
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
     //定义一个Dao层的对象
-    static AccountDao accountDao = new AccountDaoImpl();
+    @Autowired
+    private AccountDao accountDao;
     /**
      * @Title: longinUser
      * @Description: 账户登录
@@ -85,27 +85,28 @@ public class AccountServiceImpl implements AccountService {
      * @param account 账户对象
      * @return respond 显示给用户成功或失败
      */
-    public Account modifyUser(Account account){
-        Connection connection = JdbcConnectionUtils.getConnection();
-        PreparedStatement preparedStatement = null;
-        Account result=null;
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-            // 修改结果返回给result
-            result = accountDao.modifyUser(account, connection, preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            try {
-                connection.commit();//提交事务
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            JdbcUtils.release(connection,preparedStatement);//关闭连接
-            return result;//返回结果给用户
-        }
+    public int modifyUser(Account account){
+//        Connection connection = JdbcConnectionUtils.getConnection();
+//        PreparedStatement preparedStatement = null;
+//        Account result=null;
+//        try {
+//            //建立事物
+//            connection.setAutoCommit(false);
+//            // 修改结果返回给result
+//            result = accountDao.modifyUser(account, connection, preparedStatement);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            connection.rollback();//出现异常，事物回滚
+//        }finally {
+//            try {
+//                connection.commit();//提交事务
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            JdbcUtils.release(connection,preparedStatement);//关闭连接
+//            return result;//返回结果给用户
+//        }
+        return accountDao.modifyUser(account);
     }
     /**
      * @Title: cancelUser
@@ -143,6 +144,16 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> selectAll() {
         return accountDao.queryAll() ;
     }
-
-
+    /**
+     * @Title: selectOne
+     * @Description: 查询单个用户
+     * @author DengHongbo
+     * @date 2018/2/26 10:18
+     * @param id
+     * @return com.zyht.domain.Account
+     */
+    @Override
+    public Account selectOne(Long id) {
+        return accountDao.queryOne(id);
+    }
 }

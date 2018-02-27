@@ -23,8 +23,8 @@
 </header>
 <div id="content">
     <form action="/Manager.htm" method="post">
-        <button type="submit">查看所有账户</button>
-    <table>
+        <button id="show" type="submit">查看所有账户</button>
+    <table border="1" id="mytable">
         <thead>
             <tr>
                 <th>序号</th>
@@ -55,34 +55,76 @@
                         ${account.getPassword()}
                     </td>
                     <td>
-                        ${account.getIsFrozen()}
+                        <c:choose>
+                            <c:when test="${account.getIsFrozen() == true}">
+                                ${"冻结"}
+                            </c:when>
+                            <c:otherwise>
+                                ${"未冻结"}
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                     <td>
-                        ${account.getIsCanceled()}
+                        <c:choose>
+                            <c:when test="${account.getIsCanceled() == true}">
+                                ${"注销"}
+                            </c:when>
+                            <c:otherwise>
+                                ${"未注销"}
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                     <td>
-                        ${account.getIsDelete()}
+                        <c:choose>
+                            <c:when test="${account.getIsDelete() == true}">
+                                ${"删除"}
+                            </c:when>
+                            <c:otherwise>
+                                ${"未删除"}
+                            </c:otherwise>
+                        </c:choose>
+
                     </td>
                     <td>
-                        ${account.getBuyerId()}
+                        <c:choose>
+                            <c:when test="${account.getBuyerId() == null}">
+                                ${"非买家"}
+                            </c:when>
+                            <c:otherwise>
+                                ${account.getBuyerId()}
+                            </c:otherwise>
+                        </c:choose>
+
                     </td>
                     <td>
-                        ${account.getSellerId()}
+                        <c:choose>
+                            <c:when test="${account.getSellerId() == null}">
+                                ${"非卖家"}
+                            </c:when>
+                            <c:otherwise>
+                                ${account.getSellerId()}
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                     <td>
-                        ${account.getAddTime()}
+                        <fmt:formatDate type="time"
+                                        value="${account.getAddTime()}"
+                                        pattern="yyyy-MM-dd HH:mm:ss"/>
                     </td>
                     <td>
-                        ${account.getUpdateTime()}
+                        <fmt:formatDate type="time"
+                                        value="${account.getUpdateTime()}"
+                                        pattern="yyyy-MM-dd HH:mm:ss"/>
                     </td>
                     <td>
-                        <button id="frozen" type="submit" value="${account.getId()}">冻结账户</button>
+                        <button name="frozen" type="submit" value="${account.getId()}">冻结</button>
+                        <button name="not_frozen" type="submit" value="${account.getId()}">解冻</button>
                     </td>
                     <td>
-                        <button id="cancaled" type="submit" value="${account.getId()}">注销账户</button>
+                        <button name="canceled" type="submit" value="${account.getId()}">注销</button>
                     </td>
                     <td>
-                        <button id="delete" type="submit" value="${account.getId()}">删除账户</button>
+                        <button name="delete" type="submit" value="${account.getId()}">删除</button>
                     </td>
                 </tr>
             </c:forEach>
