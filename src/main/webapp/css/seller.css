@@ -14,7 +14,9 @@ span{
     font-size: 40px;font-weight: bold;text-align:center;margin-left:40%
 }
 li{
-    list-style:none;}
+    list-style:none;
+    color: red;
+}
 img{
     float: left;
     border:0;
@@ -26,4 +28,7 @@ img{
 }
 .list{
     float:left; width:100px; height:80px; margin-right:10px;
+}
+button{
+    float: left;
 }
