@@ -15,25 +15,27 @@
     <link href="${pageContext.request.contextPath}/css/goods_seller_relation.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form action="" method="get">
+
 <%--<c:forEach items="${seller}" var="seller">--%>
 <td >
     <div id='marguee' class="shop_name">欢迎来到${seller.getName()}的店铺</div>
 </td>
+<div><p class="shop_cars"> <a href="https://www.baidu.com">我的购物车</a></p></div>
     <%--</c:forEach>--%>
-    <div class="pho"><img class="pictureone" src="img/HP.png" alt="商品样式图"/></div>
+    <div class="pho"><img class="pictureone" src="${pageContext.request.contextPath}/img/HP.png" alt="商品样式图"/></div>
+<form name="Jump" action="" method="get">
 <div class="goodsDiv">
         <p class="details">商品名字：${goodsSellerRelation.get(0).getName()}</p>
         <p class="details">单价为：${goodsSellerRelation.get(0).getPrice()}</p>
         <p class="details">数量：${goodsSellerRelation.get(0).getInventory()}</p>
  <div class="know">
-
             <input id="min" type="button" value="-" />
             <input id="text_box" name="goodsNumber" type="text" value="1" style="width:25px;" />
             <input id="add"  type="button" value="+" /></td>
             <script>
                 $(function(){
                     var t = $("#text_box");
+
                     $("#add").click(function(){
                         t.val(parseInt(t.val())+1)
                         setTotal();
@@ -41,6 +43,14 @@
                     $("#min").click(function(){
                         t.val(parseInt(t.val())-1)
                         setTotal();
+                    })
+                    $("#shop_car").click(function(){
+                        alert('添加成功！');
+                        document.Jump.action="https://www.baidu.com";
+
+                    })
+                    $("#buyGoods").click(function(){
+                        document.Jump.action="Buy.htm";
                     })
                     function setTotal(){
                         var tt = $("#text_box").val();
@@ -56,14 +66,18 @@
                 })
             </script>
     </div>
-    <div>
-        <a href="jump_prompt.jsp"><button class="buy">加入购物车</button></a>
-        <p><button class="buy" type="submit">购买</button></p>
-    </div>
+
+        <div>
+            <p><button class="buy" id="shop_car" type="submit">加入购物车</button></p>
+        </div>
+        <div>
+            <p><button class="buy" id="buyGoods" type="submit">购买</button></p>
+        </div>
+        <input type="hidden" name="grsid" value="${requestScope.goodsSellerRelation.get(0).getId()}">
+        <input type="hidden" name="buyerid" value="${requestScope.buyer.getId()}">
+</div>
+</form>
     <div style="clear:both;"></div>
     </div>
-    <input type="hidden" name="grsid" value="${requestScope.goodsSellerRelation.get(0).getId()}">
-    <input type="hidden" name="buyerid" value="${requestScope.buyer.getId()}">
-</form>
 </body>
 </html>
