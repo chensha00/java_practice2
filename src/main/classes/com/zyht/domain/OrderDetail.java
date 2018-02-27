@@ -74,24 +74,45 @@ public class OrderDetail {
      */
     private Date finishTime;
     /**
+     * 物流信息
+     */
+    private String physicalDistribution;
+    /**
+     * 评价
+     */
+    private String Evaluate;
+    /**
      * 留言
      */
-    private String message;
-    /**
-     * 物流状态：1--未发货，2--已发货，3--派送，4--已收货，5--退货
-     */
-    private Byte expressStatus;
-    /**
-     * 买家评价：1--差评，2--一般，3--不错，4--满意，5--非常满意
-     */
-    private Byte comment;
+    private String leaveWord;
+
+    public OrderDetail(Long id, Long buyerId, Buyer buyer, Long sellerId, Seller seller, Long goodsId, Goods goods, Long orderId, Order order, Double amount, Boolean isSuccess, Byte orderStatus, String orderNumber, Date creationTime, Date finishTime, String physicalDistribution, String evaluate, String leaveWord) {
+        this.id = id;
+        this.buyerId = buyerId;
+        this.buyer = buyer;
+        this.sellerId = sellerId;
+        this.seller = seller;
+        this.goodsId = goodsId;
+        this.goods = goods;
+        this.orderId = orderId;
+        this.order = order;
+        this.amount = amount;
+        this.isSuccess = isSuccess;
+        this.orderStatus = orderStatus;
+        this.orderNumber = orderNumber;
+        this.creationTime = creationTime;
+        this.finishTime = finishTime;
+        this.physicalDistribution = physicalDistribution;
+        this.Evaluate = evaluate;
+        this.leaveWord = leaveWord;
+    }
+
     /**
      * @Title: OrderDetail
      * @Description: 空参数构造函数
      * @author caoxin
      * @date 2018/1/16
      */
-
     public OrderDetail() {
     }
 
@@ -443,47 +464,47 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
-    public Byte getComment() {
-        return comment;
+    public String getPhysicalDistribution() {
+        return physicalDistribution;
     }
 
-    public void setComment(Byte comment) {
-        this.comment = comment;
+    public void setPhysicalDistribution(String physicalDistribution) {
+        this.physicalDistribution = physicalDistribution;
     }
 
-    public Byte getExpressStatus() {
-        return expressStatus;
+    public String getEvaluate() {
+        return Evaluate;
     }
 
-    public void setExpressStatus(Byte expressStatus) {
-        this.expressStatus = expressStatus;
+    public void setEvaluate(String evaluate) {
+        Evaluate = evaluate;
     }
 
-    public String getMessage() {
-        return message;
+    public String getLeaveWord() {
+        return leaveWord;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setLeaveWord(String leaveWord) {
+        this.leaveWord = leaveWord;
     }
 
-    @Override
     public String toString() {
         return "OrderDetail{" +
                 "amount=" + amount +
                 ", id=" + id +
                 ", buyerId=" + buyerId +
+                ", buyer=" + buyer +
                 ", sellerId=" + sellerId +
+                ", seller=" + seller +
                 ", goodsId=" + goodsId +
+                ", goods=" + goods +
                 ", orderId=" + orderId +
+                ", order=" + order +
                 ", isSuccess=" + isSuccess +
                 ", orderStatus=" + orderStatus +
                 ", orderNumber='" + orderNumber + '\'' +
                 ", creationTime=" + creationTime +
                 ", finishTime=" + finishTime +
-                ", message='" + message + '\'' +
-                ", expressStatus=" + expressStatus +
-                ", comment=" + comment +
                 '}';
     }
 }
