@@ -32,7 +32,7 @@ public interface GoodsDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteGoodsById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Integer deleteGoodsById(Long id)throws SQLException;
 
     /**
      * @Title: deleteGoodsByIds
@@ -43,7 +43,7 @@ public interface GoodsDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteGoodsByIds(Long[] ids,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Integer deleteGoodsByIds(Long[] ids)throws SQLException;
     /**
      * @Title: insertGoods
      * @Description: 添加商品信息
@@ -54,7 +54,7 @@ public interface GoodsDao {
      * @throw SQLException
      */
 
-    public Goods insertGoods(Goods goods,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Goods insertGoods(Goods goods)throws SQLException;
     /**
      * @Title: updateGoods
      * @Description: 修改商品信息
@@ -64,7 +64,7 @@ public interface GoodsDao {
      * @return domain.Goods
      * @throw SQLException
      */
-    public Integer updateGoods(Goods goods, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public Integer updateGoods(Goods goods) throws SQLException;
 
         /**
          * @Title: queryGoodsById
@@ -76,7 +76,7 @@ public interface GoodsDao {
          * @throw SQLException
          */
 
-    public Goods queryGoodsById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Goods queryGoodsById(Long id)throws SQLException;
     /**
      * @Title: queryGoodsByCondition
      * @Description: 通过条件查询商品信息
@@ -86,7 +86,7 @@ public interface GoodsDao {
      * @return domain.Goods
      * @throw SQLException
      */
-    public List<Goods> queryGoodsByCondition(Map<String,String> stringGoodsMap,Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<Goods> queryGoodsByCondition(Map<String,String> stringGoodsMap)throws SQLException;
     /**
      * @Title: findGoodsByCondition
      * @Description: 通过条件批量查询商品信息并分页显示
@@ -96,5 +96,5 @@ public interface GoodsDao {
      * @return java.util.List<domain.Goods>
      * @throw SQLException
      */
-    public List<Goods> queryGoodsByCondition(Map<String,String> stringGoodsMap,Integer startRow,Integer size, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<Goods> queryGoodsByCondition(Map<String,String> stringGoodsMap,Integer startRow,Integer size)throws SQLException;
 }
