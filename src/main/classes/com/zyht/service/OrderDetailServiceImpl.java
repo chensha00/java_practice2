@@ -42,20 +42,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         Integer result = null;
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-            result = orderDetailDao.deleteOrderById(id);
-            if(result != 0){
-                connection.commit();//提交事务
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return result;//返回结果给用户
-        }
+        result = orderDetailDao.deleteOrderById(id);
+        return result;
     }
 
     /**
@@ -72,20 +60,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         Integer result = null;
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-             result = orderDetailDao.deleteOrderByIds(ids);
-            if(result != 0){
-                connection.commit();//提交事务
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return result;//返回结果给用户
-        }
+        result = orderDetailDao.deleteOrderByIds(ids);
+        return result;
     }
 
     /**
@@ -102,21 +78,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         int result = 0;
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-            result = orderDetailDao.insertOrder(orderDetail);
-            if(result == 0){
-            }else {
-                connection.commit();//提交事务
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return result;//返回结果给用户
-        }
+        result = orderDetailDao.insertOrder(orderDetail);
+        return result;//返回结果给用户
     }
     /**
      * @Title: updateOrder
@@ -132,23 +95,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         String respond = null;//返回给用户的字符串
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-            int result = orderDetailDao.updateOrder(orderDetail);
-            if(result == 0 ){
-                respond = "更新失败!";
-            }else {
-                respond = "更新成功"+result+"条!";
-                connection.commit();//提交事务
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return respond;//返回结果给用户
-        }
+        int result = orderDetailDao.updateOrder(orderDetail);
+        return respond;//返回结果给用户
     }
     /**
      * @Title: queryOrderById
@@ -164,17 +112,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         OrderDetail result = new OrderDetail();
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-             result = orderDetailDao.queryOrderById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return result;
-        }
+        result = orderDetailDao.queryOrderById(id);
+        return result;
     }
     /**
      * @Title: queryOrderByCondition
@@ -190,17 +129,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         List<OrderDetail> result = new LinkedList<OrderDetail>();
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-             result = orderDetailDao.queryOrderByCondition(stringOrderMap);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return result;
-        }
+        result = orderDetailDao.queryOrderByCondition(stringOrderMap);
+        return result;
     }
     /**
      * @Title: findOrderByCondition
@@ -216,18 +146,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         List<OrderDetail> result = new LinkedList<OrderDetail>();
-        try {
-            //建立事物
-            connection.setAutoCommit(false);
-            result = orderDetailDao.queryOrderByCondition(stringOrderMap);
-            Iterator<OrderDetail> iterator = result.iterator();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            connection.rollback();//出现异常，事物回滚
-        }finally {
-            JdbcUtils.release(connection, preparedStatement);//关闭连接
-            return result;
-        }
+        result = orderDetailDao.queryOrderByCondition(stringOrderMap);
+        Iterator<OrderDetail> iterator = result.iterator();
+        return result;
     }
 
 }
