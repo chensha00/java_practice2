@@ -1,11 +1,6 @@
 package com.zyht.service;
 
-import com.zyht.domain.Buyer;
-import com.zyht.domain.GoodsSellerRelation;
 import com.zyht.domain.Seller;
-import com.zyht.exception.SellException;
-
-import java.sql.*;
 
 /**
  * @author chendong
@@ -15,39 +10,39 @@ import java.sql.*;
  */
 public interface SellerService {
 
-    /**
-     * @Title: sell
-     * @Description: 出售商品
-     * @author chendong
-     * @date 2018/1/16
-     * @param buyer, goods, buyNumber
-     * @throw SellException
-     */
-     public Seller sell(Buyer buyer, GoodsSellerRelation goodsSellerRelation, Double buyNumber)throws SellException;
-    /**
-     * @Title: restock
-     * @Description: 进货
-     * @author chendong
-     * @date 2018/1/16
-     * @param goodsSellerRelation, buyNumber, price,seller
-     */
-     public void restock(GoodsSellerRelation goodsSellerRelation, Double buyNumber, Double price, Seller seller);
-    /**
-     * @Title: deliverGoods
-     * @Description: 发货
-     * @author chendong
-     * @date 2018/1/16
-     * @param buyer, goods, time
-     */
-     public void deliverGoods(Buyer buyer, GoodsSellerRelation goodsSellerRelation, Date time, Double buyNumber);
-    /**
-     * @Title: receiveMoney
-     * @Description: 收货款
-     * @author chendong
-     * @date 2018/1/16
-     * @param goodsSellerRelation, buyer,buyNumber,seller
-     */
-     public void receiveMoney(GoodsSellerRelation goodsSellerRelation, Buyer buyer, Double buyNumber, Seller seller);
+//    /**
+//     * @Title: sell
+//     * @Description: 出售商品
+//     * @author chendong
+//     * @date 2018/1/16
+//     * @param buyer, goods, buyNumber
+//     * @throw SellException
+//     */
+//     public Seller sell(Buyer buyer, GoodsSellerRelation goodsSellerRelation, Double buyNumber)throws SellException;
+//    /**
+//     * @Title: restock
+//     * @Description: 进货
+//     * @author chendong
+//     * @date 2018/1/16
+//     * @param goodsSellerRelation, buyNumber, price,seller
+//     */
+//     public void restock(GoodsSellerRelation goodsSellerRelation, Double buyNumber, Double price, Seller seller);
+//    /**
+//     * @Title: deliverGoods
+//     * @Description: 发货
+//     * @author chendong
+//     * @date 2018/1/16
+//     * @param buyer, goods, time
+//     */
+//     public void deliverGoods(Buyer buyer, GoodsSellerRelation goodsSellerRelation, Date time, Double buyNumber);
+//    /**
+//     * @Title: receiveMoney
+//     * @Description: 收货款
+//     * @author chendong
+//     * @date 2018/1/16
+//     * @param goodsSellerRelation, buyer,buyNumber,seller
+//     */
+//     public void receiveMoney(GoodsSellerRelation goodsSellerRelation, Buyer buyer, Double buyNumber, Seller seller);
 
 
 
@@ -61,7 +56,7 @@ public interface SellerService {
      * @date 2018/1/19
      * @throw SQLException
      */
-    public Integer deleteSellerById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public int deleteSellerById(Long id);
 
     /**
      * @param ids, connection, preparedStatement
@@ -72,10 +67,9 @@ public interface SellerService {
      * @date 2018/1/19
      * @throw SQLException
      */
-    public Integer deleteSellerByIds(Long[] ids, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public Integer deleteSellerByIds(Long[] ids);
 
     /**
-     * @param Seller, connection, preparedStatement
      * @return domain.Seller
      * @Title: insertOrUpdateSeller
      * @Description: 添加卖家信息
@@ -83,10 +77,9 @@ public interface SellerService {
      * @date 2018/1/19
      * @throw SQLException
      */
-    public Seller insertSeller(Seller Seller, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public int insertSeller(Seller seller);
 
     /**
-     * @param seller, connection, preparedStatement
      * @return domain.Buyer
      * @Title: updateBuyer
      * @Description: 修改卖家信息
@@ -95,7 +88,7 @@ public interface SellerService {
      * @throw SQLException
      */
 
-    public Seller updateSeller(Seller seller, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public int updateSeller(Seller seller);
     /**
      * @Title: querySellerById
      * @Description: 通过ID查询卖家信息表
@@ -106,6 +99,6 @@ public interface SellerService {
      * @throw SQLException
      */
 
-    public Seller querySellerById(Long id)throws SQLException;
+    public Seller querySellerById(Long id);
 
 }
