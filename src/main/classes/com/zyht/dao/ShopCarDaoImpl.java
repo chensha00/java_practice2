@@ -30,7 +30,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public Integer deleteShopCarById(Long id) throws SQLException {
+    public Integer deleteShopCarById(Long id) {
         return this.sqlSessionTemplate.delete("com.zyht.domain.ShopCar."+"deleteById",id);
     }
     /**
@@ -43,7 +43,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public Integer deleteShopCarByIds(Long[] ids) throws SQLException {
+    public Integer deleteShopCarByIds(Long[] ids) {
         return this.sqlSessionTemplate.delete("com.zyht.domain.ShopCar."+"deleteByIds",ids);
     }
     /**
@@ -56,7 +56,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public Integer updateShopCar(ShopCar shopCar) throws SQLException {
+    public Integer updateShopCar(ShopCar shopCar) {
         return this.sqlSessionTemplate.update("com.zyht.domain.ShopCar."+"update",shopCar);
     }
     /**
@@ -69,7 +69,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public Integer insertShopCar(ShopCar shopCar) throws SQLException {
+    public Integer insertShopCar(ShopCar shopCar) {
         return this.sqlSessionTemplate.update("com.zyht.domain.ShopCar."+"add",shopCar);
     }
     /**
@@ -82,7 +82,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public ShopCar queryShopCarById(Long id) throws SQLException {
+    public ShopCar queryShopCarById(Long id) {
         return this.sqlSessionTemplate.selectOne("com.zyht.domain.ShopCar."+"findById",id);
     }
     /**
@@ -95,7 +95,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) throws SQLException {
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar." + "find", stringShopCarMap);
     }
     /**
@@ -108,7 +108,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) throws SQLException {
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderStatement."+"findPage",stringShopCarMap);
     }
 }

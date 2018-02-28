@@ -23,7 +23,7 @@ public interface ShopCarService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteShopCarById(Long id)throws SQLException;
+    public Integer deleteShopCarById(Long id);
 
     /**
      * @Title: deleteShopCarByIds
@@ -34,7 +34,7 @@ public interface ShopCarService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteShopCarByIds(Long[] ids)throws SQLException;
+    public Integer deleteShopCarByIds(Long[] ids);
     /**
      * @Title: updateShopCar
      * @Description: 添加或者修改购物车信息
@@ -44,7 +44,7 @@ public interface ShopCarService {
      * @return Integer
      * @throw SQLException
      */
-    public Integer updateShopCar(ShopCar shopCar)throws SQLException;
+    public Integer updateShopCar(ShopCar shopCar);
     /**
      * @Title: insertShopCar
      * @Description: 添加或者修改购物车信息
@@ -54,7 +54,7 @@ public interface ShopCarService {
      * @return Integer
      * @throw SQLException
      */
-    public Integer insertShopCar(ShopCar shopCar)throws SQLException;
+    public Integer insertShopCar(ShopCar shopCar);
     /**
      * @Title: queryShopCarById
      * @Description: 通过ID查询购物车信息表
@@ -64,7 +64,7 @@ public interface ShopCarService {
      * @return ShopCar
      * @throw SQLException
      */
-    public ShopCar queryShopCarById(Long id)throws SQLException;
+    public ShopCar queryShopCarById(Long id);
     /**
      * @Title: queryShopCarByCondition
      * @Description: 通过条件查询购物车信息
@@ -74,7 +74,7 @@ public interface ShopCarService {
      * @return List<ShopCar>
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap)throws SQLException;
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap);
     /**
      * @Title: queryShopCarByCondition
      * @Description: 通过条件批量查询购物车信息
@@ -84,5 +84,5 @@ public interface ShopCarService {
      * @return List<ShopCar>
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size)throws SQLException;
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size);
 }
