@@ -19,18 +19,18 @@
     </sql>
     <!-- 查询所有-->
     <select id="getTestAll" resultType="java.util.Map" resultMap="goods">
-        SELECT <include refid="columns"/> FROM test
+        SELECT <include refid="columns"/> FROM goods
     </select>
     <select id="getById" resultType="domain.Goods">
-        SELECT <include refid="columns"/> FROM test
+        SELECT <include refid="columns"/> FROM goods
     </select>
     <!-- 添加-->
     <insert id="save" parameterType="domain.Goods">
-        INSERT INTO `test` (`id`, `NAME`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIMA`,`UNIT`) VALUES (${id}, #{name,jdbcType=VARCHAR},#{type,jdbaType=VARCHER},${price,jabaType=DECOMAL},#{addr,jdbcType=VARCHAR},#{makeTime,jdbcType=DATETIME},#{expirationTime,jdbcType=DATE},#{unit,jdbcType=VARCHAR})
+        INSERT INTO `goods` (`id`, `NAME`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIMA`,`UNIT`) VALUES (${id}, #{name,jdbcType=VARCHAR},#{type,jdbaType=VARCHER},${price,jabaType=DECOMAL},#{addr,jdbcType=VARCHAR},#{makeTime,jdbcType=DATETIME},#{expirationTime,jdbcType=DATE},#{unit,jdbcType=VARCHAR})
     </insert>
     <!-- 编辑-->
     <update id="update" parameterType="domain.Goods">
-        UPDATE `test` SET `id`='7', `NAME`='test mybaties'
+        UPDATE `goods` SET `id`=${id}, `NAME`=${NAME},`PRICE`=${PRICE},`ADDR`=${ADDR},,`MAKE_TIME`=${`MAKE_TIME},`EXPIRATION_TIMA`=${EXPIRATION_TIMA},`UNIT`=${UNIT}
        <where>
         <if test="@Ognl@isNotEmpty(id)">
             AND (`id`=${id})
@@ -42,11 +42,11 @@
 
     <delete id="delete" parameterType="java.util.Map">
         <!-- ids,name -->
-        DELETE FROM  test WHERE  id IN
+        DELETE FROM  goods WHERE  id IN
         <if test="@Ognl@isNotEmpty(ids)">
             <foreach collection="ids" item="goodsId" open="("
                      separator="," close=")">
-                ${testId}
+                ${goodsId}
             </foreach>
         </if>
 
