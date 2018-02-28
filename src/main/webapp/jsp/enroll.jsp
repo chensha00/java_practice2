@@ -60,6 +60,11 @@
                     <td><input type="text" name="work_unit" value=""/></td>
                 </tr>
                 <tr>
+                    <td class="birthdate" align="">*注册类型</td>
+                    <td><input type="checkbox" name="status" value=""/>买家</td>
+                    <td><input type="checkbox" name="status" value=""/>卖家</td>
+                </tr>
+                <tr>
                     <td></td>
                     <td align="center" >
                         <button type="submit">确定</button>
