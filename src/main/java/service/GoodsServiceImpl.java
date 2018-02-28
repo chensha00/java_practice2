@@ -1,8 +1,11 @@
-package service;
-import common.util.JdbcUtils;
-import dao.GoodsDao;
-import dao.GoodsDaoImpl;
-import domain.Goods;
+package com.zyht.service;
+import com.zyht.common.util.JdbcUtils;
+import com.zyht.common.util.SpringContextUtil;
+import com.zyht.dao.GoodsDao;
+import com.zyht.dao.GoodsDaoImpl;
+import com.zyht.domain.Goods;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +20,7 @@ import java.util.Map;
  * @Description
  * @Date 2018/1/24
  */
+@Service("GoodsService")
 public class GoodsServiceImpl implements GoodsService {
     GoodsDao goodsDao =new GoodsDaoImpl();
 /**
@@ -28,38 +32,8 @@ public class GoodsServiceImpl implements GoodsService {
  * @return  respond
 */
     @Override
-    public String deleteGoodsById(Long id) throws SQLException {
-        Connection connection= JdbcUtils.getConnection();
-        connection.setAutoCommit(false);
-        PreparedStatement preparedStatement=null;
-        String respond=null;
-        try{
-            connection.setAutoCommit(false);
-            Integer result = goodsDao.deleteGoodsById(id, connection, preparedStatement);
-            if(result.intValue() == 0){
-                respond = "删除失败！";
-            }else {
-                respond = "删除成功！";
-            }
-        }catch (SQLException e){
-            try{
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                connection.rollback();//出现异常，事物回滚
-            }
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                connection.commit();
-                JdbcUtils.release(connection, preparedStatement);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            JdbcUtils.release(connection,preparedStatement);//关闭连接
-        }
-        return respond;
+    public Integer deleteGoodsById(Long id) throws SQLException {
+        return goodsDao.deleteGoodsById(id);
     }
 
 /**
@@ -71,37 +45,10 @@ public class GoodsServiceImpl implements GoodsService {
  * @return respond
 */
     @Override
-    public String deleteGoodsByIds(Long[] ids) throws SQLException {
-        Connection connection= JdbcUtils.getConnection();
-        connection.setAutoCommit(false);
-        PreparedStatement preparedStatement=null;
-        String  respond = null;                                      //返回给用户的信息
-        try{
-            connection.setAutoCommit(false);
-            Integer result = goodsDao.deleteGoodsByIds(ids, connection, preparedStatement);
-            if(result.doubleValue() == 0){
-                respond = "删除失败！";
-            }else {
-                respond = "删除成功！";
-            }
-        }catch (SQLException e){
-            try{
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                connection.rollback();//出现异常，事物回滚
-            }
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                connection.commit();//提交事务
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            JdbcUtils.release(connection,preparedStatement);                        //关闭连接
-            return  respond;                                                           //返回结果
-        }
+    public Integer  deleteGoodsByIds(Long[] ids) throws SQLException {
+
+            return  goodsDao.deleteGoodsByIds(ids);                                                           //返回结果
+
     }
 /**
  * @ClassName updateGoods
@@ -112,38 +59,9 @@ public class GoodsServiceImpl implements GoodsService {
  * @return respond
 */
     @Override
-    public String updateGoods(Goods goods) throws SQLException {
-        Connection  connection= JdbcUtils.getConnection();
-        PreparedStatement preparedStatement=null;
-        String respond=null;
-        try{
-            connection.setAutoCommit(false);
-            int result = goodsDao.updateGoods(goods, connection, preparedStatement);
-            if(result == 0){
-                respond = "更新失败！";
-                System.out.println(respond);
-            }else {
-                respond = "更新成功！";
-                System.out.println(respond);
-            }
-        }catch (SQLException e){
-            try{
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                connection.rollback();//出现异常，事物回滚
-            }
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                connection.commit();//提交事务
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            JdbcUtils.release(connection,preparedStatement);//关闭连接
-        }
-        return respond;
+    public Integer updateGoods(Goods goods) throws SQLException {
+
+        return goodsDao.updateGoods(goods);
     }
 /**
  * @ClassName insertGoods
@@ -154,35 +72,9 @@ public class GoodsServiceImpl implements GoodsService {
  * @return respond
 */
     @Override
-    public String insertGoods(Goods goods) throws SQLException {
-        Connection connection= JdbcUtils.getConnection();
-        PreparedStatement preparedStatement=null;
-        String respond=null;
-        try{
-            connection.setAutoCommit(false);
-            Goods result = goodsDao.insertGoods(goods, connection, preparedStatement);
-            if(result == null){
-                respond = "注销失败！";
-            }else {
-                respond = "注销成功！";
-            }
-        }catch (SQLException e){
-            try{
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                connection.rollback();//出现异常，事物回滚
-            }
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                connection.commit();//提交事务
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return respond;
+    public Goods insertGoods(Goods goods) throws SQLException {
+
+        return goodsDao.insertGoods(goods);
     }
 /**
  * @ClassName queryGoods
@@ -190,32 +82,12 @@ public class GoodsServiceImpl implements GoodsService {
  * @author guoxin
  * @Date 2018/1/25
  * @param id
- * @return respond
+ * @return result
 */
     @Override
-    public String queryGoodsById(Long id) throws SQLException {
-        Connection connection= JdbcUtils.getConnection();
-        PreparedStatement preparedStatement=null;
-        String respond=null;
-        try{
-            connection.setAutoCommit(false);
-            Goods result = goodsDao.queryGoodsById(id,connection, preparedStatement);
-            if(result == null){
-                respond = "查询失败！";
-            }else {
-                respond = "查询成功！";
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        finally {
-//            try {
-//                connection.commit();//提交事务
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-        }
-        return respond;
+    public Goods queryGoodsById(Long id) throws SQLException {
+
+        return goodsDao.queryGoodsById(id);
     }
 /**
  * @ClassName queryGoodsByCondition
@@ -226,38 +98,9 @@ public class GoodsServiceImpl implements GoodsService {
  * @return stringGoodsMap
 */
     @Override
-    public  String queryGoodsByCondition(Map<String, String> stringGoodsMap) throws SQLException {
-        Connection connection= JdbcUtils.getConnection();
-        PreparedStatement preparedStatement=null;
-        String respond=null;//返回给用户的字符串
-        String str="";
-        try{
-            connection.setAutoCommit(false);
-            List<Goods> result = goodsDao.queryGoodsByCondition(stringGoodsMap, connection, preparedStatement);
-            if(result == null){
-                respond = "查询失败！";
-            }else {
-                respond = "查询成功！";
-            }
-            System.out.print(result);                          //显示查询状态
-        }catch (SQLException e){
-            try{
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                connection.rollback();//出现异常，事物回滚
-            }
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                connection.commit();                               //提交事务
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            JdbcUtils.release(connection,preparedStatement);       //关闭连接
-        }
-        return respond;
+    public   List<Goods>  queryGoodsByCondition(Map<String, String> stringGoodsMap) throws SQLException {
+
+        return goodsDao.queryGoodsByCondition(stringGoodsMap);
     }
     /**
      * @ClassName queryGoodsByCondition
@@ -268,37 +111,8 @@ public class GoodsServiceImpl implements GoodsService {
      * @return stringBuyerMap
     */
     @Override
-    public  String queryGoodsByCondition(Map<String, String> stringBuyerMap, Integer startRow, Integer size) throws SQLException {
-        Connection connection= JdbcUtils.getConnection();
-        PreparedStatement preparedStatement=null;
-        String respond=null;//返回给用户的字符串
-        try{
-            connection.setAutoCommit(false);
-            List<Goods> result = goodsDao.queryGoodsByCondition(stringBuyerMap, connection, preparedStatement);
+    public   List<Goods>  queryGoodsByCondition(Map<String, String> stringBuyerMap, Integer startRow, Integer size) throws SQLException {
 
-            if(result == null){
-                respond = "查询失败！";
-            }else {
-                respond = "查询成功！";
-            }
-            System.out.println(respond);   //输出查询是否成功
-        }catch (SQLException e){
-            try{
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-                connection.rollback();//出现异常，事物回滚
-            }
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                connection.commit();                //提交事务
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            JdbcUtils.release(connection,preparedStatement);//关闭连接
-        }
-        return respond;                           //返回查询的信息给用户
+        return goodsDao.queryGoodsByCondition(stringBuyerMap,startRow,size);                           //返回查询的信息给用户
     }
     }
