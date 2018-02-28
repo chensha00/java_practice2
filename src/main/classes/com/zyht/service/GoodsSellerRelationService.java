@@ -10,7 +10,6 @@ package com.zyht.service;/******************************************************
 
 import com.zyht.domain.GoodsSellerRelation;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,10 +26,9 @@ public interface GoodsSellerRelationService {
      * @author caoxin
      * @date 2018/1/25
      * @param id
-     * @return java.lang.Integer
-     * @throw SQLException
+     * @return int
      */
-    public Integer deleteGoodsSellerRelationById(Long id)throws SQLException;
+    public int deleteGoodsSellerRelationById(Long id);
 
     /**
      * @Title: deleteGoodsSellerRelationByIds
@@ -38,31 +36,28 @@ public interface GoodsSellerRelationService {
      * @author caoxin
      * @date 2018/1/25
      * @param  ids
-     * @return java.lang.Integer
-     * @throw SQLException
+     * @return int
      */
-    public Integer deleteGoodsSellerRelationByIds(Long[] ids)throws SQLException;
+    public Integer deleteGoodsSellerRelationByIds(Long[] ids);
     /**
      * @Title: insertGoodsSellerRelation
      * @Description: 添加商品卖家关系信息
      * @author caoxin
      * @date 2018/1/19
      * @param goodsSellerRelation
-     * @return domain.Goods
-     * @throw SQLException
+     * @return int
      */
 
-    public GoodsSellerRelation insertGoodsSellerRelation(GoodsSellerRelation goodsSellerRelation)throws SQLException;
+    public int insertGoodsSellerRelation(GoodsSellerRelation goodsSellerRelation);
     /**
      * @Title: updateGoodsSellerRelation
      * @Description: 修改商品信息
      * @author caoxin
      * @date 2018/1/25
      * @param goodsSellerRelation
-     * @return domain.GoodsSellerRelation
-     * @throw SQLException
+     * @return int
      */
-    public GoodsSellerRelation updateGoodsSellerRelation(GoodsSellerRelation goodsSellerRelation) throws SQLException;
+    public int updateGoodsSellerRelation(GoodsSellerRelation goodsSellerRelation);
 
     /**
      * @Title: queryGoodsSellerRelationById
@@ -70,11 +65,10 @@ public interface GoodsSellerRelationService {
      * @author caoxin
      * @date 2018/1/25
      * @param id
-     * @return domain.Goods
-     * @throw SQLException
+     * @return domain.GoodsSellerRelation
      */
 
-    public GoodsSellerRelation queryGoodsSellerRelationById(Long id)throws SQLException;
+    public GoodsSellerRelation queryGoodsSellerRelationById(Long id);
     /**
      * @Title: queryGoodsSellerRelationByCondition
      * @Description: 通过条件查询商品卖家关系信息表
@@ -82,17 +76,15 @@ public interface GoodsSellerRelationService {
      * @date 2018/1/25
      * @param stringGoodsSellerMap
      * @return java.util.List<domain.GoodsSellerRelation>
-     * @throw SQLException
      */
-    public List<GoodsSellerRelation> queryGoodsSellerRelationByCondition(Map<String,String> stringGoodsSellerMap)throws SQLException;
+    public List<GoodsSellerRelation> queryGoodsSellerRelationByCondition(Map<String,Object> stringGoodsSellerMap);
     /**
-     * @Title: queryGoodsSellerRelationByCondition
+     * @Title: queryGoodsSellerRelationByConditionPage
      * @Description: 通过条件批量查询商品卖家信息表并分页显示
      * @author caoxin
      * @date 2018/1/25
-     * @param stringGoodsSellerMap, startRow, size
+     * @param stringGoodsSellerMap
      * @return java.util.List<domain.GoodsSellerRelation>
-     * @throw SQLException
      */
-    public List<GoodsSellerRelation> queryGoodsSellerRelationByCondition(Map<String,String> stringGoodsSellerMap,Integer startRow,Integer size)throws SQLException;
+    public List<GoodsSellerRelation> queryGoodsSellerRelationByConditionPage(Map<String,Object> stringGoodsSellerMap);
 }
