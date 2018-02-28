@@ -28,7 +28,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public Integer deleteShopCarById(Long id) throws SQLException {
+    public Integer deleteShopCarById(Long id) {
         ShopCarDaoImpl shopCarDao=new ShopCarDaoImpl();
         Integer rows=shopCarDao.deleteShopCarById(id);
         return rows;
@@ -43,7 +43,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public Integer deleteShopCarByIds(Long[] ids) throws SQLException {
+    public Integer deleteShopCarByIds(Long[] ids) {
         ShopCarDaoImpl shopCarDao=new ShopCarDaoImpl();
         Integer rows=shopCarDao.deleteShopCarByIds(ids);
         return rows;
@@ -58,7 +58,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public Integer updateShopCar(ShopCar shopCar) throws SQLException {
+    public Integer updateShopCar(ShopCar shopCar) {
         ShopCarDaoImpl shopCarDao=new ShopCarDaoImpl();
         Integer rows=shopCarDao.updateShopCar(shopCar);
         return rows;
@@ -73,7 +73,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public Integer insertShopCar(ShopCar shopCar) throws SQLException {
+    public Integer insertShopCar(ShopCar shopCar) {
         ShopCarDaoImpl shopCarDao=new ShopCarDaoImpl();
         Integer rows=shopCarDao.insertShopCar(shopCar);
         return rows;
@@ -88,7 +88,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public ShopCar queryShopCarById(Long id) throws SQLException {
+    public ShopCar queryShopCarById(Long id) {
         ShopCarDaoImpl shopCarDao=new ShopCarDaoImpl();
         ShopCar shopCar=shopCarDao.queryShopCarById(id);
         return shopCar;
@@ -103,7 +103,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) throws SQLException {
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) {
         ShopCarDaoImpl shopCarDao=new ShopCarDaoImpl();
         List<ShopCar> shopCarList=shopCarDao.queryShopCarByCondition(stringShopCarMap);
         return shopCarList;
@@ -118,7 +118,7 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) throws SQLException {
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
         ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         List<ShopCar> shopCarList=shopCarDao.queryShopCarByCondition(stringShopCarMap, startRow, size);
