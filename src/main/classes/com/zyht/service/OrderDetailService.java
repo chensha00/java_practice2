@@ -73,7 +73,7 @@ public interface OrderDetailService {
      * @return domain.Order
      * @throw Exception
      */
-    public List<OrderDetail> queryOrderByCondition(Map<String,String> stringOrderMap);
+    public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap);
     /**
      * @Title: findOrderByCondition
      * @Description: 通过条件批量查询订单信息
@@ -83,6 +83,6 @@ public interface OrderDetailService {
      * @return java.util.List<domain.Order>
      * @throw Exception
      */
-    public List<OrderDetail> queryOrderByCondition(Map<String,String> stringOrderMap,Integer offset,Integer size);
+    public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap,Integer offset,Integer size);
 
 }

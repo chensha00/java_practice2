@@ -45,7 +45,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         try {
             //建立事物
             connection.setAutoCommit(false);
-            result = orderDetailDao.deleteOrderById(id, connection, preparedStatement);
+            result = orderDetailDao.deleteOrderById(id);
             if(result != 0){
                 connection.commit();//提交事务
             }
@@ -75,7 +75,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         try {
             //建立事物
             connection.setAutoCommit(false);
-             result = orderDetailDao.deleteOrderByIds(ids, connection, preparedStatement);
+             result = orderDetailDao.deleteOrderByIds(ids);
             if(result != 0){
                 connection.commit();//提交事务
             }
@@ -105,7 +105,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         try {
             //建立事物
             connection.setAutoCommit(false);
-            result = orderDetailDao.insertOrder(orderDetail, connection, preparedStatement);
+            result = orderDetailDao.insertOrder(orderDetail);
             if(result == 0){
             }else {
                 connection.commit();//提交事务
@@ -135,7 +135,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         try {
             //建立事物
             connection.setAutoCommit(false);
-            int result = orderDetailDao.updateOrder(orderDetail, connection, preparedStatement);
+            int result = orderDetailDao.updateOrder(orderDetail);
             if(result == 0 ){
                 respond = "更新失败!";
             }else {
@@ -167,7 +167,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         try {
             //建立事物
             connection.setAutoCommit(false);
-             result = orderDetailDao.queryOrderById(id, connection, preparedStatement);
+             result = orderDetailDao.queryOrderById(id);
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();//出现异常，事物回滚
@@ -186,14 +186,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @throw Exception
      */
     @Override
-    public List<OrderDetail> queryOrderByCondition(Map<String,String> stringOrderMap){
+    public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap){
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         List<OrderDetail> result = new LinkedList<OrderDetail>();
         try {
             //建立事物
             connection.setAutoCommit(false);
-             result = orderDetailDao.queryOrderByCondition(stringOrderMap, connection, preparedStatement);
+             result = orderDetailDao.queryOrderByCondition(stringOrderMap);
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();//出现异常，事物回滚
@@ -212,14 +212,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @throw Exception
      */
     @Override
-    public List<OrderDetail> queryOrderByCondition(Map<String,String> stringOrderMap,Integer offset,Integer size){
+    public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap,Integer offset,Integer size){
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         List<OrderDetail> result = new LinkedList<OrderDetail>();
         try {
             //建立事物
             connection.setAutoCommit(false);
-            result = orderDetailDao.queryOrderByCondition(stringOrderMap, connection, preparedStatement);
+            result = orderDetailDao.queryOrderByCondition(stringOrderMap);
             Iterator<OrderDetail> iterator = result.iterator();
         } catch (SQLException e) {
             e.printStackTrace();

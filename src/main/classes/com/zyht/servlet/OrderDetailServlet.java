@@ -29,7 +29,7 @@ public class OrderDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         OrderDetailService orderDetailService = new OrderDetailServiceImpl();
-        Map<String, String> stringMap = new HashMap<String, String>();
+        Map<String, Object> stringMap = new HashMap<String,Object>();
         String sellerid = "" + req.getAttribute("sellerid");
         if(sellerid !=null){
             stringMap.put("SELLER_ID",sellerid);

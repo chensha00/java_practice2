@@ -32,7 +32,7 @@ public interface OrderDetailDao {
      * @return java.lang.Integer
      * @throw Exception
      */
-    public Integer deleteOrderById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Integer deleteOrderById(Long id);
 
     /**
      * @Title: deleteOrderByIds
@@ -43,7 +43,7 @@ public interface OrderDetailDao {
      * @return java.lang.Integer
      * @throw Exception
      */
-    public Integer deleteOrderByIds(Long[] ids,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Integer deleteOrderByIds(Long[] ids);
     /**
      * @Title: insertOrder
      * @Description: 添加订单详情
@@ -53,7 +53,7 @@ public interface OrderDetailDao {
      * @return Long id
      * @throw Exception
      */
-    public int insertOrder(OrderDetail orderDetail,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int insertOrder(OrderDetail orderDetail);
     /**
      * @Title: updateOrder
      * @Description: 修改订单详情
@@ -63,7 +63,7 @@ public interface OrderDetailDao {
      * @return int
      * @throw Exception
      */
-    public int updateOrder(OrderDetail orderDetail,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int updateOrder(OrderDetail orderDetail);
     /**
      * @Title: queryOrderById
      * @Description: 通过ID查询订单信息表
@@ -74,7 +74,7 @@ public interface OrderDetailDao {
      * @throw Exception
      */
 
-    public OrderDetail queryOrderById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public OrderDetail queryOrderById(Long id);
     /**
      * @Title: queryOrderByCondition
      * @Description: 通过条件查询订单信息
@@ -84,7 +84,7 @@ public interface OrderDetailDao {
      * @return domain.Order
      * @throw Exception
      */
-    public List<OrderDetail> queryOrderByCondition(Map<String,String> stringOrderMap,Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap);
     /**
      * @Title: findOrderByCondition
      * @Description: 通过条件批量查询订单信息
@@ -94,5 +94,5 @@ public interface OrderDetailDao {
      * @return java.util.List<domain.Order>
      * @throw Exception
      */
-    public List<OrderDetail> queryOrderByCondition(Map<String,String> stringOrderMap,Integer offset,Integer size, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap,Integer offset,Integer size);
 }

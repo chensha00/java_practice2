@@ -124,7 +124,7 @@ public class OrderDetail {
      * @param id, buyerId, sellerId, goodsId, amount, isSuccess, orderStatus, orderNumber, creationDate,finishDate
      */
 
-    public OrderDetail(Long id, Long buyerId, Long sellerId, Long goodsId,Long orderId, Double amount, Boolean isSuccess, Byte orderStatus, String orderNumber, Date creationTime,Date finishTime) {
+    public OrderDetail(Long id, Long buyerId, Long sellerId, Long goodsId,Long orderId, Double amount, Boolean isSuccess, Byte orderStatus, String orderNumber, Date creationTime,Date finishTime, String physicalDistribution, String evaluate, String leaveWord) {
         this.id=id;
         this.buyerId = buyerId;
         this.sellerId = sellerId;
@@ -136,6 +136,9 @@ public class OrderDetail {
         this.orderNumber = orderNumber;
         this.creationTime = creationTime;
         this.finishTime=finishTime;
+        this.physicalDistribution = physicalDistribution;
+        this.Evaluate = evaluate;
+        this.leaveWord = leaveWord;
     }
     /**
      * @Title: OrderDetail

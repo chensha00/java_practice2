@@ -42,7 +42,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteOrderById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public Integer deleteOrderById(Long id) {
         return this.sqlSessionTemplate.delete("com.zyht.domain.OrderDetail." + "delete", id);
        /* preparedStatement=connection.prepareStatement("DELETE FROM order_detail WHERE ID=?");
         preparedStatement.setLong(1,id);
@@ -59,7 +59,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteOrderByIds(Long[] ids, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public Integer deleteOrderByIds(Long[] ids) {
         return this.sqlSessionTemplate.delete("com.zyht.domain.OrderDetail." + "delete", ids);
        /* Integer operatedRows = 0;
         for(Long id:ids){
@@ -80,7 +80,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public int updateOrder(OrderDetail orderDetail, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public int updateOrder(OrderDetail orderDetail){
         return this.sqlSessionTemplate.update("com.zyht.domain.OrderDetail." + "update", orderDetail);
        /* Long id = null;
         preparedStatement=connection.prepareStatement("UPDATE order_detail SET AMOUNT=?,IS_SUCCESS=?,ORDER_STATUS=?,ORDER_NUMBER=?,CREATION_TIME=?,FINISH_TIME=? WHERE ID=?;");
@@ -106,8 +106,8 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public int insertOrder(OrderDetail orderDetail, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        return this.sqlSessionTemplate.update("com.zyht.domain.OrderDetail." + "insert", orderDetail);
+    public int insertOrder(OrderDetail orderDetail){
+        return this.sqlSessionTemplate.insert("com.zyht.domain.OrderDetail." + "insert", orderDetail);
       /*  Long id = null;
         preparedStatement=connection.prepareStatement("INSERT INTO order_detail(ID,SELLER_ID,BUYER_ID,GOODS_ID,ORDER_ID,AMOUNT,IS_SUCCESS,ORDER_STATUS,ORDER_NUMBER,CREATION_TIME,FINISH_TIME )VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?);");
         preparedStatement.setLong(1, orderDetail.getSellerId());
@@ -139,7 +139,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public OrderDetail queryOrderById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public OrderDetail queryOrderById(Long id)  {
         return this.sqlSessionTemplate.selectOne("com.zyht.domain.OrderDetail." + "getById", id);
        /* preparedStatement=connection.prepareStatement("SELECT  ID,BUYER_ID,SELLER_ID,GOODS_ID,AMOUNT,IS_SUCCESS,ORDER_STATUS,ORDER_NUMBER,CREATION_TIME,FINISH_TIME,ORDER_ID FROM order_detail WHERE ID=?;");
         preparedStatement.setLong(1,id);
@@ -184,7 +184,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      */
 
     @Override
-    public List<OrderDetail> queryOrderByCondition(Map<String, String> stringOrderMap, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public List<OrderDetail> queryOrderByCondition(Map<String, Object> stringOrderMap){
         return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderDetail." + "queryCondition", stringOrderMap);
        /* //取出stringOrderMap中的鍵集合
         Set<String> keySet=stringOrderMap.keySet();
@@ -234,7 +234,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public List<OrderDetail> queryOrderByCondition(Map<String, String> stringOrderMap, Integer startRow, Integer size, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+    public List<OrderDetail> queryOrderByCondition(Map<String, Object> stringOrderMap, Integer startRow, Integer size) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderDetail." + "queryConditionPage", stringOrderMap);
       /*  //取出stringOrderMap中的鍵集合
         Set<String> keySet=stringOrderMap.keySet();
