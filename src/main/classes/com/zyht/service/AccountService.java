@@ -4,6 +4,7 @@ package com.zyht.service;
 import com.zyht.domain.Account;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -11,15 +12,14 @@ import java.util.List;
  */
 public interface AccountService {
     /**
-     * @Title: longinUser
-     * @Description: 账户登录
+     * @Title: cancelUser
+     * @Description: 账户注销
      * @author renxu
      * @date 2018/1/20
      * @param account 账户对象
-     * @return Boolean true-登录成功，false-登录失败
+     * @return Integer 1-注销成功 0-注销失败
      */
-    public Account logInUser(Account account);
-
+    public int cancelUser(Account account);
     /**
      * @Title: registerUser
      * @Description: 账户注册
@@ -28,7 +28,7 @@ public interface AccountService {
      * @param account 账户对象
      * @return Integer 1-注册成功 0-注册失败
      */
-    public Account registerUser(Account account);
+    public int registerUser(Account account);
     /**
      * @Title: modifyUser
      * @Description: 账户修改
@@ -39,14 +39,14 @@ public interface AccountService {
      */
     public int modifyUser(Account account);
     /**
-     * @Title: cancelUser
-     * @Description: 账户注销
+     * @Title: longinUser
+     * @Description: 账户登录
      * @author renxu
      * @date 2018/1/20
      * @param account 账户对象
-     * @return Integer 1-注销成功 0-注销失败
+     * @return Boolean true-登录成功，false-登录失败
      */
-    public Integer cancelUser(Account account);
+    public Account logInUser(Map<String,Object> stringObjectMap);
     /**
      * @Title: selectAll
      * @Description: 查询所有账户

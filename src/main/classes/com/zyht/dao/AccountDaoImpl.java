@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author denghongbo
@@ -20,45 +21,46 @@ import java.util.List;
  */
 @Repository("accountDao")
 public class AccountDaoImpl extends Base<Account> implements AccountDao {
-    /**
-     * @Title: cancelAccount
-     * @Description: 注销账户
-     * @author DengHongbo
-     * @date 2018/1/20 14:06
-     * @param account, connection, preparedStatement
-     * @return java.lang.Integer
-     * @throw SQLException
-     */
+  /**
+   * @Title: cancelUser
+   * @Description: 删除数据
+   * @author DengHongbo
+   * @date 2018/2/28 14:11
+   * @param account
+   * @return java.lang.Integer
+   * @throw
+   */
     @Override
-    public Integer cancelUser(Account account, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement=connection.prepareStatement("DELETE FROM account WHERE ID=?");
-        preparedStatement.setLong(1,account.getId());
-        int rows=preparedStatement.executeUpdate();
-        return rows;
+    public int cancelUser(Account account) {
+//        preparedStatement=connection.prepareStatement("DELETE FROM account WHERE ID=?");
+//        preparedStatement.setLong(1,account.getId());
+//        int rows=preparedStatement.executeUpdate();
+//        return rows;
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteOne",account);
     }
     /**
-     * @Title: registerAccount
-     * @Description: 注册账户
+     * @Title: registerUser
+     * @Description: 插入数据
      * @author DengHongbo
-     * @date 2018/1/20 14:06
-     * @param account, connection, preparedStatement
-     * @return Account
-     * @throw SQLException
+     * @date 2018/2/28 14:13
+     * @param account
+     * @return com.zyht.domain.Account
      */
     @Override
-    public Account registerUser(Account account, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement = connection.prepareStatement("INSERT INTO account(ID,ACCOUNT,PASSWORD,BUYER_ID,ADD_TIME,UPDATE_TIME) VALUES(DEFAULT ,?,?,?,?,?);");
-        preparedStatement.setString(1,account.getAccount());
-        preparedStatement.setString(2,account.getPassword());
-//        preparedStatement.setBoolean(3,account.getIsFrozen());
-//        preparedStatement.setBoolean(4,account.getIsCanceled());
-//        preparedStatement.setBoolean(5,account.getIsDelete());
-        preparedStatement.setLong(3,account.getBuyerId());
-//        preparedStatement.setLong( 4,account.getSellerId());
-        preparedStatement.setDate(4, new java.sql.Date(account.getAddTime().getTime()));
-        preparedStatement.setDate(5, new java.sql.Date(account.getUpdateTime().getTime()));
-        preparedStatement.executeUpdate();
-        return account;
+    public int registerUser(Account account){
+//        preparedStatement = connection.prepareStatement("INSERT INTO account(ID,ACCOUNT,PASSWORD,BUYER_ID,ADD_TIME,UPDATE_TIME) VALUES(DEFAULT ,?,?,?,?,?);");
+//        preparedStatement.setString(1,account.getAccount());
+//        preparedStatement.setString(2,account.getPassword());
+////        preparedStatement.setBoolean(3,account.getIsFrozen());
+////        preparedStatement.setBoolean(4,account.getIsCanceled());
+////        preparedStatement.setBoolean(5,account.getIsDelete());
+//        preparedStatement.setLong(3,account.getBuyerId());
+////        preparedStatement.setLong( 4,account.getSellerId());
+//        preparedStatement.setDate(4, new java.sql.Date(account.getAddTime().getTime()));
+//        preparedStatement.setDate(5, new java.sql.Date(account.getUpdateTime().getTime()));
+//        preparedStatement.executeUpdate();
+//        return account;
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"insert",account);
     }
     /**
      * @Title: modifyAccount
@@ -88,39 +90,40 @@ public class AccountDaoImpl extends Base<Account> implements AccountDao {
         return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"update",account);
     }
     /**
-     * @Title: longinAccount
+     * @Title: logInUser
      * @Description: 登录账户
      * @author DengHongbo
-     * @date 2018/1/20 14:10
-     * @param connection, preparedStatement
-     * @return Account
-     * @throw SQLException
+     * @date 2018/2/28 15:35
+     * @param stringObjectMap
+     * @return com.zyht.domain.Account
+     * @throw
      */
     @Override
-    public Account logInUser(Account account, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        ResultSet resultSet = null;
-        Account account1 = null;
-        System.out.println(account.getAccount());
-        System.out.println(account.getPassword());
-        String selectStr = "SELECT ID,ACCOUNT,PASSWORD,IS_FROZEN,IS_CANCELED,IS_DELETE,BUYER_ID,SELLER_ID,ADD_TIME,UPDATE_TIME FROM account WHERE ACCOUNT='"+account.getAccount()+"' AND `PASSWORD`="+account.getPassword();
-        preparedStatement = connection.prepareStatement(selectStr);
-        resultSet = preparedStatement.executeQuery();
-        if(resultSet != null){
-            while(resultSet.next()){
-                account1=new Account();
-                account1.setId(resultSet.getLong(1));
-                account1.setAccount(resultSet.getString(2));
-                account1.setPassword(resultSet.getString(3));
-                account1.setIsFrozen(resultSet.getBoolean(4));
-                account1.setIsCanceled(resultSet.getBoolean(5));
-                account1.setIsDelete(resultSet.getBoolean(6));
-                account1.setBuyerId(resultSet.getLong(7));
-                account1.setSellerId(resultSet.getLong(8));
-                account1.setAddTime(resultSet.getDate(9));
-                account1.setUpdateTime(resultSet.getDate(10));
-            }
-        }
-        return account1;
+    public Account logInUser(Map<String,Object> stringObjectMap){
+//        ResultSet resultSet = null;
+//        Account account1 = null;
+//        System.out.println(account.getAccount());
+//        System.out.println(account.getPassword());
+//        String selectStr = "SELECT ID,ACCOUNT,PASSWORD,IS_FROZEN,IS_CANCELED,IS_DELETE,BUYER_ID,SELLER_ID,ADD_TIME,UPDATE_TIME FROM account WHERE ACCOUNT='"+account.getAccount()+"' AND `PASSWORD`="+account.getPassword();
+//        preparedStatement = connection.prepareStatement(selectStr);
+//        resultSet = preparedStatement.executeQuery();
+//        if(resultSet != null){
+//            while(resultSet.next()){
+//                account1=new Account();
+//                account1.setId(resultSet.getLong(1));
+//                account1.setAccount(resultSet.getString(2));
+//                account1.setPassword(resultSet.getString(3));
+//                account1.setIsFrozen(resultSet.getBoolean(4));
+//                account1.setIsCanceled(resultSet.getBoolean(5));
+//                account1.setIsDelete(resultSet.getBoolean(6));
+//                account1.setBuyerId(resultSet.getLong(7));
+//                account1.setSellerId(resultSet.getLong(8));
+//                account1.setAddTime(resultSet.getDate(9));
+//                account1.setUpdateTime(resultSet.getDate(10));
+//            }
+//        }
+//        return account1;
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"selectOne",stringObjectMap);
     }
     @Override
     public List<Account> queryAll() {
