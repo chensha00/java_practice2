@@ -19,6 +19,7 @@
         ID,ACCOUNT,PASSWORD,IS_FROZEN,IS_CANCELED,IS_DELETE,BUYER_ID,SELLER_ID,ADD_TIME,UPDATE_TIME
     </sql>
     <!-- 查询所有-->
+
     <select id="selectAll" resultMap="test">
         SELECT
         <include refid="columns"/>
@@ -30,32 +31,25 @@
         <include refid="columns"/>
         FROM account WHERE ID = #{id};
     </select>
-    <!--&lt;!&ndash; 添加&ndash;&gt;-->
-    <!--<insert id="save" parameterType="domain.Test">-->
-    <!--INSERT INTO `account` (`id`, `ACCOUNT`,`PASSWORD`,`IS_FROZEN`,`IS_CANCELED`,`IS_DELETE`,`BUYER_ID`,`SELLER_ID`,`ADD_TIME`,`UPDATE_TIME`) VALUES (${id}, #{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{is_frozen,jdbcType=TINYINT},#{is_canceled,jdbcType=TINYINT},#{is_delete,jdbcType=TINYINT},#{buyer_id,jdbcType=BIGINT},#{seller_id,jdbcType=BIGINT},#{add_time,jdbcType=DATETIME},#{update_time,jdbcType=DATETIME})-->
-    <!--</insert>-->
+    <!--按账号和密码查询数据-->
+    <select id="selectOne" resultMap="test" parameterType="java.util.Map">
+        SELECT
+        <include refid="columns"/>
+        FROM account WHERE ACCOUNT=#{account} AND PASSWORD=#{password};
+    </select>
+    <!-- 插入数据-->
+    <insert id="insert" parameterType="com.zyht.domain.Account">
+    INSERT INTO `account` (`ACCOUNT`,`PASSWORD`,`IS_FROZEN`,`IS_CANCELED`,`IS_DELETE`,`BUYER_ID`,`SELLER_ID`,`ADD_TIME`,`UPDATE_TIME`) VALUES (#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{isFrozen,jdbcType=TINYINT},#{isCanceled,jdbcType=TINYINT},#{isDelete,jdbcType=TINYINT},#{buyerId,jdbcType=BIGINT},#{sellerId,jdbcType=BIGINT},#{addTime,jdbcType=DATE},#{updateTime,jdbcType=DATE})
+    </insert>
     <!--&lt;!&ndash; 编辑&ndash;&gt;-->
     <update id="update" parameterType="com.zyht.domain.Account">
         UPDATE `account` SET
         ACCOUNT=#{account},PASSWORD=#{password},IS_FROZEN=#{isFrozen},IS_CANCELED=#{isCanceled},IS_DELETE=#{isDelete},BUYER_ID=#{buyerId},SELLER_ID=#{sellerId},ADD_TIME=#{addTime},UPDATE_TIME=#{updateTime}
             WHERE ID=${id}
-        <![CDATA[
-        ]]>
     </update>
 
-    <!--<delete id="delete" parameterType="java.util.Map">-->
-    <!--&lt;!&ndash; ids,name &ndash;&gt;-->
-    <!--DELETE FROM  test WHERE  id IN-->
-    <!--<if test="@Ognl@isNotEmpty(ids)">-->
-    <!--<foreach collection="ids" item="testId" open="("-->
-    <!--separator="," close=")">-->
-    <!--${testId}-->
-    <!--</foreach>-->
-    <!--</if>-->
-
-    <!--&lt;!&ndash;<foreach collection="roleIds" item="roleId" open="("&ndash;&gt;-->
-    <!--&lt;!&ndash;separator="," close=")">&ndash;&gt;-->
-    <!--&lt;!&ndash;#{roleId}&ndash;&gt;-->
-    <!--&lt;!&ndash;</foreach>&ndash;&gt;-->
-    <!--</delete>-->
+    <delete id="deleteOne" parameterType="com.zyht.domain.Account">
+        <!-- ids,name -->
+        DELETE FROM account WHERE ACCOUNT=#{account} AND PASSWORD=#{password}
+    </delete>
 </mapper>

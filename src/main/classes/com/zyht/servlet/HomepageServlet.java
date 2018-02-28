@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author caoxin
@@ -62,12 +64,16 @@ public class HomepageServlet extends HttpServlet {
         //获取登录的账户名和密码
         session=request.getSession();
         String userName=(String)session.getAttribute("username");
-        String password=(String)session.getAttribute("password");
-        //将获取的用户名和密码传递给account对象
-        account.setAccount(userName);
-        account.setPassword(password);
-        //将数据库中查询的数据传递给account账户
-        account=accountServiceImpl.logInUser(account);
+        Object password= session.getAttribute("password");
+//        将账号密码放到map中
+        Map<String,Object> stringObjectMap = new HashMap<String,Object>();
+        stringObjectMap.put(userName,password);
+//        将获取的用户名和密码传递给account对象
+//        account.setAccount(userName);
+//        account.setPassword(password);
+//        将数据库中查询的数据传递给account账户
+        account=accountServiceImpl.logInUser(stringObjectMap);
+
         seller.setId(account.getSellerId());
         Long sellerId=seller.getId();
         Long buyerId=account.getBuyerId();

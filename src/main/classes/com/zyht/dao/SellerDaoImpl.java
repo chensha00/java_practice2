@@ -8,18 +8,15 @@ package com.zyht.dao;/**********************************************************
  * @version V1.0
  */
 
-import com.opensymphony.xwork2.util.ResolverUtil;
+import com.zyht.base.Base;
+import com.zyht.domain.GoodsSellerRelation;
 import com.zyht.domain.Seller;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author caoxin
@@ -28,7 +25,8 @@ import java.util.Set;
  * @date 2018/1/19
  */
 @Repository("sellerDao")
-public class SellerDaoImpl implements SellerDao {
+public class SellerDaoImpl extends Base<GoodsSellerRelation> implements SellerDao{
+//public class SellerDaoImpl implements SellerDao {
     /**
      * 查询结果集
      */
@@ -51,12 +49,15 @@ public class SellerDaoImpl implements SellerDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteSellerById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement=connection.prepareStatement("DELETE FROM seller WHERE ID=?");
-        preparedStatement.setLong(1,id);
-        Integer operatedRow=preparedStatement.executeUpdate();
-        connection.commit();
-        return operatedRow;
+    public int deleteSellerById(Long id) {
+//    public Integer deleteSellerById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//        preparedStatement=connection.prepareStatement("DELETE FROM seller WHERE ID=?");
+//        preparedStatement.setLong(1,id);
+//        Integer operatedRow=preparedStatement.executeUpdate();
+//        connection.commit();
+//        return operatedRow;
+//    }
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteById",id);
     }
     /**
      * @Title: deleteSellerByIds
@@ -68,64 +69,74 @@ public class SellerDaoImpl implements SellerDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteSellerByIds(Long[] ids, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        for(Long id:ids){
-            preparedStatement=connection.prepareStatement("DELETE FROM seller WHERE ID=?");
-            preparedStatement.setLong(1,id);
-        }
-        Integer operatedRows=preparedStatement.executeUpdate();
-        connection.commit();
-        return operatedRows;
+    public int deleteSellerByIds(Long[] ids){
+//    public Integer deleteSellerByIds(Long[] ids, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//        for(Long id:ids){
+//            preparedStatement=connection.prepareStatement("DELETE FROM seller WHERE ID=?");
+//            preparedStatement.setLong(1,id);
+//        }
+//        Integer operatedRows=preparedStatement.executeUpdate();
+//        connection.commit();
+//        return operatedRows;
+//    }
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("ids", ids);
+        return this.sqlSessionTemplate.delete(getMybaitsNameSpace()+"deleteByIds",map);
     }
     /**
      * @Title: updateSeller
      * @Description: 修改卖家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param Seller, connection, preparedStatement
      * @return domain.Seller
      * @throw SQLException
      */
     @Override
-    public Seller updateSeller(Seller Seller, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-
-        preparedStatement=connection.prepareStatement("UPDATE Seller SET NAME=?,SEX=?,AGE=?,ID_NUMBER=?,TEL=?,ADDR=?,PROFESSION=?,WORK_UNIT=?,SAVING=? WHERE ID=?;");
-        preparedStatement.setLong(10,Seller.getId());
-        preparedStatement.setString(1,Seller.getName());
-        preparedStatement.setString(2, Seller.getSex());
-        preparedStatement.setByte(3, Seller.getAge());
-        preparedStatement.setString(4, Seller.getIdNumber());
-        preparedStatement.setString(5,Seller.getTel());
-        preparedStatement.setString(6,Seller.getAddr());
-        preparedStatement.setString(7,Seller.getProfession());
-        preparedStatement.setString(8,Seller.getWorkUnit());
-        preparedStatement.setDouble(9,Seller.getSaving());
-        connection.commit();
-        return Seller;
+    public int updateSeller(Seller seller) {
+//    public Seller updateSeller(Seller Seller, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//
+//        preparedStatement=connection.prepareStatement("UPDATE Seller SET NAME=?,SEX=?,AGE=?,ID_NUMBER=?,TEL=?,ADDR=?,PROFESSION=?,WORK_UNIT=?,SAVING=? WHERE ID=?;");
+//        preparedStatement.setLong(10,Seller.getId());
+//        preparedStatement.setString(1,Seller.getName());
+//        preparedStatement.setString(2, Seller.getSex());
+//        preparedStatement.setByte(3, Seller.getAge());
+//        preparedStatement.setString(4, Seller.getIdNumber());
+//        preparedStatement.setString(5,Seller.getTel());
+//        preparedStatement.setString(6,Seller.getAddr());
+//        preparedStatement.setString(7,Seller.getProfession());
+//        preparedStatement.setString(8,Seller.getWorkUnit());
+//        preparedStatement.setDouble(9,Seller.getSaving());
+//        connection.commit();
+//        return Seller;
+//    }
+        return this.sqlSessionTemplate.update(getMybaitsNameSpace()+"updateSeller",seller);
     }
     /**
      * @Title: insertSeller
      * @Description: 添加卖家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param Seller, connection, preparedStatement
+
      * @return domain.Seller
      * @throw SQLException
      */
     @Override
-    public Seller insertSeller(Seller Seller, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement=connection.prepareStatement("INSERT INTO Seller(NAME,SEX,AGE,ID_NUMBER,TEL,ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(?,?,?,?,?,?,?,?,?);");
-        preparedStatement.setString(1,Seller.getName());
-        preparedStatement.setString(2, Seller.getSex());
-        preparedStatement.setByte(3, Seller.getAge());
-        preparedStatement.setString(4, Seller.getIdNumber());
-        preparedStatement.setString(5,Seller.getTel());
-        preparedStatement.setString(6,Seller.getAddr());
-        preparedStatement.setString(7,Seller.getProfession());
-        preparedStatement.setString(8,Seller.getWorkUnit());
-        preparedStatement.setDouble(9,Seller.getSaving());
-        connection.commit();
-        return Seller;
+    public int insertSeller(Seller seller) {
+//    public Seller insertSeller(Seller Seller, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//        preparedStatement=connection.prepareStatement("INSERT INTO Seller(NAME,SEX,AGE,ID_NUMBER,TEL,ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(?,?,?,?,?,?,?,?,?);");
+//        preparedStatement.setString(1,Seller.getName());
+//        preparedStatement.setString(2, Seller.getSex());
+//        preparedStatement.setByte(3, Seller.getAge());
+//        preparedStatement.setString(4, Seller.getIdNumber());
+//        preparedStatement.setString(5,Seller.getTel());
+//        preparedStatement.setString(6,Seller.getAddr());
+//        preparedStatement.setString(7,Seller.getProfession());
+//        preparedStatement.setString(8,Seller.getWorkUnit());
+//        preparedStatement.setDouble(9,Seller.getSaving());
+//        connection.commit();
+//        return Seller;
+//    }
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"insertSeller",seller);
     }
 
     /**
@@ -138,32 +149,35 @@ public class SellerDaoImpl implements SellerDao {
      * @throw SQLException
      */
     @Override
-    public Seller querySellerById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement=connection.prepareStatement("SELECT ID, NAME ,SEX,AGE,ID_NUMBER,TEL,ADDR,PROFESSION,WORK_UNIT,SAVING FROM seller WHERE ID=?;");
-        preparedStatement.setLong(1,id);
-        //获取查询的结果集
-        resultSet=preparedStatement.executeQuery();
-        //若非空，开始遍历结果集并给Seller赋值
-        if(resultSet!=null){
-            while(resultSet.next()){
-                seller = new Seller();
-                seller.setId(resultSet.getLong(1));
-                seller.setName(resultSet.getString(2));
-                seller.setSex(resultSet.getString(3));
-                seller.setAge(resultSet.getByte(4));
-                seller.setIdNumber(resultSet.getString(5));
-                seller.setTel(resultSet.getString(6));
-                seller.setAddr(resultSet.getString(7));
-                seller.setProfession(resultSet.getString(8));
-                seller.setWorkUnit(resultSet.getString(9));
-                seller.setSaving(resultSet.getDouble(10));
-            }
-            resultSet.close();
-            return seller;
-        }else{
-            //结果集为空返回null
-            return null;
-        }
+    public Seller querySellerById(Long id)  {
+//    public Seller querySellerById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//        preparedStatement=connection.prepareStatement("SELECT ID, NAME ,SEX,AGE,ID_NUMBER,TEL,ADDR,PROFESSION,WORK_UNIT,SAVING FROM seller WHERE ID=?;");
+//        preparedStatement.setLong(1,id);
+//        //获取查询的结果集
+//        resultSet=preparedStatement.executeQuery();
+//        //若非空，开始遍历结果集并给Seller赋值
+//        if(resultSet!=null){
+//            while(resultSet.next()){
+//                seller = new Seller();
+//                seller.setId(resultSet.getLong(1));
+//                seller.setName(resultSet.getString(2));
+//                seller.setSex(resultSet.getString(3));
+//                seller.setAge(resultSet.getByte(4));
+//                seller.setIdNumber(resultSet.getString(5));
+//                seller.setTel(resultSet.getString(6));
+//                seller.setAddr(resultSet.getString(7));
+//                seller.setProfession(resultSet.getString(8));
+//                seller.setWorkUnit(resultSet.getString(9));
+//                seller.setSaving(resultSet.getDouble(10));
+//            }
+//            resultSet.close();
+//            return seller;
+//        }else{
+//            //结果集为空返回null
+//            return null;
+//        }
+//    }
+        return this.sqlSessionTemplate.selectOne(getMybaitsNameSpace()+"queryById",id);
     }
     /**
      * @Title: querySellerByCondition
@@ -176,33 +190,36 @@ public class SellerDaoImpl implements SellerDao {
      */
 
     @Override
-    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        //取出stringSellerMap中的鍵集合
-        Set<String> keySet=stringSellerMap.keySet();
-        //储存查询结果集
-        sellers=new ArrayList<Seller>();
-        //遍历键集，取出对应值并通过键值对条件进行查询
-        for(String key:keySet){
-            String keyValue=stringSellerMap.get(key);
-            preparedStatement=connection.prepareStatement("SELECT NAME,SEX,ID_NUMBER,SAVING FROM Seller WHERE ?=?;");
-            preparedStatement.setString(1,key);
-            preparedStatement.setString(2,keyValue);
-            resultSet=preparedStatement.executeQuery();
-            if(resultSet!=null){
-                while(resultSet.next()){
-                    seller=new Seller();
-                    seller.setName(resultSet.getString(1));
-                    seller.setSex(resultSet.getString(2));
-                    seller.setIdNumber(resultSet.getString(3));
-                    seller.setSaving(resultSet.getDouble(4));
-                    sellers.add(seller);
-                }
-                resultSet.close();
-            }else {
-                return null;
-            }
-        }
-        return sellers;
+    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap){
+//    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//        //取出stringSellerMap中的鍵集合
+//        Set<String> keySet=stringSellerMap.keySet();
+//        //储存查询结果集
+//        sellers=new ArrayList<Seller>();
+//        //遍历键集，取出对应值并通过键值对条件进行查询
+//        for(String key:keySet){
+//            String keyValue=stringSellerMap.get(key);
+//            preparedStatement=connection.prepareStatement("SELECT NAME,SEX,ID_NUMBER,SAVING FROM Seller WHERE ?=?;");
+//            preparedStatement.setString(1,key);
+//            preparedStatement.setString(2,keyValue);
+//            resultSet=preparedStatement.executeQuery();
+//            if(resultSet!=null){
+//                while(resultSet.next()){
+//                    seller=new Seller();
+//                    seller.setName(resultSet.getString(1));
+//                    seller.setSex(resultSet.getString(2));
+//                    seller.setIdNumber(resultSet.getString(3));
+//                    seller.setSaving(resultSet.getDouble(4));
+//                    sellers.add(seller);
+//                }
+//                resultSet.close();
+//            }else {
+//                return null;
+//            }
+//        }
+//        return sellers;
+//    }
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"queryByCondition",stringSellerMap);
     }
     /**
      * @Title: querySellerByCondition
@@ -214,37 +231,39 @@ public class SellerDaoImpl implements SellerDao {
      * @throw SQLException
      */
     @Override
-    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap, Integer startRow, Integer size, Connection connection, PreparedStatement preparedStatement) throws SQLException {
-        //取出stringSellerMap中的鍵集合
-        Set<String> keySet=stringSellerMap.keySet();
-        //储存查询结果集
-        sellers=new ArrayList<Seller>();
-        //遍历键集，取出对应值并通过键值对条件进行查询并对结果进行分页显示
-        for(String key:keySet){
-            String keyValue=stringSellerMap.get(key);
-            preparedStatement=connection.prepareStatement("SELECT NAME,SEX,ID_NUMBER,SAVING FROM Seller WHERE ?=? ;");
-            preparedStatement.setString(1,key);
-            preparedStatement.setString(2,keyValue);
-            resultSet=preparedStatement.executeQuery();
-            //指针定位到要startRow行开始输出记录
-            resultSet.absolute(startRow);
-            // 设置最大查询记录条数
-            preparedStatement.setMaxRows(size);
-            if(resultSet!=null){
-                while(resultSet.next()){
-                    seller=new Seller();
-                    seller.setName(resultSet.getString(1));
-                    seller.setSex(resultSet.getString(2));
-                    seller.setIdNumber(resultSet.getString(3));
-                    seller.setSaving(resultSet.getDouble(4));
-                    sellers.add(seller);
-                }
-                resultSet.close();
-            }else {
-                return null;
-            }
-        }
-        return sellers;
+    public List<Seller> querySellerByConditionPage(Map<String, Object> stringSellerMap){
+//    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap, Integer startRow, Integer size, Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//        //取出stringSellerMap中的鍵集合
+//        Set<String> keySet=stringSellerMap.keySet();
+//        //储存查询结果集
+//        sellers=new ArrayList<Seller>();
+//        //遍历键集，取出对应值并通过键值对条件进行查询并对结果进行分页显示
+//        for(String key:keySet){
+//            String keyValue=stringSellerMap.get(key);
+//            preparedStatement=connection.prepareStatement("SELECT NAME,SEX,ID_NUMBER,SAVING FROM Seller WHERE ?=? ;");
+//            preparedStatement.setString(1,key);
+//            preparedStatement.setString(2,keyValue);
+//            resultSet=preparedStatement.executeQuery();
+//            //指针定位到要startRow行开始输出记录
+//            resultSet.absolute(startRow);
+//            // 设置最大查询记录条数
+//            preparedStatement.setMaxRows(size);
+//            if(resultSet!=null){
+//                while(resultSet.next()){
+//                    seller=new Seller();
+//                    seller.setName(resultSet.getString(1));
+//                    seller.setSex(resultSet.getString(2));
+//                    seller.setIdNumber(resultSet.getString(3));
+//                    seller.setSaving(resultSet.getDouble(4));
+//                    sellers.add(seller);
+//                }
+//                resultSet.close();
+//            }else {
+//                return null;
+//            }
+//        }
+//        return sellers;
+//    }
+        return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"queryByConditionWithPage",stringSellerMap);
     }
-  
 }

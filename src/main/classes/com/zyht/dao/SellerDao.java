@@ -10,9 +10,6 @@ package com.zyht.dao;/**********************************************************
 
 import com.zyht.domain.Seller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +29,7 @@ public interface SellerDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteSellerById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int deleteSellerById(Long id);
 
     /**
      * @Title: deleteSellerByIds
@@ -43,31 +40,29 @@ public interface SellerDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteSellerByIds(Long[] ids,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int deleteSellerByIds(Long[] ids);
     /**
      * @Title: insertOrUpdateSeller
      * @Description: 添加卖家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param Seller, connection, preparedStatement
      * @return domain.Seller
      * @throw SQLException
      */
-    public Seller insertSeller(Seller Seller,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int insertSeller(Seller seller);
     /**
      * @Title: updateBuyer
      * @Description: 修改卖家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param seller, connection, preparedStatement
      * @return domain.Buyer
      * @throw SQLException
      */
 
-    public Seller updateSeller(Seller seller,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public int updateSeller(Seller seller);
     /**
      * @Title: querySellerById
-     * @Description: 通过ID查询卖家信息表
+    * @Description: 通过ID查询卖家信息表
      * @author caoxin
      * @date 2018/1/19
      * @param id, connection, preparedStatement
@@ -75,25 +70,23 @@ public interface SellerDao {
      * @throw SQLException
      */
 
-    public Seller querySellerById(Long id,Connection connection,PreparedStatement preparedStatement)throws SQLException;
+    public Seller querySellerById(Long id);
     /**
      * @Title: querySellerByCondition
      * @Description: 通过条件查询卖家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param stringSellerMap, connection, preparedStatement
      * @return domain.Seller
      * @throw SQLException
      */
-    public List<Seller> querySellerByCondition(Map<String,String> stringSellerMap,Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap);
     /**
      * @Title: findSellerByCondition
      * @Description: 通过条件批量查询卖家信息
      * @author caoxin
      * @date 2018/1/19
-     * @param stringSellerMap, offset, size, connection, preparedStatement
      * @return java.util.List<domain.Seller>
      * @throw SQLException
      */
-    public List<Seller> querySellerByCondition(Map<String,String> stringSellerMap,Integer startRow,Integer size, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+    public List<Seller> querySellerByConditionPage(Map<String,Object> stringSellerMap);
 }
