@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,8 +76,8 @@ public class BuyServlet extends HttpServlet{
         Long buyerId=Long.parseLong(request.getParameter("buyerid"));
         Double buyAmount= Double.parseDouble(request.getParameter("goodsNumber"));
         GoodsSellerRelation gsr=null;
-        GoodsSellerRelationServiceImpl gsrsi=new GoodsSellerRelationServiceImpl();
-//      GoodsSellerRelationServiceImpl gsrsi=(GoodsSellerRelationServiceImpl)applicationContext.getBean("goodsSellerRelationServiceImpl");
+//        GoodsSellerRelationServiceImpl gsrsi=new GoodsSellerRelationServiceImpl();
+      GoodsSellerRelationServiceImpl gsrsi=(GoodsSellerRelationServiceImpl)applicationContext.getBean("goodsSellerRelationService");
         //查询出购买的产品
         gsr=gsrsi.queryGoodsSellerRelationById(goodsSellerRelationId);
         String goodsName=gsr.getName();
@@ -86,21 +86,22 @@ public class BuyServlet extends HttpServlet{
         map.put(gsr,buyAmount);
         Double bill=buyerService.bill(map);
         goods.setId(gsr.getGoodsId());
-        try {
+//        try {
             seller=ssi.querySellerById(gsr.getSellerId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         String sellerName=seller.getName();
         buyer=buyerService.queryBuyerById(buyerId);
         //购买行为产生订单详情
-//        OrderDetail orderDetail=buyerServiceImpl.buy(bill, goods, seller, buyer);
+        List<OrderDetail> buyList=new ArrayList<OrderDetail>();
+        buyList=buyerService.buy(bill,map,buyer);
         //查询出产生的订单详情的id
-        Map<String,String> query=new HashMap<String,String>();
+//        Map<String,Object> query=new HashMap<String,Object>();
 //        query.put("ORDER_NUMBER",orderDetail.getOrderNumber());
         //获取查询结果
-        List<OrderDetail> orderDetails=null;
-        orderDetails=odsi.queryOrderByCondition(query);
+//        List<OrderDetail> orderDetails=null;
+//        orderDetails=odsi.queryOrderByCondition(query);
 //        orderDetail=orderDetails.get(0);
 //        Long id=orderDetail.getId();
 //        String orderNum=orderDetail.getOrderNumber();
@@ -108,12 +109,13 @@ public class BuyServlet extends HttpServlet{
 
         //将id,sellername,amount,goodsname ordernumber creationtime用请求传递
 //        request.setAttribute("id",id);
-        request.setAttribute("sellername",sellerName);
-        request.setAttribute("amount",bill);
-        request.setAttribute("goodsname",goodsName);
+//        request.setAttribute("sellername",sellerName);
+//        request.setAttribute("amount",bill);
+//        request.setAttribute("goodsname",goodsName);
 //        request.setAttribute("ordernumber",orderNum);
 //        request.setAttribute("creationtime",creationTime);
 //        System.out.println(id+sellerName+goodsName+orderNum);
+        request.setAttribute("buylist",buyList);
 //        将请求转发到pay_order.jsp页面
         request.getRequestDispatcher("jsp/pay_order.jsp").forward(request,response);
 
