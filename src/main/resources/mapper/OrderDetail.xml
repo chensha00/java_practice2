@@ -132,17 +132,28 @@
 </select>
 <!--插入数据-->
 <insert id="insert" parameterType="com.zyht.domain.OrderDetail">
-    INSERT INTO `order_detail` (`ID`, `SELLER_ID`,`BUYER_ID`,`ORDER_ID`,`AMOUNT`,`IS_SUCCESS`,`ORDER_STATUS`,`ORDER_NUMBER`,`CREATION_TIME`,`FINISH_TIME`,`PHYSICAL_DISTRIBUTION`,`EVALUATE`,`LEAVE_WORD`)
-    VALUES (${id}, ${sellerId},${buyerId},${orderId},${orderId},${amount},${isSuccess},${orderStatus},${orderNumber},${creationTime}
-    ,${finishTime},${physicalDistribution},${evaluate},${leaveWord})
+    INSERT INTO `order_detail` (`ID`, `SELLER_ID`,`BUYER_ID`,`GOODS_ID`,`ORDER_ID`,`AMOUNT`,`IS_SUCCESS`,`ORDER_STATUS`,`ORDER_NUMBER`,`CREATION_TIME`,`FINISH_TIME`,`PHYSICAL_DISTRIBUTION`,`EVALUATE`,`LEAVE_WORD`)
+    VALUES (DEFAULT,${sellerId},${buyerId},${orderId},${orderId},${amount},${isSuccess},${orderStatus},#{orderNumber},#{creationTime},#{finishTime},#{physicalDistribution},#{evaluate},#{leaveWord})
 </insert>
 <!-- 更新-->
 <update id="update" parameterType="com.zyht.domain.OrderDetail">
-    UPDATE `order_detail` SET `ID`=${id},`SELLER_ID`=${sellerId},`BUYER_ID`=${buyerId},`ORDER_ID`=${orderId},`AMOUNT`=${amount},`IS_SUCCESS`=${isSuccess},`ORDER_STATUS`=${orderStatus}
-    `ORDER_NUMBER`=${orderNumber},`CREATION_TIME`=${creationTime},`FINISH_TIME`=${finishTime},`PHYSICAL_DISTRIBUTION`=${physicalDistribution},`EVALUATE`=${evaluate},`LEAVE_WORD`=${leaveWord}
-    <if test="@Ognl@isNotEmpty(id)">
-        WHERE (`ID`=${id})
-    </if>
+      UPDATE `order_detail` SET `ID`=${id},
+    `SELLER_ID`=${sellerId},
+    `BUYER_ID`=${buyerId},
+    `GOODS_ID`=${orderId},
+    `ORDER_ID`=${orderId},
+    `AMOUNT`=${amount},
+    `IS_SUCCESS`=${isSuccess},
+    `ORDER_STATUS`=${orderStatus},
+    `ORDER_NUMBER`=${orderNumber},
+    `CREATION_TIME`=#{creationTime},
+    `FINISH_TIME`=#{finishTime},
+    `PHYSICAL_DISTRIBUTION`=${physicalDistribution},
+    `EVALUATE`=${evaluate},
+    `LEAVE_WORD`=${leaveWord}
+       <if test="id!=null">
+           WHERE (`ID`=${id})
+       </if>
     <!--原样输出-->
     <![CDATA[
         ]]>
@@ -150,7 +161,7 @@
 <!--删除-->
 <delete id="delete" parameterType="java.util.Arrays">
     DELETE FROM  order_detail WHERE  id IN
-    <if test="@Ognl@isNotEmpty(ids)">
+    <if test="ids!=null">
         <foreach collection="ids" item="orderDetailId" open="("
                  separator="," close=")">
             ${testId}
