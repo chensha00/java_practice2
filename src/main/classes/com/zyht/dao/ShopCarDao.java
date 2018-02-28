@@ -24,7 +24,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer deleteShopCarById(Long id)throws SQLException;
+    public Integer deleteShopCarById(Long id);
 
     /**
      * @param ids
@@ -35,7 +35,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer deleteShopCarByIds(Long[] ids)throws SQLException;
+    public Integer deleteShopCarByIds(Long[] ids);
     /**
      * @param shopCar
      * @return java.lang.Integer
@@ -45,7 +45,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer updateShopCar(ShopCar shopCar)throws SQLException;
+    public Integer updateShopCar(ShopCar shopCar);
     /**
      * @param shopCar
      * @return java.lang.Integer
@@ -55,7 +55,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer insertShopCar(ShopCar shopCar)throws SQLException;
+    public Integer insertShopCar(ShopCar shopCar);
     /**
      * @param id
      * @return java.lang.Integer
@@ -65,7 +65,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public ShopCar queryShopCarById(Long id)throws SQLException;
+    public ShopCar queryShopCarById(Long id);
     /**
      * @param stringShopCarMap
      * @return java.util.*
@@ -75,7 +75,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap)throws SQLException;
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap);
     /**
      * @param stringShopCarMap startRow size
      * @return java.util.*
@@ -85,5 +85,5 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size)throws SQLException;
+    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size);
 }
