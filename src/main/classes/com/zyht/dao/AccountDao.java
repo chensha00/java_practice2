@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author denghongbo
@@ -16,45 +17,45 @@ import java.util.List;
  */
 public interface AccountDao {
     /**
-     * @Title: deleteAccountById
+     * @Title: cancelUser
      * @Description: 注销账户——单个删除数据
      * @author DengHongbo
-     * @date 2018/1/19 16:27
-     * @param account, connection, preparedStatement
-     * @return Integer
-     * @throw SQLException
+     * @date 2018/2/28 14:08
+     * @param account
+     * @return java.lang.Integer
+     * @throw
      */
-    public Integer cancelUser(Account account, Connection connection, PreparedStatement preparedStatement) throws SQLException;
+    public int cancelUser(Account account);
     /**
-     * @Title: insertAccount
+     * @Title: registerUser
      * @Description: 注册账户——插入数据
      * @author DengHongbo
-     * @date 2018/1/20 12:32
-     * @param account, connection, preparedStatement
-     * @return Account
-     * @throw SQLException
+     * @date 2018/2/28 14:07
+     * @param account
+     * @return com.zyht.domain.Account
+     * @throw
      */
-    public Account registerUser(Account account, Connection connection, PreparedStatement preparedStatement) throws SQLException;
-    /**
-     * @Title: UpdateAccount
-     * @Description: 修改账户——修改数据
-     * @author DengHongbo
-     * @date 2018/1/19 18:54
-     * @param account, connection, preparedStatement
-     * @return java.domain.Account
-     * @throw SQLException
-     */
+    public int registerUser(Account account);
+   /**
+    * @Title: modifyUser
+    * @Description: 修改账户数据
+    * @author DengHongbo
+    * @date 2018/2/28 14:06
+    * @param account
+    * @return int
+    * @throw
+    */
     public int modifyUser(Account account);
-    /**
-     * @Title: logInAccount
-     * @Description: 登录账户——查询数据
-     * @author DengHongbo
-     * @date 2018/1/20 15:58
-     * @param account, connection, preparedStatement
-     * @return boolean
-     * @throw SQLException
-     */
-    public Account logInUser(Account account, Connection connection, PreparedStatement preparedStatement)throws SQLException;
+   /**
+    * @Title: logInUser
+    * @Description: 登录账户
+    * @author DengHongbo
+    * @date 2018/2/28 15:36
+    * @param stringObjectMap
+    * @return com.zyht.domain.Account
+    * @throw
+    */
+    public Account logInUser(Map<String,Object> stringObjectMap);
 
     /**
      * @Title: queryAllAccount
