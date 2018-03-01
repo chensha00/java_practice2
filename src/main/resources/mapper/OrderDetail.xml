@@ -27,7 +27,7 @@
     SELECT <include refid="columns"/> FROM order_detail
 </select>
 <!--按照id查询-->
-<select id="getById" resultType="com.zyht.domain.OrderDetail" parameterType="java.lang.Long">
+<select id="getById" resultType="com.zyht.domain.OrderDetail" parameterType="java.lang.Long" resultMap="orderDetailMyBatis">
     SELECT <include refid="columns"/> FROM order_detail WHERE ID=#{_Param}
 </select>
 <!-- 按条件查询-->
@@ -137,7 +137,7 @@
 </insert>
 <!-- 更新-->
 <update id="update" parameterType="com.zyht.domain.OrderDetail">
-      UPDATE `order_detail` SET `ID`=${id},
+    UPDATE `order_detail` SET `ID`=${id},
     `SELLER_ID`=${sellerId},
     `BUYER_ID`=${buyerId},
     `GOODS_ID`=${orderId},
@@ -148,9 +148,9 @@
     `ORDER_NUMBER`=${orderNumber},
     `CREATION_TIME`=#{creationTime},
     `FINISH_TIME`=#{finishTime},
-    `PHYSICAL_DISTRIBUTION`=${physicalDistribution},
-    `EVALUATE`=${evaluate},
-    `LEAVE_WORD`=${leaveWord}
+    `PHYSICAL_DISTRIBUTION`=#{physicalDistribution},
+    `EVALUATE`=#{evaluate},
+    `LEAVE_WORD`=#{leaveWord}
        <if test="id!=null">
            WHERE (`ID`=${id})
        </if>
@@ -158,14 +158,16 @@
     <![CDATA[
         ]]>
 </update>
-<!--删除-->
+<!--根据id删除-->
 <delete id="delete" parameterType="java.util.Arrays">
-    DELETE FROM  order_detail WHERE  id IN
-    <if test="ids!=null">
-        <foreach collection="ids" item="orderDetailId" open="("
-                 separator="," close=")">
-            ${testId}
-        </foreach>
-    </if>
+    DELETE FROM  order_detail WHERE  id = #{_parameter}
 </delete>
+
+    <!--通过ID批量删除买家-->
+    <delete id="deletes" parameterType="java.util.Arrays">
+        DELETE FROM `order_detail` WHERE ID IN
+        <foreach collection="list" item="orderDetailId" open="(" close=")" separator=",">
+            ${orderDetailId}
+        </foreach>
+    </delete>
 </mapper>
