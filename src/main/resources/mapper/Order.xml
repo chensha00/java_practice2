@@ -96,10 +96,16 @@
 
     <!-- 编辑-->
     <update id="update" parameterType="com.zyht.domain.Order">
-        UPDATE `order` SET NUMBER=#{number},BUYER_ID=${buyerId},AMOUNT=${amount},IS_SUCCESS=${isSuccess},ORDER_STATUS=${orderStatus},CREATION_TIME=#{creationTime},FINISH_TIME=#{finishTime} WHERE (`ID`=${id})
-        <![CDATA[
+        UPDATE `order` SET
+            NUMBER=#{number},
+            BUYER_ID=#{buyerId},
+            AMOUNT=#{amount},
+            IS_SUCCESS=#{isSuccess},
+            ORDER_STATUS=#{orderStatus},
+            CREATION_TIME=#{creationTime},
+            FINISH_TIME=#{finishTime}
+        WHERE (`ID`=#{id})
 
-        ]]>
     </update>
     <!--单个删除-->
     <delete id="delete" parameterType="java.lang.Long">

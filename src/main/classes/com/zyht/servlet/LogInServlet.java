@@ -45,7 +45,7 @@ public class LogInServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
 //        获取对象
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         AccountService accountService = (AccountService) context.getBean("accountService");
 //        获取本地时间
         Date time = new Date();
@@ -84,22 +84,22 @@ public class LogInServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");//汉字转码
             PrintWriter out = response.getWriter();
             out.println("<script> alert('用户名不存在，请重新登录');window.location.href='jsp/log_in.jsp';</script>");
-        } else if (account.getFrozen() == true) {
+        } else if (account.getIsFrozen() == true) {
             PrintWriter out = response.getWriter();
-            out.println("<scipt> alert('该用户已被冻结，请重新登录');window.location.href='jsp/log_in.jsp';</scipt>");
-        } else if (account.getCanceled() == true) {
+            out.println("<script> alert('该用户已被冻结，请重新登录');window.location.href='jsp/log_in.jsp';</scipt>");
+        } else if (account.getIsCanceled() == true) {
             PrintWriter out = response.getWriter();
-            out.println("<scipt> alert('该用户已被注销，请重新登录');window.location.href='jsp/log_in.jsp';</scipt>");
-        } else if (account.getDelete() == true) {
+            out.println("<script> alert('该用户已被注销，请重新登录');window.location.href='jsp/log_in.jsp';</scipt>");
+        } else if (account.getIsDelete() == true) {
             PrintWriter out = response.getWriter();
-            out.println("<scipt> alert('该用户已被删除，请重新登录');window.location.href='jsp/log_in.jsp';</scipt>");
+            out.println("<script> alert('该用户已被删除，请重新登录');window.location.href='jsp/log_in.jsp';</scipt>");
         } else {
             Long sellerId = account.getSellerId();
             Long buyerId = account.getBuyerId();
             session.setAttribute("sellerid", sellerId);
             session.setAttribute("buyerid", buyerId);
 //            判断是否是管理员，如果是管理员就进入管理员界面，否则就进入主界面
-            if (userName == "admin") {
+            if (userName.equals("admin")) {
                 request.getRequestDispatcher("jsp/manager.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("jsp/homepage.jsp").forward(request, response);
