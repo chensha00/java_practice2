@@ -61,7 +61,7 @@ public class BuyerServiceImpl implements BuyerService {
 //        OrderDetailServiceImpl orderDetailServiceImpl=new OrderDetailServiceImpl();
 //        OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
         OrderService os=(OrderService)context.getBean("orderService");
-        List<OrderDetail> orderDetails=new ArrayList<>();
+        List<OrderDetail> orderDetails=new ArrayList<OrderDetail>();
         //在订单表数据库中生成一条订单信息
         try {
             order = new Order( buyer.getId(), bill, false, OrderState.UNPAID.getStateNum(), UUID.randomUUID().toString(), new Date(), DateTransferUtil.stringToDate("2018-02-01 18:12:33"));
@@ -121,7 +121,7 @@ public class BuyerServiceImpl implements BuyerService {
 //        OrderDetailServiceImpl orderDetailServiceImpl=new OrderDetailServiceImpl();
 //        OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
         OrderService os=(OrderService)context.getBean("orderService");
-        Map<String,String> query=new HashMap<String,String>();
+        Map<String,Object> query=new HashMap<String,Object>();
         query.put("ORDER_NUMBER",order.getNumber());
         List<OrderDetail> orderDetails=new LinkedList<OrderDetail>();
         orderDetails=ods.queryOrderByCondition(query);
