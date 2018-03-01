@@ -9,11 +9,9 @@ package com.zyht.dao;/**********************************************************
  */
 
 import com.zyht.base.Base;
-import com.zyht.domain.GoodsSellerRelation;
 import com.zyht.domain.Seller;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,20 +23,20 @@ import java.util.Map;
  * @date 2018/1/19
  */
 @Repository("sellerDao")
-public class SellerDaoImpl extends Base<GoodsSellerRelation> implements SellerDao{
+public class SellerDaoImpl extends Base<Seller> implements SellerDao{
 //public class SellerDaoImpl implements SellerDao {
     /**
      * 查询结果集
      */
-    private ResultSet resultSet=null;
-    /**
-     *卖家信息
-     */
-    private Seller seller=null;
+//    private ResultSet resultSet=null;
+//    /**
+//     *卖家信息
+//     */
+//    private Seller seller=null;
     /**
      *卖家信息集合
      */
-    private List<Seller> sellers=null;
+//    private List<Seller> sellers=null;
     /**
      * @Title: deleteSellerById
      * @Description: 通过卖家ID删除
@@ -190,7 +188,7 @@ public class SellerDaoImpl extends Base<GoodsSellerRelation> implements SellerDa
      */
 
     @Override
-    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap){
+    public List<Seller> querySellerByCondition(Map<String, Object> stringSellerMap){
 //    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap, Connection connection, PreparedStatement preparedStatement) throws SQLException {
 //        //取出stringSellerMap中的鍵集合
 //        Set<String> keySet=stringSellerMap.keySet();
