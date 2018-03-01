@@ -76,7 +76,7 @@ public interface GoodsService {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public List<Goods>  queryGoodsByCondition(Map<String, String> stringBuyerMap)throws SQLException;
+        public List<Goods>  queryGoodsByCondition(Map<String,Object> stringBuyerMap)throws SQLException;
     /**
      * @Title: findGoodsByCondition
      * @Description: 通过条件批量查询订单信息
@@ -86,5 +86,5 @@ public interface GoodsService {
      * @return java.util.List<domain.Buyer>
      * @throw SQLException
      */
-    public  List<Goods>  queryGoodsByCondition(Map<String, String> stringBuyerMap, Integer startRow, Integer size)throws SQLException;
+    public  List<Goods>  queryGoodsByCondition(Map<String,Object> stringBuyerMap, Integer startRow, Integer size)throws SQLException;
 }
