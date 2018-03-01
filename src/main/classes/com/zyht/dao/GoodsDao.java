@@ -9,9 +9,6 @@ package com.zyht.dao;/**********************************************************
  */
 
 import com.zyht.domain.Goods;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +29,7 @@ public interface GoodsDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteGoodsById(Long id)throws SQLException;
+    public Integer deleteGoodsById(Long id);
 
     /**
      * @Title: deleteGoodsByIds
@@ -43,7 +40,7 @@ public interface GoodsDao {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteGoodsByIds(Long[] ids)throws SQLException;
+    public Integer deleteGoodsByIds(Long[] ids);
     /**
      * @Title: insertGoods
      * @Description: 添加商品信息
@@ -54,7 +51,7 @@ public interface GoodsDao {
      * @throw SQLException
      */
 
-    public Goods insertGoods(Goods goods)throws SQLException;
+    public Goods insertGoods(Goods goods);
     /**
      * @Title: updateGoods
      * @Description: 修改商品信息
@@ -64,7 +61,7 @@ public interface GoodsDao {
      * @return domain.Goods
      * @throw SQLException
      */
-    public Integer updateGoods(Goods goods) throws SQLException;
+    public Integer updateGoods(Goods goods);
 
         /**
          * @Title: queryGoodsById
@@ -76,7 +73,7 @@ public interface GoodsDao {
          * @throw SQLException
          */
 
-    public Goods queryGoodsById(Long id)throws SQLException;
+    public Goods queryGoodsById(Long id);
     /**
      * @Title: queryGoodsByCondition
      * @Description: 通过条件查询商品信息
@@ -86,7 +83,7 @@ public interface GoodsDao {
      * @return domain.Goods
      * @throw SQLException
      */
-    public List<Goods> queryGoodsByCondition(Map<String,String> stringGoodsMap)throws SQLException;
+    public List<Goods> queryGoodsByCondition(Map<String,Object> stringGoodsMap);
     /**
      * @Title: findGoodsByCondition
      * @Description: 通过条件批量查询商品信息并分页显示
@@ -96,5 +93,5 @@ public interface GoodsDao {
      * @return java.util.List<domain.Goods>
      * @throw SQLException
      */
-    public List<Goods> queryGoodsByCondition(Map<String,String> stringGoodsMap,Integer startRow,Integer size)throws SQLException;
+    public List<Goods> queryGoodsByCondition(Map<String,Object> stringGoodsMap,Integer startRow,Integer size);
 }

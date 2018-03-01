@@ -98,7 +98,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return stringGoodsMap
 */
     @Override
-    public   List<Goods>  queryGoodsByCondition(Map<String, String> stringGoodsMap) throws SQLException {
+    public   List<Goods>  queryGoodsByCondition(Map<String, Object> stringGoodsMap) throws SQLException {
 
         return goodsDao.queryGoodsByCondition(stringGoodsMap);
     }
@@ -111,7 +111,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return stringBuyerMap
     */
     @Override
-    public   List<Goods>  queryGoodsByCondition(Map<String, String> stringBuyerMap, Integer startRow, Integer size) throws SQLException {
+    public   List<Goods>  queryGoodsByCondition(Map<String, Object> stringBuyerMap, Integer startRow, Integer size) throws SQLException {
 
         return goodsDao.queryGoodsByCondition(stringBuyerMap,startRow,size);                           //返回查询的信息给用户
     }
