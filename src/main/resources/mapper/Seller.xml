@@ -4,16 +4,16 @@
 
     <!-- 定义结果集-->
     <resultMap type="com.zyht.domain.Seller" id="seller">
-        <id property="id" column="id" jdbcType="INT" javaType="java.lang.Long"/>
-        <result property="name" column="NAME" jdbcType="java.lang.String"/>
-        <result property="sex" column="SEX" jdbcType="java.lang.String"/>
-        <result property="age" column="AGE" jdbcType="java.lang.Long"/>
-        <result property="id_number" column="ID_NUMBER" jdbcType="java.lang.String"/>
-        <result property="tel" column="TEL" jdbcType="java.lang.String"/>
-        <result property="addr" column="ADDR" jdbcType="java.lang.String"/>
-        <result property="profession" column="PROFESSION" jdbcType="java.lang.String"/>
-        <result property="work_unit" column="WORK_UNIT" jdbcType="java.lang.String"/>
-        <result property="saving" column="SAVING" jdbcType="java.lang.Double"/>
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="sex" column="SEX" jdbcType="CHAR"  javaType="java.lang.String"/>
+        <result property="age" column="AGE" jdbcType="TINYINT"  javaType="java.lang.Long"/>
+        <result property="id_number" column="ID_NUMBER" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="tel" column="TEL" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="addr" column="ADDR"  jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="profession" column="PROFESSION" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="work_unit" column="WORK_UNIT" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="saving" column="SAVING" jdbcType="DECIMAL"  javaType="java.lang.Double"/>
     </resultMap>
     <!--定义查询列 -->
     <sql id="columns">
