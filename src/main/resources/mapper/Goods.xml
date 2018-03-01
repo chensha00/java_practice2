@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyht.domain.Goods">
-
     <!-- 定义结果集-->
-    <resultMap type="com.zyht.domain.Goods" id="goods">
+    <resultMap   id="goods" type="com.zyht.domain.Goods">
         <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="type" column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -18,41 +17,31 @@
         ID,NAME,TYPE ,PRICE,ADDR,MAKE_TIME,EXPIRATION_TIME,UNIT
     </sql>
     <!-- 查询所有-->
-    <select id="getTestAll" resultType="java.util.Map" resultMap="goods">
-        SELECT <include refid="columns"/> FROM goods WHERE ID=1
-    </select>
-    <select id="getById" resultType="com.zyht.domain.Goods">
+    <select id="getTestAll"  resultMap="goods" parameterType="java.lang.Long">
         SELECT <include refid="columns"/> FROM goods
     </select>
+    <!--按id查询-->
+    <select id="getById"  resultMap="goods" parameterType="java.lang.Long">
+        SELECT <include refid="columns"/> FROM goods WHERE ID=#{_param}
+    </select>
     <!-- 添加-->
-    <insert id="save" parameterType="com.zyht.domain.Goods">
+    <insert id="insert" parameterType="com.zyht.domain.Goods">
         INSERT INTO `goods` (`id`, `NAME`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIMA`,`UNIT`) VALUES (${id}, #{name,jdbcType=VARCHAR},#{type,jdbaType=VARCHER},${price,jabaType=DECOMAL},#{addr,jdbcType=VARCHAR},#{makeTime,jdbcType=DATETIME},#{expirationTime,jdbcType=DATE},#{unit,jdbcType=VARCHAR})
     </insert>
-    <!-- 编辑-->
+    <!-- 更新-->
     <update id="update" parameterType="com.zyht.domain.Goods">
-        UPDATE `goods` SET `id`=${id}, `NAME`=${NAME},`PRICE`=${PRICE},`ADDR`=${ADDR},,`MAKE_TIME`=${`MAKE_TIME},`EXPIRATION_TIMA`=${EXPIRATION_TIMA},`UNIT`=${UNIT}
-       <where>
-        <if test="@Ognl@isNotEmpty(id)">
-            AND (`id`=${id})
-        </if>
-        </where>
-        <![CDATA[
-        ]]>
+        UPDATE `goods` SET `id`=${id}, `NAME`=${NAME},`PRICE`=${PRICE},`ADDR`=${ADDR},,`MAKE_TIME`=${`MAKE_TIME},`EXPIRATION_TIMA`=${EXPIRATION_TIMA},`UNIT`=${UNIT} WHERE ID=${id}
     </update>
 
-    <delete id="delete" parameterType="java.util.Map">
+    <delete id="delete" parameterType="java.lang.Long">
         <!-- ids,name -->
-        DELETE FROM  goods WHERE  id IN
-        <if test="@Ognl@isNotEmpty(ids)">
-            <foreach collection="ids" item="goodsId" open="("
-                     separator="," close=")">
-                ${id}
-            </foreach>
-        </if>
-
-        <foreach collection="roleIds" item="roleId" open="("
-        separator="," close=")">
-        #{roleId}
+        DELETE FROM  goods WHERE  ID=#{_param}
+    </delete>
+    <!--按条件批量删除-->
+    <delete id="deleteGoodsByIds" parameterType="java.util.Map">
+        DELETE FROM goods WHERE ID IN
+        <foreach collection="ids" item="eachId" open="(" separator="," close=")">
+            ${eachId}
         </foreach>
     </delete>
 </mapper>
