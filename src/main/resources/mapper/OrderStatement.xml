@@ -27,33 +27,33 @@
     <!-- 按条件查询-->
     <select id="findByCondition" parameterType="java.util.Map" resultMap="orderStatement">
         SELECT <include refid="columns"/> FROM `order_statement`
-        <where>
+        <where> 1=1
             <if test="id!=null">
-                AND `ID`=${id}
+                 AND `ID`=${id}
             </if>
             <if test="orderDetailId!=null">
-                AND `ORDER_DETAIL_ID`=#{orderDetailId}
+                 AND `ORDER_DETAIL_ID`=#{orderDetailId}
             </if>
             <if test="buyerId!=null">
-                AND `BUYER_ID`=#{buyerId}
+                 AND `BUYER_ID`=#{buyerId}
             </if>
             <if test="sellerId!=null">
-                AND `SELLER_ID`=${sellerId}
+                 AND `SELLER_ID`=${sellerId}
             </if>
             <if test="number!=null">
-                AND `NUMBER`=#{number}
+                 AND `NUMBER`=#{number}
             </if>
             <if test="amount!=null">
-                AND `AMOUNT`=#{amount}
+                 AND `AMOUNT`=#{amount}
             </if>
             <if test="finishTime!=null">
-                AND `FINISH_TIME`=#{finishTime}
+                 AND `FINISH_TIME`=#{finishTime}
             </if>
         </where>
     </select>
     <!-- 按id查询-->
     <select id="findById" resultType="java.util.List" parameterType="java.util.Map" resultMap="orderStatement">
-        SELECT <include refid="columns"/> FROM `order_statement` WHERE `ID` = ${id}
+        SELECT <include refid="columns"/> FROM `order_statement` WHERE `ID` = #{_param}
     </select>
     <!-- 添加-->
     <insert id="add" parameterType="com.zyht.domain.OrderStatement">
@@ -77,6 +77,6 @@
     </delete>
     <!--删除一条-->
     <delete id="deleteById" parameterType="com.zyht.domain.OrderStatement">
-        DELETE  FROM `order_statement` WHERE  `ID`= ${id}
+        DELETE  FROM `order_statement` WHERE  `ID`= #{_param}
     </delete>
 </mapper>

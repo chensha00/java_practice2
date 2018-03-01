@@ -21,15 +21,35 @@
     </select>
      <!--分页查询所有-->
     <select id="findPage" resultMap="shopCar">
-        SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID`=${id} LIMIT 0,5
+        SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID`=#{_param} LIMIT #{startRow},#{size}
     </select>
     <!-- 按条件查询-->
     <select id="findByCondition" parameterType="java.util.Map" resultMap="shopCar">
-        SELECT <include refid="columns"/> FROM `shop_car` WHERE #{KEY } = #{VALUE }
+        SELECT <include refid="columns"/> FROM `shop_car`
+        <where> 1=1
+            <if test="id!=null">
+                AND `ID`=${id}
+            </if>
+            <if test="orderDetailId!=null">
+                AND `GOODS_ID`=#{goodsId}
+            </if>
+            <if test="buyerId!=null">
+                AND `BUY_NUM`=#{buyNum}
+            </if>
+            <if test="sellerId!=null">
+                AND `GOODS_PRICE`=${goodsPrice}
+            </if>
+            <if test="number!=null">
+                AND `GOODS_NAME`=#{goodsName}
+            </if>
+            <if test="amount!=null">
+                AND `BUYER_ID`=#{buyerId}
+            </if>
+        </where>
     </select>
     <!-- 按id查询-->
     <select id="findById" resultType="java.util.List" parameterType="java.util.Map" resultMap="shopCar">
-        SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID` = ${id}
+        SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID` = #{_param}
     </select>
     <!-- 添加-->
     <insert id="add" parameterType="com.zyht.domain.ShopCar">
@@ -39,7 +59,7 @@
     <!-- 编辑-->
     <update id="update" parameterType="com.zyht.domain.ShopCar">
         UPDATE `shop_car` SET `GOODS_ID`=${goodsId},`BUY_NUM`=${buyNum},`GOODS_PRICE`=${goodsPrice},
-        `GOODS_NAME`=#{goodsName},`BUYER_ID`=#{buyerId} WHERE `ID`=${id}
+        `GOODS_NAME`=#{goodsName},`BUYER_ID`=#{buyerId} WHERE `ID`=#{_param}
         <![CDATA[
         ]]>
     </update>
@@ -53,6 +73,6 @@
     </delete>
     <!--删除一条-->
     <delete id="deleteById" parameterType="com.zyht.domain.ShopCar">
-        DELETE  FROM `shop_car` WHERE  `ID`= ${id}
+        DELETE  FROM `shop_car` WHERE  `ID`= #{_param}
     </delete>
 </mapper>
