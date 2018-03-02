@@ -68,7 +68,7 @@
         ]]>
     </update>
     <!--删除多条-->
-    <delete id="deleteByIds" parameterType="com.zyht.domain.OrderStatement">
+    <delete id="deleteByIds" parameterType="java.util.Map">
         DELETE FROM `order_statement` WHERE  `ID` IN
         <foreach collection="ids" item="testId" open="("
                  separator="," close=")">
@@ -76,7 +76,7 @@
         </foreach>
     </delete>
     <!--删除一条-->
-    <delete id="deleteById" parameterType="com.zyht.domain.OrderStatement">
+    <delete id="deleteById" parameterType="java.lang.Long">
         DELETE  FROM `order_statement` WHERE  `ID`= #{_param}
     </delete>
 </mapper>

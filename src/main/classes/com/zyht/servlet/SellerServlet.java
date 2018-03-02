@@ -28,7 +28,7 @@ public class SellerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
         GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
-        Map<String, Object> stringMap = new HashMap<>();
+        Map<String, Object> stringMap = new HashMap<String, Object>();
         String str = ""+request.getAttribute("sellerid");
         stringMap.put("SELLER_ID", str);
         List<GoodsSellerRelation> goodsSellerRelationList = null;
@@ -48,7 +48,7 @@ public class SellerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
         GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
-        Map<String, Object> stringMap = new HashMap<>();
+        Map<String, Object> stringMap = new HashMap<String, Object>();
         String str = ""+request.getAttribute("sellerid");
         stringMap.put("SELLER_ID", str);
         List<GoodsSellerRelation> goodsSellerRelationList = null;
