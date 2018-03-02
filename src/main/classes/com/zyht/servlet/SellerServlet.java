@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,15 +28,11 @@ public class SellerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
         GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
-        Map<String, String> stringMap = new HashMap<String, String>();
+        Map<String, Object> stringMap = new HashMap<>();
         String str = ""+request.getAttribute("sellerid");
         stringMap.put("SELLER_ID", str);
         List<GoodsSellerRelation> goodsSellerRelationList = null;
-        try {
-            goodsSellerRelationList = goodsSellerRelationService.queryGoodsSellerRelationByCondition(stringMap);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        goodsSellerRelationList = goodsSellerRelationService.queryGoodsSellerRelationByCondition(stringMap);
         request.setAttribute("goodsSellerRelationList", goodsSellerRelationList);
         request.getRequestDispatcher("jsp/seller.jsp").forward(request, response);
     }
@@ -53,15 +48,11 @@ public class SellerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
         GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
-        Map<String, String> stringMap = new HashMap<String, String>();
+        Map<String, Object> stringMap = new HashMap<>();
         String str = ""+request.getAttribute("sellerid");
         stringMap.put("SELLER_ID", str);
         List<GoodsSellerRelation> goodsSellerRelationList = null;
-        try {
-            goodsSellerRelationList = goodsSellerRelationService.queryGoodsSellerRelationByCondition(stringMap);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        goodsSellerRelationList = goodsSellerRelationService.queryGoodsSellerRelationByCondition(stringMap);
         request.setAttribute("goodsSellerRelationList", goodsSellerRelationList);
         System.out.println(goodsSellerRelationList.get(0).getId());
         request.getRequestDispatcher("jsp/seller.jsp").forward(request, response);

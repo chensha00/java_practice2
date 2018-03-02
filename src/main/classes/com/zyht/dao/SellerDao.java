@@ -79,7 +79,7 @@ public interface SellerDao {
      * @return domain.Seller
      * @throw SQLException
      */
-    public List<Seller> querySellerByCondition(Map<String, String> stringSellerMap);
+    public List<Seller> querySellerByCondition(Map<String, Object> stringSellerMap);
     /**
      * @Title: findSellerByCondition
      * @Description: 通过条件批量查询卖家信息
