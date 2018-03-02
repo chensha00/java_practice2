@@ -9,10 +9,9 @@ package com.zyht.servlet;/******************************************************
  */
 import com.sun.xml.internal.ws.api.client.SelectOptimalEncodingFeature;
 import com.zyht.domain.*;
-import com.zyht.service.BuyerServiceImpl;
-import com.zyht.service.GoodsSellerRelationServiceImpl;
-import com.zyht.service.GoodsServiceImpl;
-import com.zyht.service.SellerServiceImpl;
+import com.zyht.service.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import javax.servlet.ServletException;
@@ -47,28 +46,28 @@ public class GoodsServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
         request.setCharacterEncoding("utf-8");
         response.setContentType("goods_seller_relation/html;charset=utf-8");
-        String buyerid=request.getParameter("buyerid");                                                                //接受上一个页面传递来的id
-      //  String buyerid ="1";                                                                                            //测试
+      //  String buyerid=request.getParameter("buyerid");                                                                //接受上一个页面传递来的id
+        String buyerid ="1";                                                                                            //测试
         Long id=Long.parseLong(buyerid);                                                                                //把buyerid转化成Long类型用id接收
         Map<String,String> stringStringMap=new HashMap<String ,String>();
         stringStringMap.put("`ID`",buyerid);
         List<GoodsSellerRelation> goodsSellerRelationList=null;                                                         //  定义一个接受goods数据的对象
         Seller seller =null;                                                                                            //定义一个接受卖家数据的对象
         Buyer buyer=null;
-        GoodsSellerRelationServiceImpl goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
+        GoodsSellerRelationServiceImpl goodsSellerRelationService=(GoodsSellerRelationServiceImpl)applicationContext.getBean("GoodsServiceRelationService");
         goodsSellerRelationList= (List<GoodsSellerRelation>) goodsSellerRelationService.queryGoodsSellerRelationByCondition(stringStringMap);                               //通过卖家 id查找获取商品的信息
-        BuyerServiceImpl buyerServiceImpl=new BuyerServiceImpl();
+        BuyerServiceImpl buyerServiceImpl=(BuyerServiceImpl)applicationContext.getBean("BuyerService");
         buyer =buyerServiceImpl.queryBuyerById(id);                                                                     //查询id，传递给页面
         request.setAttribute("buyer",buyer);
-        SellerServiceImpl sellerServiceImpl =new SellerServiceImpl();
+        SellerServiceImpl sellerServiceImpl =(SellerServiceImpl)applicationContext.getBean("SellerService");
         System.out.println(goodsSellerRelationList.get(0).getSellerId());
         seller= sellerServiceImpl.querySellerById(goodsSellerRelationList.get(0).getSellerId());                        //通过卖家 id查找获取卖家的信息取出卖家的名字
         request.setAttribute("seller",seller);
         request.setAttribute("goodsSellerRelation", goodsSellerRelationList);                                            //传递信息到页面
         request.getRequestDispatcher("/jsp/goods_seller_relation.jsp").forward(request, response);
-
     }
 
     /**
