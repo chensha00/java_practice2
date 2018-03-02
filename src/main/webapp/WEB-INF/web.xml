@@ -122,6 +122,14 @@
         <servlet-name>Manager</servlet-name>
         <url-pattern>/Manager.htm</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ShopCar</servlet-name>
+        <servlet-class>com.zyht.servlet.ShopCarServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShopCar</servlet-name>
+        <url-pattern>/ShopCar.htm</url-pattern>
+    </servlet-mapping>
 </web-app>
 
 
