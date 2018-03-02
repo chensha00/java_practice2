@@ -51,7 +51,7 @@ public interface GoodsDao {
      * @throw SQLException
      */
 
-    public Goods insertGoods(Goods goods);
+    public Integer insertGoods(Goods goods);
     /**
      * @Title: updateGoods
      * @Description: 修改商品信息
