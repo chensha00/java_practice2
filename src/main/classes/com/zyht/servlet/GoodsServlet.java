@@ -52,7 +52,7 @@ public class GoodsServlet extends HttpServlet {
         String buyerid=request.getParameter("buyerid");                                                                //接受上一个页面传递来的id
      //   String buyerid ="1";                                                                                            //测试
         Long id=Long.parseLong(buyerid);                                                                                //把buyerid转化成Long类型用id接收
-        Map<String,String> stringStringMap=new HashMap<String ,String>();
+        Map<String,Object> stringStringMap=new HashMap<String ,Object>();
         stringStringMap.put("`ID`",buyerid);
         List<GoodsSellerRelation> goodsSellerRelationList=null;                                                         //  定义一个接受goods数据的对象
         Seller seller =null;                                                                                            //定义一个接受卖家数据的对象
