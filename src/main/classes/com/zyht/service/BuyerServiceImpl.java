@@ -176,13 +176,9 @@ public class BuyerServiceImpl implements BuyerService {
             orderDetail.setOrderStatus(OrderState.FINISH.getStateNum());
 
             //更新订单表
-            try {
-                os.updateOrder(order);
-                ods.updateOrder(orderDetail);
-                orderStatementServiceImpl.insertOrderStatement(ost);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            os.updateOrder(order);
+            ods.updateOrder(orderDetail);
+            orderStatementServiceImpl.insertOrderStatement(ost);
         } else {
             //否则，设定订单失败，订单状态为支付失败
             order.setIsSuccess(false);
