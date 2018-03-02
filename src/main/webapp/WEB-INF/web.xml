@@ -98,7 +98,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Enroll</servlet-name>
-        <servlet-class>com.zyht.servlet.EnrollServlet1</servlet-class>
+        <servlet-class>com.zyht.servlet.EnrollServlet</servlet-class>
         
     </servlet>
     <servlet-mapping>
