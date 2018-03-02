@@ -1,0 +1,202 @@
+.middle{
+	width: 100%;
+	border-top: 1px solid #f4dadc;
+}
+
+.middle>.box{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.middle>.box>table{
+	width: 100%;
+	margin-top: 35px;
+	font-size: 14px;
+	border-collapse:   separate;   
+	border-spacing: 0 35px;
+	margin-bottom: 50px;
+}
+
+.middle>.box>table a{
+	color: #666060;
+}
+
+.middle>.box>table>thead>tr,thead>tr a{
+	text-align: left;
+	color: #333232 !important;
+}
+
+.middle>.box>table>thead>tr>td>span{
+	float: left;
+	width: 148px;
+}
+
+.middle>.box>table>thead>tr>td>span:nth-of-type(3){
+	width: 535px;
+}
+
+.middle>.box>table>thead>tr>td>span:nth-of-type(4){
+	margin-left: 73px;
+}
+
+.middle>.box>table>thead>tr>td>span:last-of-type{
+	float: right;
+	text-align: center;
+}
+
+.middle>.box>table>thead>tr>td>span>i{
+	font-style: normal;
+}
+
+.middle>.box>table>thead>tr>th{
+	font-weight: normal;
+	line-height: 40px;
+}
+
+.middle>.box>table>thead>tr>th:first-of-type{
+	text-align: left;
+}
+
+.middle>.box>table>thead>tr>th:nth-of-type(2){
+	padding-left: 85px;
+}
+
+.middle>.box>table>thead>tr>th:nth-of-type(5){
+	width: 163px;
+}
+
+.middle>.box>table>thead>tr>th:last-of-type{
+	width: 138px;
+}
+
+.middle>.box>table>tbody{
+	font-size: 14px;
+	color: #666060;
+}
+
+input[type=checkbox]::-ms-check{
+display: none;
+}
+
+.middle>.box>table input[type=checkbox]{
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	-ms-appearance: none;
+  	-o-appearance: none;
+  	appearance: none;
+  	width: 24px;
+  	height: 24px;
+  	border: 0;
+  	background: url(../img/shop_cart_uncheck.jpg.png) no-repeat center center;
+  	position: relative;
+  	left: -5px;
+  	top: 5px;
+}
+
+.middle>.box>table input[type=checkbox]:checked{
+	background: url(../img/shop_cart_checked.jpg.png) no-repeat center center;
+}
+
+.middle>.box>table input[type=checkbox]:hover{
+	cursor: pointer;
+}
+
+.middle>.box>table>tbody>tr>td>h4{
+	display: inline-block;
+	font-size: 14px;
+	width: 200px;
+	line-height: 20px;
+	margin-top: 12px;
+	margin-left: 10px;
+}
+
+.middle>.box>table>tbody>tr>td>h4>a{
+	color: #666060;
+}
+
+.middle>.box>table>tbody>tr>td>.color_sort{
+	margin-left: 50px;
+}
+
+.middle>.box>table>tbody>tr>td>.num{
+	width: 36px;
+	height: 25px;
+	border: 1px solid #f1efef;
+	text-align: center;
+	font-size: 14px;
+	color: #666060;
+}
+
+.middle>.box>table>tbody>tr>td>.reduce,.add{
+	font-size: 18px;
+	font-family: "microsoft yahei";
+	display: inline-block;
+}
+
+.middle>.box>table>tbody>tr>td>.reduce{
+	margin-right: 10px;
+}
+
+.middle>.box>table>tbody>tr>td>.add{
+	margin-left: 10px;
+}
+
+.middle>.box>table>tbody>tr>td>.reduce:hover,.add:hover{
+	cursor: pointer;
+}
+
+
+.middle>.box>table>tbody td:nth-of-type(n+3),thead th:nth-of-type(n+3){
+	text-align: center;
+}
+
+.middle>.box>table>tbody>tr>td:last-of-type{
+	line-height: 35px;
+}
+
+.middle>.box>table>tbody>tr>td:nth-of-type(2){
+	width: 600px;
+}
+
+.middle>.box>table>tbody>tr>td:first-of-type{
+	width: 65px;
+	vertical-align: top;
+}
+
+.middle>.box>table>tfoot span{
+	float: left;
+	width: 90px;
+	line-height: 40px;
+}
+
+.middle>.box>table>tfoot span:last-of-type{
+	float: left;
+	margin-left: 165px;
+	width: auto;
+}
+
+.middle>.box>table>tfoot #sum{
+	font-style: normal;
+	font-size: 18px;
+	color: #c8000b;
+}
+
+.middle>.box>table>tfoot span:nth-of-type(3){
+	margin-right: 30px;
+}
+
+.middle>.box>table>tfoot span:nth-of-type(5){
+	margin-left: 290px;
+}
+
+.middle>.box table a:hover{
+	color: #c8000b !important;
+}
+
+.middle>.box>table #choose_num{
+	font-style: normal;
+}
+
+.middle>.box>table>thead label:hover,.middle>.box>table>tfoot label:hover{
+	cursor: pointer;
+}

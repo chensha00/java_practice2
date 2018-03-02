@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #666;
+    text-decoration: none;
+}
+body {
+     font: 12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b体,sans-serif;
+     color: #666;
+ }
+span{
+    font-size: 40px;font-weight: bold;text-align:center;margin-left:40%
+}
+li{
+    list-style:none;
+    color: red;
+}
+img{
+    float: left;
+    border:0;
+    width:150px;
+    height:200px
+}
+.list{
+    width:440px;
+}
+.list{
+    float:left; width:100px; height:80px; margin-right:10px;
+}
+button{
+    float: left;
+}
