@@ -4,7 +4,6 @@ import com.zyht.common.util.SpringContextUtil;
 import com.zyht.dao.GoodsDao;
 import com.zyht.dao.GoodsDaoImpl;
 import com.zyht.domain.Goods;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +20,9 @@ import java.util.Map;
  * @Description
  * @Date 2018/1/24
  */
-@Service("goodsService")
+@Service("GoodsService")
 public class GoodsServiceImpl implements GoodsService {
-//    GoodsDao goodsDao =new GoodsDaoImpl();
-    @Autowired
-    private GoodsDao goodsDao;
+    GoodsDao goodsDao =new GoodsDaoImpl();
 /**
  * @ClassName deleteGoodsById
  * @Description 根据商品ID删除商品
@@ -35,7 +32,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return  respond
 */
     @Override
-    public Integer deleteGoodsById(Long id)  {
+    public Integer deleteGoodsById(Long id) throws SQLException {
         return goodsDao.deleteGoodsById(id);
     }
 
@@ -48,7 +45,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return respond
 */
     @Override
-    public Integer  deleteGoodsByIds(Long[] ids)  {
+    public Integer  deleteGoodsByIds(Long[] ids) throws SQLException {
 
             return  goodsDao.deleteGoodsByIds(ids);                                                           //返回结果
 
@@ -62,7 +59,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return respond
 */
     @Override
-    public Integer updateGoods(Goods goods) {
+    public Integer updateGoods(Goods goods) throws SQLException {
 
         return goodsDao.updateGoods(goods);
     }
@@ -75,7 +72,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return respond
 */
     @Override
-    public Integer insertGoods(Goods goods){
+    public Goods insertGoods(Goods goods) throws SQLException {
 
         return goodsDao.insertGoods(goods);
     }
@@ -88,7 +85,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return result
 */
     @Override
-    public Goods queryGoodsById(Long id) {
+    public Goods queryGoodsById(Long id) throws SQLException {
 
         return goodsDao.queryGoodsById(id);
     }
@@ -101,7 +98,7 @@ public class GoodsServiceImpl implements GoodsService {
  * @return stringGoodsMap
 */
     @Override
-    public   List<Goods>  queryGoodsByCondition(Map<String, Object> stringGoodsMap){
+    public   List<Goods>  queryGoodsByCondition(Map<String, Object> stringGoodsMap) throws SQLException {
 
         return goodsDao.queryGoodsByCondition(stringGoodsMap);
     }
@@ -114,7 +111,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return stringBuyerMap
     */
     @Override
-    public   List<Goods>  queryGoodsByCondition(Map<String, Object> stringBuyerMap, Integer startRow, Integer size)  {
+    public   List<Goods>  queryGoodsByCondition(Map<String, Object> stringBuyerMap, Integer startRow, Integer size) throws SQLException {
 
         return goodsDao.queryGoodsByCondition(stringBuyerMap,startRow,size);                           //返回查询的信息给用户
     }

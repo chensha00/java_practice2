@@ -70,8 +70,3 @@ hs_err_pid*
 .idea/artifacts/jspweb_war.xml
 .idea/.name
 .idea/artifacts/jspweb_war_exploded.xml
-target
-.idea
-.git
-web
-pom.xml

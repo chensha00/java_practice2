@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,9 +44,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      */
     @Override
     public Integer deleteShopCarByIds(Long[] ids) {
-        Map<String,Object> stringObjectMap= new HashMap<String,Object>();
-        stringObjectMap.put("ids",ids);
-        return this.sqlSessionTemplate.delete("com.zyht.domain.ShopCar."+"deleteByIds",stringObjectMap);
+        return this.sqlSessionTemplate.delete("com.zyht.domain.ShopCar."+"deleteByIds",ids);
     }
     /**
      * @param shopCar

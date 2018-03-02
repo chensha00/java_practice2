@@ -1,7 +1,8 @@
 package com.zyht.servlet;
 import com.zyht.domain.GoodsSellerRelation;
 import com.zyht.service.GoodsSellerRelationService;
-import com.zyht.service.GoodsSellerRelationServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +28,10 @@ public class SellerServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
-        GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
+
+        ApplicationContext applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
+        GoodsSellerRelationService goodsSellerRelationService=(GoodsSellerRelationService) applicationContext.getBean("goodsSellerRelationService");
+
         Map<String, Object> stringMap = new HashMap<String, Object>();
         String str = ""+request.getAttribute("sellerid");
         stringMap.put("SELLER_ID", str);
@@ -45,18 +49,7 @@ public class SellerServlet extends HttpServlet {
      * @throw IOException, ServletException
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=utf-8");
-        GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
-        Map<String, Object> stringMap = new HashMap<String, Object>();
-        String str = ""+request.getAttribute("sellerid");
-        stringMap.put("SELLER_ID", str);
-        List<GoodsSellerRelation> goodsSellerRelationList = null;
-        goodsSellerRelationList = goodsSellerRelationService.queryGoodsSellerRelationByCondition(stringMap);
-        request.setAttribute("goodsSellerRelationList", goodsSellerRelationList);
-        System.out.println(goodsSellerRelationList.get(0).getId());
-        request.getRequestDispatcher("jsp/seller.jsp").forward(request, response);
-
+        doGet(request,response);
         }
     }
 

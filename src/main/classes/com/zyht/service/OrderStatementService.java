@@ -1,5 +1,6 @@
 package com.zyht.service;
 
+
 import com.zyht.domain.OrderStatement;
 
 import java.sql.SQLException;
@@ -10,75 +11,75 @@ public interface OrderStatementService {
     /**
      * @Title: deleteOrderStatementById
      * @Description: 通过流水ID删除
-     * @author wangchuan
+     * @author cuixinyuan
      * @date 2018/1/20
-     * @param id
+     * @param id, connection, preparedStatement
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteOrderStatementById(Long id);
+    public Integer deleteOrderStatementById(Long id)throws SQLException;
 
     /**
      * @Title: deleteOrderStatementByIds
      * @Description: 通过ID批量删除订单流水
-     * @author wangchuan
+     * @author cuixinyuan
      * @date 2018/1/19
-     * @param  ids
+     * @param  ids, connection, preparedStatement
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteOrderStatementByIds(Long[] ids);
+    public Integer deleteOrderStatementByIds(Long[] ids)throws SQLException;
     /**
      * @Title: updateOrderStatement
      * @Description: 添加或者修改流水信息
-     * @author wangchuan
+     * @author cuixinyuan
      * @date 2018/1/20
-     * @param orderStatement
-     * @return Integer
-     * @throw SQLException
-     */
-
-    public Integer updateOrderStatement(OrderStatement orderStatement);
-    /**
-     * @Title: insertOrUpdateOrderStatement
-     * @Description: 添加或者修改流水信息
-     * @author wangchuan
-     * @date 2018/1/20
-     * @param orderStatement
-     * @return Integer
-     * @throw SQLException
-     */
-    public Integer insertOrderStatement(OrderStatement orderStatement);
-    /**
-     * @Title: queryOrderStatementById
-     * @Description: 通过ID查询流水信息表
-     * @author wangchuan
-     * @date 2018/1/20
-     * @param id
+     * @param orderStatement, connection, preparedStatement
      * @return OrderStatement
      * @throw SQLException
      */
 
-    public OrderStatement queryOrderStatementById(Long id);
+    public OrderStatement updateOrderStatement(OrderStatement orderStatement)throws SQLException;
+    /**
+     * @Title: insertOrUpdateOrderStatement
+     * @Description: 添加或者修改流水信息
+     * @author cuixinyuan
+     * @date 2018/1/20
+     * @param orderStatement, connection, preparedStatement
+     * @return OrderStatement
+     * @throw SQLException
+     */
+    public OrderStatement insertOrderStatement(OrderStatement orderStatement)throws SQLException;
+    /**
+     * @Title: queryOrderStatementById
+     * @Description: 通过ID查询流水信息表
+     * @author cuixinyuan
+     * @date 2018/1/20
+     * @param id, connection, preparedStatement
+     * @return OrderStatement
+     * @throw SQLException
+     */
+
+    public OrderStatement queryOrderStatementById(Long id)throws SQLException;
     /**
      * @Title: queryOrderStatementByCondition
      * @Description: 通过条件查询流水信息
-     * @author wangchuan
+     * @author cuixinyuan
      * @date 2018/1/20
-     * @param stringOrderStatementMap
-     * @return List<OrderStatement>
+     * @param stringOrderStatementMap, connection, preparedStatement
+     * @return OrderStatement
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap);
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, String> stringOrderStatementMap)throws SQLException;
     /**
      * @Title: findOrderStatementByCondition
      * @Description: 通过条件批量查询流水信息
-     * @author wangchuan
+     * @author cuixinyuan
      * @date 2018/1/20
-     * @param stringOrderStatementMap, startRow, size
-     * @return List<OrderStatement>
+     * @param stringOrderStatementMap, offset, size, connection, preparedStatement
+     * @return java.util.List<OrderStatement>
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size);
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, String> stringOrderStatementMap, Integer startRow, Integer size)throws SQLException;
 }
 

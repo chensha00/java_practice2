@@ -2,7 +2,6 @@ package com.zyht.service;
 
 import com.zyht.dao.ShopCarDaoImpl;
 import com.zyht.domain.ShopCar;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,6 @@ import java.util.Map;
  */
 @Service("shopCarService")
 public class ShopCarServiceImpl implements ShopCarService{
-    @Autowired
-    private  ShopCarDaoImpl shopCarDao;
     /**
      * @Title: deleteShopCarById
      * @Description: 通过购物车ID删除
@@ -32,6 +29,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public Integer deleteShopCarById(Long id) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         Integer rows=shopCarDao.deleteShopCarById(id);
         return rows;
     }
@@ -46,6 +45,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public Integer deleteShopCarByIds(Long[] ids) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         Integer rows=shopCarDao.deleteShopCarByIds(ids);
         return rows;
     }
@@ -60,6 +61,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public Integer updateShopCar(ShopCar shopCar) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         Integer rows=shopCarDao.updateShopCar(shopCar);
         return rows;
     }
@@ -74,6 +77,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public Integer insertShopCar(ShopCar shopCar) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         Integer rows=shopCarDao.insertShopCar(shopCar);
         return rows;
     }
@@ -88,6 +93,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public ShopCar queryShopCarById(Long id) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         ShopCar shopCar=shopCarDao.queryShopCarById(id);
         return shopCar;
     }
@@ -102,6 +109,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         List<ShopCar> shopCarList=shopCarDao.queryShopCarByCondition(stringShopCarMap);
         return shopCarList;
     }
@@ -116,6 +125,8 @@ public class ShopCarServiceImpl implements ShopCarService{
      */
     @Override
     public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) {
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ShopCarDaoImpl shopCarDao= (ShopCarDaoImpl) applicationContext.getBean("shopCarDao");
         List<ShopCar> shopCarList=shopCarDao.queryShopCarByCondition(stringShopCarMap, startRow, size);
         return shopCarList;
     }

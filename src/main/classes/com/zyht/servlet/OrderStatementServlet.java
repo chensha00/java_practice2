@@ -1,9 +1,11 @@
 package com.zyht.servlet;
 
+import com.zyht.common.util.SpringContextUtil;
 import com.zyht.domain.OrderStatement;
+import com.zyht.service.OrderStatementService;
 import com.zyht.service.OrderStatementServiceImpl;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import java.util.Map;
  * OrderStatementController
  *
  * @author wangchuan
- * @Description OrderStatementServlet
+ * @Description
  * @Date 2018/1/30
  */
 public class OrderStatementServlet extends HttpServlet {
@@ -31,7 +33,25 @@ public class OrderStatementServlet extends HttpServlet {
      * @throws IOException ServletException
      */
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        doPost(req,resp);
+        req.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        //ApplicationContext applicationContext= SpringContextUtil.getApplicationContext();
+        //List<OrderStatement> orderStatementList= (List<OrderStatement>) applicationContext.getBean("List<OrderStatement>");
+        //OrderStatementServiceImpl orderStatementService= (OrderStatementServiceImpl) applicationContext.getBean("OrderStatementServiceImpl");
+        List<OrderStatement> orderStatementList=null;
+        OrderStatementServiceImpl orderStatementService=new OrderStatementServiceImpl();
+        Map<String,String > stringStringMap=new HashMap<String, String>();
+        String str=req.getParameter("id");
+        stringStringMap.put("`ID`",str);
+        try {
+            orderStatementList=orderStatementService.queryOrderStatementByCondition(stringStringMap,0,5);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            req.setAttribute("orderStatementList",orderStatementList);
+            System.out.println(orderStatementList.get(0).getId());
+            req.getRequestDispatcher("/jsp/order_statement.jsp").forward(req,resp);
+        }
     }
     /**
      * @Title: doPost
@@ -44,15 +64,21 @@ public class OrderStatementServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementServiceImpl orderStatementService= (OrderStatementServiceImpl) applicationContext.getBean("orderStatementService");
-//        OrderStatementServiceImpl orderStatementService=new OrderStatementServiceImpl();
+        //ApplicationContext applicationContext= SpringContextUtil.getApplicationContext();
+        //List<OrderStatement> orderStatementList= (List<OrderStatement>) applicationContext.getBean("List<OrderStatement>");
+        //OrderStatementServiceImpl orderStatementService= (OrderStatementServiceImpl) applicationContext.getBean("OrderStatementServiceImpl");
         List<OrderStatement> orderStatementList=null;
-        Map<String,Object> stringStringMap=new HashMap<String, Object>();
+        OrderStatementServiceImpl orderStatementService=new OrderStatementServiceImpl();
+        Map<String,String > stringStringMap=new HashMap<String,String>();
         String str=req.getParameter("id");
         stringStringMap.put("`ID`",str);
-        orderStatementList=orderStatementService.queryOrderStatementByCondition(stringStringMap,0,5);
-        req.setAttribute("orderStatementList",orderStatementList);
-        req.getRequestDispatcher("/jsp/order_statement.jsp").forward(req,resp);
+        try {
+            orderStatementList=orderStatementService.queryOrderStatementByCondition(stringStringMap,0,5);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            req.setAttribute("orderStatementList",orderStatementList);
+            req.getRequestDispatcher("/jsp/order_statement.jsp").forward(req, resp);
+        }
     }
 }

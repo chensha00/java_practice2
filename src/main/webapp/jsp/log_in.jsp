@@ -10,10 +10,13 @@
 <head>
 </head>
 <body>
+<% String base=request.getContextPath();
+request.setAttribute("base",base);
+%>
 <div class="container"></div>
 <h2>用户登录</h2>
 <br>
-<form method="post" action="${pageContext.request.contextPath}/Login"/>
+<form method="post" action="${base}/Login"/>
     <label>用户名：</label>
     <input type="text" name="username"/>
     <br>
