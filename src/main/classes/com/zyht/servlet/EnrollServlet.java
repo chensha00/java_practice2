@@ -1,29 +1,22 @@
 package com.zyht.servlet;
 
 import com.zyht.common.util.DateTransferUtil;
+import com.zyht.common.util.SpringContextUtil;
 import com.zyht.domain.Account;
 import com.zyht.domain.Buyer;
 import com.zyht.service.AccountService;
-import com.zyht.service.AccountServiceImpl;
 import com.zyht.service.BuyerService;
-import com.zyht.service.BuyerServiceImpl;
-import org.apache.logging.log4j.util.StringMap;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-public class EnrollServlet1 extends HttpServlet{
+public class EnrollServlet extends HttpServlet{
     /**
      * @Title: doGet
      * @Description: 重写doGet方法
@@ -47,7 +40,9 @@ public class EnrollServlet1 extends HttpServlet{
         /**
          * 向买家表里插入数据
          */
-        BuyerService buyerService=new BuyerServiceImpl();
+//        BuyerService buyerService=new BuyerServiceImpl();
+        ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+        BuyerService buyerService=(BuyerService) SpringContextUtil.getBean("buyerService");
         String name =request.getParameter("name");
         String sex = request.getParameter("sex");
         String age=request.getParameter("age");
@@ -75,13 +70,16 @@ public class EnrollServlet1 extends HttpServlet{
         buyer.setProfession(profession);
         buyer.setWorkUnit(work_unit);
         buyer.setSaving(Double.parseDouble(saving));
-        try {
-            buyer=buyerService.insertBuyer(buyer);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
+//        try {
+//            buyer=buyerService.insertBuyer(buyer);
+//        } catch (SQLException e1) {
+//            e1.printStackTrace();
+//        }
+//        注册新买家
+        buyerService.insertBuyer(buyer);
         Long buyer_id=buyer.getId();
-        AccountService accountService=new AccountServiceImpl();
+//        AccountService accountService=new AccountServiceImpl();
+        AccountService accountService=(AccountService)SpringContextUtil.getBean("accountService");
         Account account1=new Account();
         account1.setAccount(account);
         account1.setPassword(password);
@@ -92,7 +90,8 @@ public class EnrollServlet1 extends HttpServlet{
         account1.setSellerId(seller_id);
         account1.setAddTime(date);
         account1.setUpdateTime(date);
-        account1=accountService.registerUser(account1);
+//        注册新账户
+        accountService.registerUser(account1);
 //        request.setAttribute("buyerService",buyerService);
         request.getRequestDispatcher("jsp/log_in.jsp").forward(request,response);
         }
