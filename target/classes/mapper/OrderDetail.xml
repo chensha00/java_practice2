@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyht.domain.OrderDetail">
+
+<!-- 定义结果集-->
+<resultMap type="com.zyht.domain.OrderDetail" id="orderDetailMyBatis">
+    <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+    <result property="sellerId" column="SELLER_ID" jdbcType="BIGINT"/>
+    <result property="buyerId" column="BUYER_ID" jdbcType="BIGINT"/>
+    <result property="orderId" column="ORDER_ID" jdbcType="BIGINT"/>
+    <result property="amount" column="AMOUNT" jdbcType="DECIMAL"/>
+    <result property="isSuccess" column="IS_SUCCESS" javaType="java.lang.Boolean"/>
+    <result property="orderStatus" column="ORDER_STATUS" jdbcType="TINYINT"/>
+    <result property="orderNumber" column="ORDER_NUMBER" jdbcType="VARCHAR"/>
+    <result property="creationTime" column="CREATION_TIME" jdbcType="DATE"/>
+    <result property="finishTime" column="FINISH_TIME" jdbcType="DATE"/>
+    <result property="physicalDistribution" column="PHYSICAL_DISTRIBUTION" jdbcType="VARCHAR"/>
+    <result property="evaluate" column="EVALUATE" jdbcType="VARCHAR"/>
+    <result property="leaveWord" column="LEAVE_WORD" jdbcType="VARCHAR"/>
+</resultMap>
+<!--定义查询列 -->
+<sql id="columns">
+    ID,SELLER_ID,BUYER_ID,ORDER_ID,AMOUNT,IS_SUCCESS,ORDER_STATUS,ORDER_NUMBER,CREATION_TIME,FINISH_TIME,PHYSICAL_DISTRIBUTION,EVALUATE,LEAVE_WORD
+</sql>
+<!-- 查询所有-->
+<select id="selectAll" resultMap="orderDetailMyBatis">
+    SELECT <include refid="columns"/> FROM order_detail
+</select>
+<!--按照id查询-->
+<select id="getById" resultType="com.zyht.domain.OrderDetail" parameterType="java.lang.Long" resultMap="orderDetailMyBatis">
+    SELECT <include refid="columns"/> FROM order_detail WHERE ID=#{_Param}
+</select>
+<!-- 按条件查询-->
+<select id="queryCondition" resultType="java.util.List" parameterType="java.util.Map" resultMap="orderDetailMyBatis">
+    SELECT <include refid="columns"/> FROM order_detail
+    <where>
+        <if test="id!=null">
+            AND ID=#{id}
+        </if>
+        <if test="buyerId!=null">
+            AND BUYER_ID=#{buyerId}
+        </if>
+        <if test="sellerId!=null">
+            AND SELLER_ID=#{sellerId}
+        </if>
+        <if test="goodsId!=null">
+            AND GOODS_ID=#{goodsId}
+        </if>
+        <if test="orderId!=null">
+            AND ORDER_ID=#{orderId}
+        </if>
+        <if test="amount!=null">
+            AND AMOUNT=#{amount}
+        </if>
+        <if test="isSuccess!=null">
+            AND IS_SUCCESS=#{isSuccess}
+        </if>
+        <if test="orderStatus!=null">
+            AND ORDER_STATUS=#{orderStatus}
+        </if>
+        <if test="orderNumber!=null">
+            AND ORDER_NUMBER=#{orderNumber}
+        </if>
+        <if test="creationTime!=null">
+            AND CREATION_TIME=#{creationTime}
+        </if>
+        <if test="finishTime!=null">
+            AND FINISH_TIME=#{finishTime}
+        </if>
+        <if test="physicalDistribution!=null">
+            AND PHYSICAL_DISTRIBUTION=#{physicalDistribution}
+        </if>
+        <if test="Evaluate!=null">
+            AND EVALUATE=#{Evaluate}
+        </if>
+        <if test="leaveWord!=null">
+            AND LEAVE_WORD=#{leaveWord}
+        </if>
+    </where>;
+</select>
+<!--按条件分页查询-->
+<select id="queryConditionPage" resultType="java.util.List" parameterType="java.util.Map" resultMap="orderDetailMyBatis">
+    SELECT <include refid="columns"/> FROM order_detail
+    <where>
+        <if test="id!=null">
+            AND ID=#{id}
+        </if>
+        <if test="buyerId!=null">
+            AND BUYER_ID=#{buyerId}
+        </if>
+        <if test="id!=null">
+            AND ID=#{id}
+        </if>
+        <if test="sellerId!=null">
+            AND SELLER_ID=#{sellerId}
+        </if>
+        <if test="goodsId!=null">
+            AND GOODS_ID=#{goodsId}
+        </if>
+        <if test="orderId!=null">
+            AND ORDER_ID=#{orderId}
+        </if>
+        <if test="amount!=null">
+            AND AMOUNT=#{amount}
+        </if>
+        <if test="isSuccess!=null">
+            AND IS_SUCCESS=#{isSuccess}
+        </if>
+        <if test="orderStatus!=null">
+            AND ORDER_STATUS=#{orderStatus}
+        </if>
+        <if test="orderNumber!=null">
+            AND ORDER_NUMBER=#{orderNumber}
+        </if>
+        <if test="creationTime!=null">
+            AND CREATION_TIME=#{creationTime}
+        </if>
+        <if test="finishTime!=null">
+            AND FINISH_TIME=#{finishTime}
+        </if>
+        <if test="physicalDistribution!=null">
+            AND PHYSICAL_DISTRIBUTION=#{physicalDistribution}
+        </if>
+        <if test="Evaluate!=null">
+            AND EVALUATE=#{Evaluate}
+        </if>
+        <if test="leaveWord!=null">
+            AND LEAVE_WORD=#{leaveWord}
+        </if>
+    </where>
+    LIMIT 0,5;
+</select>
+<!--插入数据-->
+<insert id="insert" parameterType="com.zyht.domain.OrderDetail">
+    INSERT INTO `order_detail` (`ID`, `SELLER_ID`,`BUYER_ID`,`GOODS_ID`,`ORDER_ID`,`AMOUNT`,`IS_SUCCESS`,`ORDER_STATUS`,`ORDER_NUMBER`,`CREATION_TIME`,`FINISH_TIME`,`PHYSICAL_DISTRIBUTION`,`EVALUATE`,`LEAVE_WORD`)
+    VALUES (DEFAULT,${sellerId},${buyerId},${orderId},${orderId},${amount},${isSuccess},${orderStatus},#{orderNumber},#{creationTime},#{finishTime},#{physicalDistribution},#{evaluate},#{leaveWord})
+</insert>
+<!-- 更新-->
+<update id="update" parameterType="com.zyht.domain.OrderDetail">
+    UPDATE `order_detail` SET `ID`=${id},
+    `SELLER_ID`=${sellerId},
+    `BUYER_ID`=${buyerId},
+    `GOODS_ID`=${orderId},
+    `ORDER_ID`=${orderId},
+    `AMOUNT`=${amount},
+    `IS_SUCCESS`=${isSuccess},
+    `ORDER_STATUS`=${orderStatus},
+    `ORDER_NUMBER`=${orderNumber},
+    `CREATION_TIME`=#{creationTime},
+    `FINISH_TIME`=#{finishTime},
+    `PHYSICAL_DISTRIBUTION`=#{physicalDistribution},
+    `EVALUATE`=#{evaluate},
+    `LEAVE_WORD`=#{leaveWord}
+       <if test="id!=null">
+           WHERE (`ID`=${id})
+       </if>
+    <!--原样输出-->
+    <![CDATA[
+        ]]>
+</update>
+<!--根据id删除-->
+<delete id="delete" parameterType="java.util.Arrays">
+    DELETE FROM  order_detail WHERE  id = #{_parameter}
+</delete>
+
+    <!--通过ID批量删除买家-->
+    <delete id="deletes" parameterType="java.util.Arrays">
+        DELETE FROM `order_detail` WHERE ID IN
+        <foreach collection="list" item="orderDetailId" open="(" close=")" separator=",">
+            ${orderDetailId}
+        </foreach>
+    </delete>
+</mapper>
