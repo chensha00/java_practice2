@@ -56,7 +56,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      * @throw Exception
      */
     @Override
-    public int deleteOrderByIds(Long[] ids){
+    public int deleteOrderByIds(List ids){
         Connection connection = JdbcUtils.getConnection();
         PreparedStatement preparedStatement = null;
         Integer result = null;

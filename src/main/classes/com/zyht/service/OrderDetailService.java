@@ -32,7 +32,7 @@ public interface OrderDetailService {
      * @return java.lang.Integer
      * @throw Exception
      */
-    public int deleteOrderByIds(Long[] ids);
+    public int deleteOrderByIds(List ids);
     /**
      * @Title: insertOrder
      * @Description: 添加订单详情

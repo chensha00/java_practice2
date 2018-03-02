@@ -59,8 +59,8 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteOrderByIds(Long[] ids) {
-        return this.sqlSessionTemplate.delete("com.zyht.domain.OrderDetail." + "delete", ids);
+    public Integer deleteOrderByIds(List ids) {
+        return this.sqlSessionTemplate.delete("com.zyht.domain.OrderDetail." + "deletes", ids);
        /* Integer operatedRows = 0;
         for(Long id:ids){
             preparedStatement=connection.prepareStatement("DELETE FROM order_detail WHERE ID=?");
