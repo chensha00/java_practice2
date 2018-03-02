@@ -23,7 +23,7 @@ public interface GoodsService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteGoodsById(Long id)throws SQLException;
+    public Integer deleteGoodsById(Long id);
 
     /**
      * @Title: deleteGoodsByIds
@@ -34,7 +34,7 @@ public interface GoodsService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteGoodsByIds(Long[] ids)throws SQLException;
+    public Integer deleteGoodsByIds(Long[] ids);
     /**
      * @Title: updateBuyer
      * @Description: 添加或者修改订单信息
@@ -45,7 +45,7 @@ public interface GoodsService {
      * @throw SQLException
      */
 
-    public Integer updateGoods(Goods goods)throws SQLException;
+    public Integer updateGoods(Goods goods);
     /**
      * @Title: insertOrUpdateBuyer
      * @Description: 添加或者修改订单信息
@@ -55,7 +55,7 @@ public interface GoodsService {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public Goods insertGoods(Goods goods)throws SQLException;
+    public Integer insertGoods(Goods goods);
     /**
      * @Title: queryGoodsById
      * @Description: 通过ID查询订单信息表
@@ -66,7 +66,7 @@ public interface GoodsService {
      * @throw SQLException
      */
 
-    public Goods queryGoodsById(Long id)throws SQLException;
+    public Goods queryGoodsById(Long id);
     /**
      * @Title: queryGoodsByCondition
      * @Description: 通过条件查询订单信息
@@ -76,7 +76,7 @@ public interface GoodsService {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public List<Goods>  queryGoodsByCondition(Map<String, String> stringBuyerMap)throws SQLException;
+        public List<Goods>  queryGoodsByCondition(Map<String,Object> stringBuyerMap);
     /**
      * @Title: findGoodsByCondition
      * @Description: 通过条件批量查询订单信息
@@ -86,5 +86,5 @@ public interface GoodsService {
      * @return java.util.List<domain.Buyer>
      * @throw SQLException
      */
-    public  List<Goods>  queryGoodsByCondition(Map<String, String> stringBuyerMap, Integer startRow, Integer size)throws SQLException;
+    public  List<Goods>  queryGoodsByCondition(Map<String,Object> stringBuyerMap, Integer startRow, Integer size);
 }

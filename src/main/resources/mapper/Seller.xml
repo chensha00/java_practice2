@@ -3,50 +3,123 @@
 <mapper namespace="com.zyht.domain.Seller">
 
     <!-- 定义结果集-->
-    <resultMap type="Test" id="test">
-        <id property="id" column="id" jdbcType="INT" javaType="java.lang.Long"/>
-        <result property="name" column="NAME" jdbcType="VARCHAR"/>
-        <result property="sex" column="SEX" jdbcType="CHAR"/>
-        <result property="age" column="AGE" jdbcType="BYTE"/>
-        <result property="id_number" column="ID_NUMBER" jdbcType="VARCHAR"/>
-        <result property="tel" column="TEL" jdbcType="VARCHAR"/>
-        <result property="addr" column="ADDR" jdbcType="VARCHAR"/>
-        <result property="profession" column="PROFESSION" jdbcType="VARCHAR"/>
-        <result property="work_unit" column="WORK_UNIT" jdbcType="VARCHAR"/>
-        <result property="saving" column="SAVING" jdbcType="DOUBLE"/>
+    <resultMap type="com.zyht.domain.Seller" id="seller">
+        <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="sex" column="SEX" jdbcType="CHAR"  javaType="java.lang.String"/>
+        <result property="age" column="AGE" jdbcType="TINYINT"  javaType="java.lang.Byte"/>
+        <result property="idNumber" column="ID_NUMBER" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="tel" column="TEL" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="addr" column="ADDR"  jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="profession" column="PROFESSION" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="workUnit" column="WORK_UNIT" jdbcType="VARCHAR"  javaType="java.lang.String"/>
+        <result property="saving" column="SAVING" jdbcType="DECIMAL"  javaType="java.lang.Double"/>
     </resultMap>
     <!--定义查询列 -->
     <sql id="columns">
         ID,NAME,SEX,AGE,ID_NUMBER,TEL,ADDR,PROFESSION,WORK_UNIT,SAVING
     </sql>
-    <!-- 查询所有-->
-    <select id="getTestAll" resultType="java.util.Map" resultMap="test">
-        SELECT <include refid="columns"/> FROM seller
+
+    <!--按id查询-->
+    <select id="queryById" resultMap="seller" parameterType="java.lang.Long">
+        SELECT <include refid="columns"/> FROM seller WHERE ID=#{_param}
     </select>
-    <select id="getById" resultType="Test">
+
+    <!-- 条件查询-->
+    <select id="queryByCondition" resultMap="seller" parameterType="java.util.Map">
         SELECT <include refid="columns"/> FROM seller
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="sex!=null">
+                AND SEX=#{sex}
+            </if>
+            <if test="age!=null">
+                AND AGE=${age}
+            </if>
+            <if test="idNumber!=null">
+                AND ID_NUMBER=#{idNumber}
+            </if>
+            <if test="tel!=null">
+                AND TEL=#{tel}
+            </if>
+            <if test="addr!=null">
+                AND ADDR=#{tAddr}
+            </if>
+            <if test="profession!=null">
+                AND PROFESSION=#{profession}
+            </if>
+            <if test="workUnit!=null">
+                AND WORK_UNIT=#{workUnit}
+            </if>
+            <if test="saving!=null">
+                AND SAVING=${saving}
+            </if>
+        </where>
+    </select>
+    <!--按条件查询并分页-->
+    <select id="queryByConditionWithPage" resultMap="seller" parameterType="java.util.Map">
+        SELECT <include refid="columns"/> FROM seller
+        <where>
+            <if test="id!=null">
+                AND ID=${id}
+            </if>
+            <if test="name!=null">
+                AND NAME=#{name}
+            </if>
+            <if test="sex!=null">
+                AND SEX=#{sex}
+            </if>
+            <if test="age!=null">
+                AND AGE=${age}
+            </if>
+            <if test="idNumber!=null">
+                AND ID_NUMBER=#{idNumber}
+            </if>
+            <if test="tel!=null">
+                AND TEL=#{tel}
+            </if>
+            <if test="addr!=null">
+                AND ADDR=#{addr}
+            </if>
+            <if test="profession!=null">
+                AND PROFESSION=#{profession}
+            </if>
+            <if test="workUnit!=null">
+                AND WORK_UNIT=#{workUnit}
+            </if>
+            <if test="saving!=null">
+                AND SAVING=${saving}
+            </if>
+        </where>
+        LIMIT #{startRow},#{size}
     </select>
     <!-- 添加-->
-    <insert id="save" parameterType="Test">
-        INSERT INTO `seller` (`ID`, `NAME`,`SEX`,`AGE`,`ID_NUMBER`,`TEL`,`ADDR`,`PROFESSION`,`WORK_UNIT`,`SAVING`) VALUES (${id}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=BYTE}, #{id_number,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{work_unit,jdbcType=VARCHAR}, #{saving,jdbcType=DOUBLE})
+    <insert id="insert" parameterType="com.zyht.domain.Seller">
+        INSERT INTO `seller` (`ID`, `NAME`,`SEX`,`AGE`,`ID_NUMBER`,`TEL`,`ADDR`,`PROFESSION`,`WORK_UNIT`,`SAVING`) VALUES (DEFAULT,#{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=TINYINT}, #{id_number,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{work_unit,jdbcType=VARCHAR}, #{saving,jdbcType=DOUBLE})
     </insert>
+
     <!-- 修改-->
-    <update id="update" parameterType="Test">
-        UPDATE `seller` SET `id`='3', `NAME`='王五'
-        <if test="@Ognl@isNotEmpty(id)">
-            WHERE (`id`=${id})
-        </if>
+    <update id="updateSeller" parameterType="com.zyht.domain.Seller">
+        UPDATE seller SET NAME=#{name},SEX=#{sex},AGE=${age},ID_NUMBER=#{idNumber},TEL=#{tel},ADDR=#{addr},PROFESSION=#{profession},WORK_UNIT=#{workUnit},SAVING=${saving} WHERE ID=${id}
         <![CDATA[
         ]]>
     </update>
 
-    <delete id="delete" parameterType="java.util.Map">
+<!--按id删除-->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM seller WHERE ID=#{_param}
+    </delete>
+    <!--按id批量查询-->
+    <delete id="deleteByIds" parameterType="java.util.Map">
         DELETE FROM seller WHERE  id IN
-        <if test="@Ognl@isNotEmpty(ids)">
             <foreach collection="ids" item="testId" open="("
                      separator="," close=")">
                 ${testId}
-            </foreach>
-        </if>
+        </foreach>
     </delete>
 </mapper>

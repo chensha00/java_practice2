@@ -1,6 +1,5 @@
 package com.zyht.service;
 
-
 import com.zyht.domain.OrderStatement;
 
 import java.sql.SQLException;
@@ -11,9 +10,9 @@ public interface OrderStatementService {
     /**
      * @Title: deleteOrderStatementById
      * @Description: 通过流水ID删除
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/20
-     * @param id, connection, preparedStatement
+     * @param id
      * @return java.lang.Integer
      * @throw SQLException
      */
@@ -22,9 +21,9 @@ public interface OrderStatementService {
     /**
      * @Title: deleteOrderStatementByIds
      * @Description: 通过ID批量删除订单流水
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/19
-     * @param  ids, connection, preparedStatement
+     * @param  ids
      * @return java.lang.Integer
      * @throw SQLException
      */
@@ -32,30 +31,30 @@ public interface OrderStatementService {
     /**
      * @Title: updateOrderStatement
      * @Description: 添加或者修改流水信息
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/20
-     * @param orderStatement, connection, preparedStatement
-     * @return OrderStatement
+     * @param orderStatement
+     * @return Integer
      * @throw SQLException
      */
 
-    public OrderStatement updateOrderStatement(OrderStatement orderStatement)throws SQLException;
+    public Integer updateOrderStatement(OrderStatement orderStatement)throws SQLException;
     /**
      * @Title: insertOrUpdateOrderStatement
      * @Description: 添加或者修改流水信息
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/20
-     * @param orderStatement, connection, preparedStatement
-     * @return OrderStatement
+     * @param orderStatement
+     * @return Integer
      * @throw SQLException
      */
-    public OrderStatement insertOrderStatement(OrderStatement orderStatement)throws SQLException;
+    public Integer insertOrderStatement(OrderStatement orderStatement)throws SQLException;
     /**
      * @Title: queryOrderStatementById
      * @Description: 通过ID查询流水信息表
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/20
-     * @param id, connection, preparedStatement
+     * @param id
      * @return OrderStatement
      * @throw SQLException
      */
@@ -64,22 +63,22 @@ public interface OrderStatementService {
     /**
      * @Title: queryOrderStatementByCondition
      * @Description: 通过条件查询流水信息
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/20
-     * @param stringOrderStatementMap, connection, preparedStatement
-     * @return OrderStatement
+     * @param stringOrderStatementMap
+     * @return List<OrderStatement>
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, String> stringOrderStatementMap)throws SQLException;
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap)throws SQLException;
     /**
      * @Title: findOrderStatementByCondition
      * @Description: 通过条件批量查询流水信息
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/20
-     * @param stringOrderStatementMap, offset, size, connection, preparedStatement
-     * @return java.util.List<OrderStatement>
+     * @param stringOrderStatementMap, startRow, size
+     * @return List<OrderStatement>
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, String> stringOrderStatementMap, Integer startRow, Integer size)throws SQLException;
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size)throws SQLException;
 }
 

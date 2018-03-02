@@ -43,7 +43,7 @@ public interface OrderDetailDao {
      * @return java.lang.Integer
      * @throw Exception
      */
-    public Integer deleteOrderByIds(Long[] ids);
+    public Integer deleteOrderByIds(List ids);
     /**
      * @Title: insertOrder
      * @Description: 添加订单详情
