@@ -1,4 +1,4 @@
-package com.zyht.servlet;/********************************************************************
+﻿package com.zyht.servlet;/********************************************************************
  /**
  * @Project: jsp_web
  * @Package java.servlet
@@ -49,8 +49,8 @@ public class GoodsServlet extends HttpServlet {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
         request.setCharacterEncoding("utf-8");
         response.setContentType("goods_seller_relation/html;charset=utf-8");
-      //  String buyerid=request.getParameter("buyerid");                                                                //接受上一个页面传递来的id
-        String buyerid ="1";                                                                                            //测试
+        String buyerid=request.getParameter("buyerid");                                                                //接受上一个页面传递来的id
+     //   String buyerid ="1";                                                                                            //测试
         Long id=Long.parseLong(buyerid);                                                                                //把buyerid转化成Long类型用id接收
         Map<String,String> stringStringMap=new HashMap<String ,String>();
         stringStringMap.put("`ID`",buyerid);
