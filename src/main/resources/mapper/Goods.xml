@@ -5,7 +5,6 @@
     <resultMap   id="goods" type="com.zyht.domain.Goods">
         <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="number" column="NUMBER" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="type" column="TYPE" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="price" column="PRICE" jdbcType="DECIMAL" javaType="java.lang.Double"/>
         <result property="addr" column="ADDR" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -15,7 +14,7 @@
     </resultMap>
     <!--定义查询列 -->
     <sql id="columns">
-        ID,NAME,NUMBER ,TYPE ,PRICE,ADDR,MAKE_TIME,EXPIRATION_TIME,UNIT
+        ID,NAME,TYPE ,PRICE,ADDR,MAKE_TIME,EXPIRATION_TIME,UNIT
     </sql>
     <!-- 查询所有-->
     <select id="getTestAll"  resultMap="goods" parameterType="java.lang.Long">
@@ -27,11 +26,11 @@
     </select>
     <!-- 添加-->
     <insert id="insert" parameterType="com.zyht.domain.Goods">
-        INSERT INTO `goods` (`ID`,`NAME`,`NUMBER`,`TYPE`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIME`,`UNIT`) VALUES (DEFAULT,#{name},#{number},#{type},${price},#{addr},#{makeTime},#{expirationTime},#{unit})
+        INSERT INTO `goods` (`id`, `NAME`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIMA`,`UNIT`) VALUES (${id}, #{name,jdbcType=VARCHAR},#{type,jdbaType=VARCHER},${price,jabaType=DECOMAL},#{addr,jdbcType=VARCHAR},#{makeTime,jdbcType=DATETIME},#{expirationTime,jdbcType=DATE},#{unit,jdbcType=VARCHAR})
     </insert>
     <!-- 更新-->
     <update id="update" parameterType="com.zyht.domain.Goods">
-        UPDATE `goods` SET  `NAME`=#{name},`NUMBER`=#{number},`TYPE`=#{type},`PRICE`=${price},`ADDR`=#{addr},`MAKE_TIME`=#{makeTime},`EXPIRATION_TIME`=#{expirationTime},`UNIT`=#{unit} WHERE `ID`=${id}
+        UPDATE `goods` SET  `NAME`=${NAME},`PRICE`=${PRICE},`ADDR`=#{ADDR},,`MAKE_TIME`=#{`MAKE_TIME},`EXPIRATION_TIMA`=#{EXPIRATION_TIMA},`UNIT`=#{UNIT} WHERE ID=${id}
     </update>
 
     <delete id="delete" parameterType="java.lang.Long">
@@ -40,41 +39,9 @@
     </delete>
     <!--按条件批量删除-->
     <delete id="deleteGoodsByIds" parameterType="java.util.Map">
-        DELETE FROM `goods` WHERE `ID` IN
+        DELETE FROM goods WHERE ID IN
         <foreach collection="ids" item="eachId" open="(" separator="," close=")">
             ${eachId}
         </foreach>
     </delete>
-    <select id="queryGoodsByCondition" resultMap="goods" parameterType="java.util.Map">
-        SELECT <include refid="columns"/> FROM goods
-        <where>
-            <if test="id!=null">
-                AND ID=${id}
-            </if>
-            <if test="name!=null">
-                AND NAME=#{name}
-            </if>
-            <if test="number!=null">
-                AND NUMBER=#{number}
-            </if>
-            <if test="type!=null">
-                AND TYPE=#{type}
-            </if>
-            <if test="price!=null">
-                AND PRICE=${price}
-            </if>
-            <if test="addr!=null">
-                AND ADDR=#{addr}
-            </if>
-            <if test="makeTime!=null">
-                AND MAKE_TIME=#{makeTime}
-            </if>
-            <if test="expirationTime!=null">
-                AND EXPIRATION_TIME=#{expirationTime}
-            </if>
-            <if test="unit!=null">
-                AND UNIT=#{unit}
-            </if>
-        </where>
-    </select>
 </mapper>

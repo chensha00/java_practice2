@@ -3,9 +3,6 @@ package com.zyht.servlet;
 import com.zyht.domain.OrderDetail;
 import com.zyht.service.OrderDetailService;
 import com.zyht.service.OrderDetailServiceImpl;
-import com.zyht.service.OrderService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +28,7 @@ public class OrderDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderDetailService orderDetailService = (OrderDetailService)context.getBean("orderDetailService");
+        OrderDetailService orderDetailService = new OrderDetailServiceImpl();
         Map<String, Object> stringMap = new HashMap<String,Object>();
         String sellerid = "" + req.getAttribute("sellerid");
         if(sellerid !=null){
