@@ -4,6 +4,7 @@ package com.zyht.service;
 import com.zyht.dao.OrderStatementDao;
 import com.zyht.dao.OrderStatementDaoImpl;
 import com.zyht.domain.OrderStatement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.Map;
  */
 @Service("orderStatementService")
 public class OrderStatementServiceImpl implements OrderStatementService {
+    @Autowired
+    private OrderStatementDaoImpl orderStatementDao;
     /**
      * @Title: deleteOrderStatmentServiceById
      * @Description: 通过流水ID删除
@@ -26,9 +29,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
      * @date 2018/1/22 0022
      */
     @Override
-    public Integer deleteOrderStatementById(Long id) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public Integer deleteOrderStatementById(Long id) {
         Integer rows=orderStatementDao.deleteOrderStatementById(id);
         return rows;
     }
@@ -40,9 +41,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
      * @date 2018/1/22 0022
      */
     @Override
-    public Integer deleteOrderStatementByIds(Long[] ids) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public Integer deleteOrderStatementByIds(Long[] ids) {
         Integer rows=orderStatementDao.deleteOrderStatementByIds(ids);
         return rows;
     }
@@ -54,9 +53,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
      * @date 2018/1/25 0025
      */
     @Override
-    public Integer updateOrderStatement(OrderStatement orderStatement) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public Integer updateOrderStatement(OrderStatement orderStatement) {
         Integer rows=orderStatementDao.updateOrderStatement(orderStatement);
         return rows;
     }
@@ -68,9 +65,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
      * @date 2018/1/23 0023
      */
     @Override
-    public Integer insertOrderStatement(OrderStatement orderStatement) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public Integer insertOrderStatement(OrderStatement orderStatement) {
         Integer rows=orderStatementDao.insertOrderStatement(orderStatement);
         return rows;
     }
@@ -82,9 +77,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
      * @date 2018/1/23 0023
      */
     @Override
-    public OrderStatement queryOrderStatementById(Long id) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public OrderStatement queryOrderStatementById(Long id) {
         OrderStatement orderStatement=orderStatementDao.queryOrderStatementById(id);
         return orderStatement;
     }
@@ -96,9 +89,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
      * @date 2018/1/23 0023
      */
     @Override
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap) {
         List<OrderStatement> orderStatementList=orderStatementDao.queryOrderStatementByCondition(stringOrderStatementMap);
         return orderStatementList;
     }
@@ -109,9 +100,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
  * @date 2018/1/25 0025
  */
     @Override
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size) throws SQLException {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        OrderStatementDaoImpl orderStatementDao= (OrderStatementDaoImpl) applicationContext.getBean("orderStatementDao");
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size) {
         List<OrderStatement> orderStatementList=orderStatementDao.queryOrderStatementByCondition(stringOrderStatementMap,startRow,size);
         return orderStatementList;
     }

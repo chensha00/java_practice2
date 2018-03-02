@@ -32,7 +32,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteOrderStatementById(Long id) throws SQLException {
+    public Integer deleteOrderStatementById(Long id) {
         return this.sqlSessionTemplate.delete("com.zyht.domain.OrderStatement."+"deleteById",id);
     }
     /**
@@ -45,7 +45,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public Integer deleteOrderStatementByIds(Long[] ids) throws SQLException {
+    public Integer deleteOrderStatementByIds(Long[] ids) {
         Map<String, Object> stringObjectMap=new HashMap<String,Object>();
         stringObjectMap.put("ids",ids);
         return this.sqlSessionTemplate.delete("com.zyht.domain.OrderStatement."+"deleteByIds",stringObjectMap);
@@ -60,7 +60,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public Integer updateOrderStatement(OrderStatement orderStatement) throws SQLException {
+    public Integer updateOrderStatement(OrderStatement orderStatement) {
         return this.sqlSessionTemplate.update("com.zyht.domain.OrderStatement."+"update",orderStatement);
     }
     /**
@@ -73,7 +73,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public Integer insertOrderStatement(OrderStatement orderStatement) throws SQLException {
+    public Integer insertOrderStatement(OrderStatement orderStatement) {
         return this.sqlSessionTemplate.update("com.zyht.domain.OrderStatement."+"add",orderStatement);
     }
     /**
@@ -86,7 +86,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public OrderStatement queryOrderStatementById(Long id) throws SQLException {
+    public OrderStatement queryOrderStatementById(Long id) {
         return this.sqlSessionTemplate.selectOne("com.zyht.domain.OrderStatement."+"findById",id);
     }
     /**
@@ -99,7 +99,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap) throws SQLException {
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderStatement."+"find",stringOrderStatementMap);
     }
     /**
@@ -112,7 +112,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @throw SQLException
      */
     @Override
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size) throws SQLException {
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderStatement."+"findPage",stringOrderStatementMap);
     }
 }

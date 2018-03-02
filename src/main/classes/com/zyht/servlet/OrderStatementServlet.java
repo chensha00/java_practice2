@@ -50,15 +50,9 @@ public class OrderStatementServlet extends HttpServlet {
         List<OrderStatement> orderStatementList=null;
         Map<String,Object> stringStringMap=new HashMap<String, Object>();
         String str=req.getParameter("id");
-        str="1";
         stringStringMap.put("`ID`",str);
-        try {
-            orderStatementList=orderStatementService.queryOrderStatementByCondition(stringStringMap,0,5);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            req.setAttribute("orderStatementList",orderStatementList);
-            req.getRequestDispatcher("/jsp/order_statement.jsp").forward(req,resp);
-        }
+        orderStatementList=orderStatementService.queryOrderStatementByCondition(stringStringMap,0,5);
+        req.setAttribute("orderStatementList",orderStatementList);
+        req.getRequestDispatcher("/jsp/order_statement.jsp").forward(req,resp);
     }
 }

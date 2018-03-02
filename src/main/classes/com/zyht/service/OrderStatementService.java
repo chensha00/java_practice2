@@ -16,7 +16,7 @@ public interface OrderStatementService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteOrderStatementById(Long id)throws SQLException;
+    public Integer deleteOrderStatementById(Long id);
 
     /**
      * @Title: deleteOrderStatementByIds
@@ -27,7 +27,7 @@ public interface OrderStatementService {
      * @return java.lang.Integer
      * @throw SQLException
      */
-    public Integer deleteOrderStatementByIds(Long[] ids)throws SQLException;
+    public Integer deleteOrderStatementByIds(Long[] ids);
     /**
      * @Title: updateOrderStatement
      * @Description: 添加或者修改流水信息
@@ -38,7 +38,7 @@ public interface OrderStatementService {
      * @throw SQLException
      */
 
-    public Integer updateOrderStatement(OrderStatement orderStatement)throws SQLException;
+    public Integer updateOrderStatement(OrderStatement orderStatement);
     /**
      * @Title: insertOrUpdateOrderStatement
      * @Description: 添加或者修改流水信息
@@ -48,7 +48,7 @@ public interface OrderStatementService {
      * @return Integer
      * @throw SQLException
      */
-    public Integer insertOrderStatement(OrderStatement orderStatement)throws SQLException;
+    public Integer insertOrderStatement(OrderStatement orderStatement);
     /**
      * @Title: queryOrderStatementById
      * @Description: 通过ID查询流水信息表
@@ -59,7 +59,7 @@ public interface OrderStatementService {
      * @throw SQLException
      */
 
-    public OrderStatement queryOrderStatementById(Long id)throws SQLException;
+    public OrderStatement queryOrderStatementById(Long id);
     /**
      * @Title: queryOrderStatementByCondition
      * @Description: 通过条件查询流水信息
@@ -69,7 +69,7 @@ public interface OrderStatementService {
      * @return List<OrderStatement>
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap)throws SQLException;
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap);
     /**
      * @Title: findOrderStatementByCondition
      * @Description: 通过条件批量查询流水信息
@@ -79,6 +79,6 @@ public interface OrderStatementService {
      * @return List<OrderStatement>
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size)throws SQLException;
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size);
 }
 

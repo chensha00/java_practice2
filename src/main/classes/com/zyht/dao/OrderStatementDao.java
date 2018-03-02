@@ -30,7 +30,7 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer deleteOrderStatementById(Long id)throws SQLException;
+    public Integer deleteOrderStatementById(Long id);
 
     /**
      * @param ids
@@ -41,7 +41,7 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer deleteOrderStatementByIds(Long[] ids)throws SQLException;
+    public Integer deleteOrderStatementByIds(Long[] ids);
     /**
      * @param orderStatement
      * @return java.lang.Integer
@@ -51,7 +51,7 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer updateOrderStatement(OrderStatement orderStatement)throws SQLException;
+    public Integer updateOrderStatement(OrderStatement orderStatement);
     /**
      * @param orderStatement
      * @return java.lang.Integer
@@ -61,7 +61,7 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public Integer insertOrderStatement(OrderStatement orderStatement)throws SQLException;
+    public Integer insertOrderStatement(OrderStatement orderStatement);
     /**
      * @param id
      * @return java.lang.Integer
@@ -71,7 +71,7 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public OrderStatement queryOrderStatementById(Long id)throws SQLException;
+    public OrderStatement queryOrderStatementById(Long id);
     /**
      * @param stringOrderStatementMap
      * @return java.util.*
@@ -81,7 +81,7 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap)throws SQLException;
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap);
     /**
      * @param stringOrderStatementMap startRow size
      * @return java.util.*
@@ -91,5 +91,5 @@ public interface OrderStatementDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size)throws SQLException;
+    public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size);
 }
