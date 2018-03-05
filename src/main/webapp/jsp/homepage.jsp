@@ -23,12 +23,12 @@
     </div>
     <div id="forward" class="banner">
         <a id="buy" class="function" href="" >我要购买</a>
-        <a id="log-out" class="function" href="${pageContext.request.contextPath}/LogOutServlet.htm" target="_self"> 退出登录 </a>
+        <a id="log-out" class="function" href="${pageContext.request.contextPath}/action/log-out!logOut.do" target="_self"> 退出登录 </a>
     </div>
 </div>
 <%--功能菜单--%>
 <div id="menu" class="show">
-    <form action="${pageContext.request.contextPath}/HomepageServlet.htm" method="post">
+    <form action="${pageContext.request.contextPath}/action/seller!showSeller.do?sellerId="+${sessionScope.sellerid} method="post">
         <c:choose>
             <c:when test="${sessionScope.sellerid ne null&&sessionScope.sellerid ne 0 }">
                 <button id="shop" class="menu" type="submit" name="shop" value="shop" >我的店铺</button>
@@ -49,49 +49,51 @@
     $(function(){
 //    我的购买订单跳转请求
         $("#sell-buy-orders").click(function(){
-            var value="buy-orders";
+            var value=${sessionScope.buyerid};
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/HomepageServlet.htm?buy-orders="+value,
+                url : "${pageContext.request.contextPath}/action/order!showOrder.do?buyerId="+value,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
                     $("#display").html(data);
                 },
                 error : function(e) {
-                    console.log(e);
+                    alert("参数错误！");
                 }
             });
         })
 
         $("#buy-orders").click(function(){
-            var value="buy-orders";
+            var value=${sessionScope.buyerid};
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/HomepageServlet.htm?buy-orders="+value,
+                url : "${pageContext.request.contextPath}/action/order!showOrder.do?buyerId="+value,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
                     $("#display").html(data);
                 },
                 error : function(e) {
-                    console.log(e);
+//                    console.log(e);
+                    alert("参数错误！");
                 }
             });
         })
 //    我的出售订单跳转请求
         $("#sell-orders").click(function(){
-            var value="sell-orders";
+            var value=${sessionScope.sellerid};
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/HomepageServlet.htm?sell-orders="+value,
+                url : "${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do?sellerId="+value,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
                     $("#display").html(data);
                 },
                 error : function(e) {
-                    console.log(e);
+//                    console.log(e);
+                    alert("参数错误！");
                 }
             })
         });
@@ -99,7 +101,7 @@
         $("#buy").click(function (){
             var id=${sessionScope.buyerid};
 //            var id=1;
-            document.getElementById("buy").href="${pageContext.request.contextPath}/GoodsServlet.htm?buyerid="+id;
+            document.getElementById("buy").href="${pageContext.request.contextPath}/action/Goods!goodsShow.do?buyerid="+id;
         });
 //        点击收货地址的跳转
         $("#buy-addr").click(function(){
@@ -107,14 +109,15 @@
 //            var thisId=1;
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/addr!addr.do?buyerId="+thisId,
+                url : "${pageContext.request.contextPath}/action/addr!addr.do?buyerId="+thisId,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
                     $("#display").html(data);
                 },
                 error : function(e) {
-                    console.log(e);
+//                    console.log(e);
+                    alert("参数错误！");
                 }
             });
         })
@@ -123,14 +126,15 @@
 //            var thisId=1;
             $.ajax({
                 type : "POST",
-                url :"${pageContext.request.contextPath}/addr!addr.do?buyerId="+thisId,
+                url :"${pageContext.request.contextPath}/action/addr!addr.do?buyerId="+thisId,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
                     $("#display").html(data);
                 },
                 error : function(e) {
-                    console.log(e);
+//                    console.log(e);
+                    alert("参数错误！");
                 }
             });
         })

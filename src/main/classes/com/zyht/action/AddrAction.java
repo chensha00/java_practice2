@@ -9,13 +9,12 @@ package com.zyht.action;/*******************************************************
  */
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.common.util.SpringContextUtil;
 import com.zyht.domain.Buyer;
 import com.zyht.service.BuyerService;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2018/3/2
  */
 @Action
-@Results({
-        @Result(name = "addr",location = "/jsp/addr.jsp")
-})
-public class AddrAction extends ActionSupport{
+//@Results({
+//        @Result(name = "addr",location = "/jsp/addr.jsp")
+//})
+public class AddrAction extends ActionSupport implements BaseAction{
 
     private String buyerId;
     private HttpServletRequest request;
@@ -52,7 +51,7 @@ public class AddrAction extends ActionSupport{
         request=ServletActionContext.getRequest();
         request.setAttribute("addr",addr);
         request.setAttribute("buyerid",id);
-        return "addr";
+        return ADDR;
     }
     public String getBuyerId() {
         return buyerId;

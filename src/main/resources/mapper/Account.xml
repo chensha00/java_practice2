@@ -39,8 +39,8 @@
         FROM account WHERE ACCOUNT=#{account} AND PASSWORD=#{password};
     </select>
     <!-- 插入数据-->
-    <insert id="insert" parameterType="com.zyht.domain.Account">
-    INSERT INTO `account` (`ACCOUNT`,`PASSWORD`,`IS_FROZEN`,`IS_CANCELED`,`IS_DELETE`,`BUYER_ID`,`SELLER_ID`,`ADD_TIME`,`UPDATE_TIME`,`PAY_PASSWORD`) VALUES (#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{isFrozen,jdbcType=TINYINT},#{isCanceled,jdbcType=TINYINT},#{isDelete,jdbcType=TINYINT},#{buyerId,jdbcType=BIGINT},#{sellerId,jdbcType=BIGINT},#{addTime,jdbcType=DATE},#{updateTime,jdbcType=DATE},#{payPassword,jdbcType=VARCHAR})
+    <insert id="insert" parameterType="com.zyht.domain.Account" useGeneratedKeys="true" keyProperty="id" keyColumn="ID" >
+    INSERT INTO `account` (`ACCOUNT`,`PASSWORD`,`BUYER_ID`,`SELLER_ID`,`ADD_TIME`,`UPDATE_TIME`,`PAY_PASSWORD`) VALUES (#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{buyerId,jdbcType=BIGINT},#{sellerId,jdbcType=BIGINT},#{addTime,jdbcType=DATE},#{updateTime,jdbcType=DATE},#{payPassword,jdbcType=VARCHAR})
     </insert>
     <!--&lt;!&ndash; 编辑&ndash;&gt;-->
     <update id="update" parameterType="com.zyht.domain.Account">
