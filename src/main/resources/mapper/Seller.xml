@@ -99,7 +99,7 @@
         LIMIT #{startRow},#{size}
     </select>
     <!-- 添加-->
-    <insert id="insert" parameterType="com.zyht.domain.Seller">
+    <insert id="insert" parameterType="com.zyht.domain.Seller" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO `seller` (`ID`, `NAME`,`SEX`,`AGE`,`ID_NUMBER`,`TEL`,`ADDR`,`PROFESSION`,`WORK_UNIT`,`SAVING`) VALUES (DEFAULT,#{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=TINYINT}, #{id_number,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{work_unit,jdbcType=VARCHAR}, #{saving,jdbcType=DOUBLE})
     </insert>
 
