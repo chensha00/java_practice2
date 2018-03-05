@@ -16,6 +16,8 @@ import com.zyht.domain.Account;
 import com.zyht.service.AccountService;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,11 +36,11 @@ import java.util.Map;
  * @date 2018/3/5
  */
 @Action
-//@Results({
-//        @Result(name = "logIn",location = "/jsp/log_in.jsp"),
-//        @Result(name = "manager",location = "/jsp/manager.jsp"),
-//        @Result(name = "home",location = "/jsp/homepage.jsp")
-//})
+@Results({
+        @Result(name = "logIn",location = "/jsp/log_in.jsp"),
+        @Result(name = "manager",location = "/jsp/manager.jsp"),
+        @Result(name = "home",location = "/jsp/homepage.jsp")
+})
 public class LogInAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -58,15 +60,6 @@ public class LogInAction extends ActionSupport implements BaseAction {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
-    /**
-     * @Title: logIn
-     * @Description: 登录
-     * @author caoxin
-     * @date 2018/3/5
-     * @return java.lang.String
-     * @throw IOException
-     */
-
     public String logIn()throws IOException {
 
         //        获取request,response,session对象
@@ -126,7 +119,7 @@ public class LogInAction extends ActionSupport implements BaseAction {
             session.setAttribute("sellerid", sellerId);
             session.setAttribute("buyerid", buyerId);
 //            判断是否是管理员，如果是管理员就进入管理员界面，否则就进入主界面
-            if (userName.equals("admin")) {
+            if (userName == "admin") {
                 return MANAGER;
             } else {
                 return HOME;
