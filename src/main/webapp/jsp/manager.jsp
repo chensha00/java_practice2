@@ -22,7 +22,7 @@
         <p>欢迎光临！管理员</p>${requestScope.managerName}
     </header>
     <div id="content">
-        <form action="${pageContext.request.contextPath}/action/manager!showManager.do" method="post">
+        <form action="/Manager.htm" method="post">
             <div id="myview">
                 <button id="show" type="submit">查看所有账户</button>
             </div>
@@ -46,7 +46,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${requestScope.accountList}" var="account">
+                    <c:forEach items="${requestScope.accounts}" var="account">
                         <tr>
                             <td>
                                     ${account.getId()}
@@ -121,34 +121,24 @@
                             </td>
                             <td>
                                 <div>
-                                    <button id="frozen" name="frozen" type="submit" value="${account.getId()}">
-                                        冻结
+                                    <button id="frozen" name="frozen" type="submit" value="${account.getId()}">冻结
                                     </button>
+
                                 </div>
                                 <div>
-                                    <button id="not_frozen" name="notFrozen" type="submit" value="${account.getId()}">
+                                    <button id="not_frozen" name="not_frozen" type="submit" value="${account.getId()}">
                                         解冻
                                     </button>
                                 </div>
                             </td>
                             <td>
-                                <div>
-                                    <button id="canceled" name="canceled" type="submit" value="${account.getId()}">
-                                        注销
-                                    </button>
-                                </div>
+                                <button id="canceled" name="canceled" type="submit" value="${account.getId()}">注销
+                                </button>
                             </td>
                             <td>
-                                <div>
-                                    <button id="delete" name="delete" type="submit" value="${account.getId()}">
-                                        删除
-                                    </button>
-                                </div>
-                                <div>
-                                    <button id="not_delete" name="notDelete" type="submit" value="${account.getId()}">
-                                        恢复
-                                    </button>
-                                </div>
+                                <button id="delete" name="delete" type="submit" value="${account.getId()}">删除</button>
+                                <button id="not_delete" name="not_delete" type="submit" value="${account.getId()}">恢复
+                                </button>
                             </td>
                         </tr>
                     </c:forEach>

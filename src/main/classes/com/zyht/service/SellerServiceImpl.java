@@ -6,9 +6,6 @@ import com.zyht.domain.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-
 
 /**
  *
@@ -183,13 +180,12 @@ public class SellerServiceImpl implements SellerService {
 
     /**
      * Title:deleteSellerById
-     *
      * @Description: 方法描述
      * @author 通过主键ID删除
      * @date 2018/2/28
      */
     @Override
-    public int deleteSellerById(Long id) {
+    public int deleteSellerById(Long id){
 //    public Integer deleteSellerById(Long id, Connection connection, PreparedStatement preparedStatement) throws SQLException {
 //        preparedStatement = connection.prepareStatement("DELETE FROM seller WHERE ID=?");
 //        preparedStatement.setLong(1, id);
@@ -202,13 +198,12 @@ public class SellerServiceImpl implements SellerService {
 
     /**
      * Title: deleteSellerByIds
-     *
      * @Description: 通过主键批量删除卖家
      * @author chendong
      * @date 2018/2/28
      */
     @Override
-    public Integer deleteSellerByIds(Long[] ids) {
+    public Integer deleteSellerByIds(Long[] ids){
 //    public Integer deleteSellerByIds(Long[] ids, Connection connection, PreparedStatement preparedStatement) throws SQLException {
 //        Integer operatedRows=0;
 //        for (Long id : ids) {
@@ -229,7 +224,7 @@ public class SellerServiceImpl implements SellerService {
      * @date 2018/2/28
      */
     @Override
-    public int insertSeller(Seller seller) {
+    public int insertSeller(Seller seller){
 //    public Seller insertSeller(Seller seller, Connection connection, PreparedStatement preparedStatement) throws SQLException {
 //        preparedStatement = connection.prepareStatement("INSERT INTO seller(NAME,SEX,AGE,ID_NUMBER,TEL,ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(?,?,?,?,?,?,?,?,?);");
 //        preparedStatement.setString(1,seller.getName());
@@ -252,13 +247,12 @@ public class SellerServiceImpl implements SellerService {
 
     /**
      * Title: updateSeller
-     *
      * @Description: 修改卖家信息
      * @author chendong
      * @date 2018/2/28
      */
     @Override
-    public int updateSeller(Seller seller) {
+    public int updateSeller(Seller seller){
 //    public Seller updateSeller(Seller seller, Connection connection, PreparedStatement preparedStatement) throws SQLException {
 //        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 //        preparedStatement = connection.prepareStatement("UPDATE seller SET NAME=?,SEX=?,AGE=?,ID_NUMBER=?,TEL=?,ADDR=?,PROFESSION=?,WORK_UNIT=?,SAVING=?WHERE ID=?;");
@@ -277,13 +271,12 @@ public class SellerServiceImpl implements SellerService {
 //    }
         return sellerDao.updateSeller(seller);
     }
-
-    /**
-     * @Title: querySellerById
-     * @Description: 通过id查询卖家
-     * @author chendong
-     * @date 2018/2/28
-     */
+/**
+ * @Title: querySellerById
+ * @Description: 通过id查询卖家
+ * @author chendong
+ * @date 2018/2/28
+ */
     @Override
     public Seller querySellerById(Long id) {
 //    public Seller querySellerById(Long id)  {
@@ -303,20 +296,4 @@ public class SellerServiceImpl implements SellerService {
 //    }
         return sellerDao.querySellerById(id);
     }
-    /**
-     * @Title: querySellerByCondition
-     * @Description: 通过条件查询
-     * @author chendong
-     * @date 2018/3/5
-     */
-
-    @Override
-    public List<Seller> querySellerByCondition(Map<String, Object> stringSellerMap) {
-        List<Seller> sellerList=sellerDao.querySellerByCondition(stringSellerMap);
-        return sellerList;
-    }
 }
-
-
-
-

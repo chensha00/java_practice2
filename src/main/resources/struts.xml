@@ -81,6 +81,9 @@
         </interceptors>
         <default-interceptor-ref name="myStack"></default-interceptor-ref>
         <global-results>
+<<<<<<< HEAD
+            <result name="index">/log_in.jsp</result>
+=======
             <result name="logIn">/jsp/log_in.jsp</result>
             <result name="manager">/jsp/manager.jsp</result>
             <result name="enroll">/jsp/enroll.jsp</result>
@@ -94,6 +97,7 @@
             <result name="relation">/jsp/goods_seller_relation.jsp</result>
             <result name="seller">/jsp/seller.jsp</result>
             <result name="addr">/jsp/addr.jsp</result>
+>>>>>>> ccb82041098f4a03fb4db54013a4193d0982422f
         </global-results>
         <!--<global-allowed-methods>regex:.*</global-allowed-methods>-->
         <global-allowed-methods>regex:.*</global-allowed-methods>

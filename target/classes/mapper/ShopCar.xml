@@ -21,7 +21,7 @@
     </select>
      <!--分页查询所有-->
     <select id="findPage" resultMap="shopCar">
-        SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID`=#{_param} LIMIT 0,5
+        SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID`=#{_param} LIMIT #{startRow},#{size}
     </select>
     <!-- 按条件查询-->
     <select id="findByCondition" parameterType="java.util.Map" resultMap="shopCar">

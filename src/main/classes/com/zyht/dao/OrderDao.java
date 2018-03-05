@@ -77,7 +77,7 @@ public interface OrderDao {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public List<Order> queryOrderByCondition(Map<String,Object> stringBuyerMap);
+    public List<Order> queryOrderCondition(Map<String,Object> stringBuyerMap);
     /**
      * @Title: findOrderByCondition
      * @Description: 通过条件批量查询订单信息

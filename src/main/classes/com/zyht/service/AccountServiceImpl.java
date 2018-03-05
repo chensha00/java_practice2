@@ -142,19 +142,12 @@ public class AccountServiceImpl implements AccountService {
 //        return result;
         return accountDao.logInUser(stringObjectMap);
     }
-    /**
-     * @Title: queryAll
-     * @Description: 查询所有账户
-     * @author DengHongbo
-     * @date 2018/3/5 10:02
-     * @return java.util.List<com.zyht.domain.Account>
-     */
     @Override
-    public List<Account> queryAll() {
+    public List<Account> selectAll() {
         return accountDao.queryAll() ;
     }
     /**
-     * @Title: queryOne
+     * @Title: selectOne
      * @Description: 查询单个用户
      * @author DengHongbo
      * @date 2018/2/26 10:18
@@ -162,7 +155,7 @@ public class AccountServiceImpl implements AccountService {
      * @return com.zyht.domain.Account
      */
     @Override
-    public Account queryOne(Long id) {
+    public Account selectOne(Long id) {
         return accountDao.queryOne(id);
     }
 }
