@@ -216,7 +216,7 @@ public class OrderServiceImpl implements OrderService {
 //        List<Order> result = null;
 //        try {
 //            connection.setAutoCommit(false);
-           return orderDao.queryOrderCondition(stringBuyerMap);
+           return orderDao.queryOrderByCondition(stringBuyerMap);
 //            if (result == null) {
 //                System.out.println("查询失败！");
 //            } else {
@@ -257,7 +257,7 @@ public class OrderServiceImpl implements OrderService {
 //        List<Order> result = null;
 //        try {
 //            connection.setAutoCommit(false);
-            return orderDao.queryOrderCondition(stringBuyerMap);
+            return orderDao.queryOrderConditionPage(stringBuyerMap);
 //            if (result == null) {
 //                respond = "查询失败！";
 //            } else {

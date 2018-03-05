@@ -12,8 +12,6 @@ body{
     overflow: hidden;
 }
 
-
-
 #content {
     margin: 0 auto;
     padding: 0;
@@ -32,7 +30,7 @@ body{
 #mytable {
     margin: 0 auto;
     height: auto;
-    width: 100% ;
+    width: 85% ;
 }
 #frozen{
     float: left;
@@ -50,7 +48,7 @@ body{
 }
 #delete{
     float: left;
-    height: 100%;
+    height: 34px;
     width: 50%;
 }
 #not_delete{
