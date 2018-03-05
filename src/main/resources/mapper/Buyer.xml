@@ -117,7 +117,7 @@
         </foreach>
     </delete>
     <!--单行添加数据-->
-    <insert id="insertBuyer" parameterType="com.zyht.domain.Buyer">
+    <insert id="insertBuyer" parameterType="com.zyht.domain.Buyer" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO buyer(ID,NAME,SEX,AGE,ID_NUMBER,TEL,PERMANENT_ADDR,PROFESSION,WORK_UNIT,SAVING)VALUES(DEFAULT,#{name},#{sex},${age},#{idNumber},#{tel},#{permanentAddr},#{profession},#{workUnit},${saving})
     </insert>
     <!--批量插入数据-->
