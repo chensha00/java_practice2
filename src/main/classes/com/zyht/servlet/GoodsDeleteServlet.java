@@ -1,14 +1,14 @@
 package com.zyht.servlet;
 
 import com.zyht.service.GoodsSellerRelationService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.zyht.service.GoodsSellerRelationServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by Administrator on 2018/2/27.
@@ -38,8 +38,7 @@ public class GoodsDeleteServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
-        ApplicationContext applicationContext= new ClassPathXmlApplicationContext("applicationContext.xml");
-        GoodsSellerRelationService goodsSellerRelationService=(GoodsSellerRelationService) applicationContext.getBean("goodsSellerRelationService");
+        GoodsSellerRelationService goodsSellerRelationService=new GoodsSellerRelationServiceImpl();
         String str = ""+request.getAttribute("sellerid");
         Long id = Long.parseLong(str);
         goodsSellerRelationService.deleteGoodsSellerRelationById(id);

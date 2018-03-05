@@ -52,11 +52,8 @@ public class ShopCarServlet extends HttpServlet {
         String str=req.getParameter("id");
         str="1";
         stringStringMap.put("`ID`",str);
-        try {
-            shopCarList=shopCarService.queryShopCarByCondition(stringStringMap, 0, 5);
-        } finally {
-            req.setAttribute("shopCarList",shopCarList);
-            req.getRequestDispatcher("/jsp/shop_car.jsp").forward(req,resp);
-        }
+        shopCarList=shopCarService.queryShopCarByCondition(stringStringMap, 0, 5);
+        req.setAttribute("shopCarList",shopCarList);
+        req.getRequestDispatcher("/jsp/shop_car.jsp").forward(req,resp);
     }
 }
