@@ -38,30 +38,30 @@ public interface AccountService {
      * @return Integer 1-修改成功 0-修改失败
      */
     public int modifyUser(Account account);
-    /**
-     * @Title: longinUser
-     * @Description: 账户登录
-     * @author renxu
-     * @date 2018/1/20
-     * @param account 账户对象
-     * @return Boolean true-登录成功，false-登录失败
-     */
+  /**
+   * @Title: logInUser
+   * @Description: 账户登录
+   * @author DengHongbo
+   * @date 2018/3/5 10:00
+   * @param stringObjectMap String表示表字段，Object表示值
+   * @return com.zyht.domain.Account
+   */
     public Account logInUser(Map<String,Object> stringObjectMap);
     /**
-     * @Title: selectAll
+     * @Title: queryAll
      * @Description: 查询所有账户
      * @author DengHongbo
      * @date 2018/2/26 10:16
      * @return java.util.List<com.zyht.domain.Account>
      */
-    public List<Account> selectAll();
+    public List<Account> queryAll();
     /**
-     * @Title: selectOne
+     * @Title: queryOne
      * @Description: 查询单个账户
      * @author DengHongbo
      * @date 2018/2/26 10:17
      * @param id
      * @return com.zyht.domain.Account
      */
-    public Account selectOne(Long id);
+    public Account queryOne(Long id);
 }
