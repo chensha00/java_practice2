@@ -75,7 +75,7 @@ public interface OrderService  {
      * @return domain.Buyer
      * @throw SQLException
      */
-    public List<Order> queryOrderByCondition(Map<String, Object> stringBuyerMap);
+    public List<Order> queryOrderCondition(Map<String, Object> stringBuyerMap);
     /**
      * @Title: findOrderByCondition
      * @Description: 通过条件批量查询订单信息
@@ -85,5 +85,5 @@ public interface OrderService  {
      * @return java.util.List<domain.Buyer>
      * @throw SQLException
      */
-    public List<Order> queryOrderByConditionPage(Map<String, Object> stringBuyerMap,Integer startRow,Integer size);
+    public List<Order> queryOrderConditionPage(Map<String, Object> stringBuyerMap,Integer startRow,Integer size);
 }

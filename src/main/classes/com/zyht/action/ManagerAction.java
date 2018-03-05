@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zyht.common.util.SpringContextUtil;
 import com.zyht.dao.AccountDao;
 import com.zyht.domain.Account;
+import com.zyht.service.AccountService;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
@@ -37,38 +38,38 @@ public class ManagerAction extends ActionSupport {
     private HttpServletRequest httpServletRequest;
 
 //    ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-    AccountDao accountDao = (AccountDao) SpringContextUtil.getBean("accountDao");
+    AccountService accountService = (AccountService) SpringContextUtil.getBean("accountService");
 
     public String showManager() {
         httpServletRequest = ServletActionContext.getRequest();
         Account account = null;
         if (Frozen != null) {
-            account = accountDao.queryOne(Frozen);
+            account = accountService.queryOne(Frozen);
             account.setIsFrozen(true);
-            accountDao.modifyUser(account);
+            accountService.modifyUser(account);
         }
         if(notFrozen != null){
-             account = accountDao.queryOne(notFrozen);
+             account = accountService.queryOne(notFrozen);
             account.setIsFrozen(false);
-            accountDao.modifyUser(account);
+            accountService.modifyUser(account);
         }
         if (Canceled != null) {
-            account = accountDao.queryOne(Canceled);
+            account = accountService.queryOne(Canceled);
             account.setIsCanceled(true);
-            accountDao.modifyUser(account);
+            accountService.modifyUser(account);
         }
         if (Delete != null) {
-            account = accountDao.queryOne(Delete);
+            account = accountService.queryOne(Delete);
             account.setIsDelete(true);
-            accountDao.modifyUser(account);
+            accountService.modifyUser(account);
         }
         if(notDelete!=null){
-            account = accountDao.queryOne(notDelete);
+            account = accountService.queryOne(notDelete);
             account.setIsDelete(false);
-            accountDao.modifyUser(account);
+            accountService.modifyUser(account);
 
         }
-        accountList = accountDao.queryAll();
+        accountList = accountService.queryAll();
         System.out.println(accountList);
         httpServletRequest.setAttribute("accountList",accountList);
         return "showManager";

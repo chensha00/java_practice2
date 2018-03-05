@@ -209,7 +209,7 @@ public class OrderServiceImpl implements OrderService {
      * @Date 2018/1/22
      */
     @Override
-    public List<Order> queryOrderByCondition(Map<String, Object> stringBuyerMap) {
+    public List<Order> queryOrderCondition(Map<String, Object> stringBuyerMap) {
 //        Connection connection = JdbcUtils.getConnection();
 //        PreparedStatement preparedStatement = null;
 //        String respond = null;//返回给用户的字符串
@@ -250,14 +250,14 @@ public class OrderServiceImpl implements OrderService {
      * @Date 2018/1/23
      */
     @Override
-    public List<Order> queryOrderByConditionPage(Map<String,Object> stringBuyerMap,Integer startRow,Integer size) {
+    public List<Order> queryOrderConditionPage(Map<String,Object> stringBuyerMap,Integer startRow,Integer size) {
 //        Connection connection = JdbcUtils.getConnection();
 //        PreparedStatement preparedStatement = null;
 //        String respond = null;//返回给用户的字符串
 //        List<Order> result = null;
 //        try {
 //            connection.setAutoCommit(false);
-            return orderDao.queryOrderCondition(stringBuyerMap);
+            return orderDao.queryOrderConditionPage(stringBuyerMap);
 //            if (result == null) {
 //                respond = "查询失败！";
 //            } else {
