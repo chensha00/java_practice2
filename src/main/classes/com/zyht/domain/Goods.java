@@ -264,12 +264,13 @@ public class Goods {
     @Override
     public String toString() {
         return "Goods{" +
-                "addr='" + addr + '\'' +
+
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", number='" + number + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
+                "addr='" + addr + '\'' +
                 ", makeTime=" + makeTime +
                 ", expirationTime=" + expirationTime +
                 ", unit='" + unit + '\'' +
