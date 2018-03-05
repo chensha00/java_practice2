@@ -1,6 +1,7 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.common.util.SpringContextUtil;
 import com.zyht.dao.AccountDao;
 import com.zyht.domain.Account;
@@ -24,10 +25,10 @@ import java.util.List;
  * @date 2018/3/2
  */
 @Action("manager")
-@Results({
-        @Result(name = "showManager",location = "/jsp/manager.jsp")
-})
-public class ManagerAction extends ActionSupport {
+//@Results({
+//        @Result(name = "manager",location = "/jsp/manager.jsp")
+//})
+public class ManagerAction extends ActionSupport implements BaseAction{
     private Long Frozen;
     private Long notFrozen;
     private Long Canceled;
@@ -72,7 +73,7 @@ public class ManagerAction extends ActionSupport {
         accountList = accountService.queryAll();
         System.out.println(accountList);
         httpServletRequest.setAttribute("accountList",accountList);
-        return "showManager";
+        return MANAGER;
     }
 
     public Long getFrozen() {
