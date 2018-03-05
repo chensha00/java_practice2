@@ -1,8 +1,6 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.zyht.dao.OrderDao;
-import com.zyht.dao.OrderDaoImpl;
 import com.zyht.domain.Order;
 import com.zyht.service.OrderService;
 import org.apache.struts2.ServletActionContext;
@@ -35,7 +33,7 @@ public class OrderAction extends ActionSupport {
     private List<Order> orderList;
     private HttpServletRequest request;
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-    OrderDao orderDao = (OrderDao) context.getBean("orderDao");
+    OrderService orderService = (OrderService) context.getBean("orderService");
 
     public String showOrder(){
         request = ServletActionContext.getRequest();
@@ -45,7 +43,7 @@ public class OrderAction extends ActionSupport {
             stringMap.put("BUYER_ID",buyerId);
         }
 //        根据条件查询订单
-        orderList = orderDao.queryOrderCondition(stringMap);
+        orderList = orderService.queryOrderByCondition(stringMap);
         request.setAttribute("orderList",orderList);
 //        在request中存放信息
         return "showOrder";
