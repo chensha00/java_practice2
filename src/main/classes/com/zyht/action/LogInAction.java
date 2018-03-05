@@ -9,6 +9,7 @@ package com.zyht.action;/*******************************************************
  */
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.common.util.DateTransferUtil;
 import com.zyht.common.util.SpringContextUtil;
 import com.zyht.domain.Account;
@@ -40,7 +41,7 @@ import java.util.Map;
         @Result(name = "manager",location = "/jsp/manager.jsp"),
         @Result(name = "home",location = "/jsp/homepage.jsp")
 })
-public class LogInAction extends ActionSupport {
+public class LogInAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;
 
@@ -99,19 +100,19 @@ public class LogInAction extends ActionSupport {
         if (account == null) {
             PrintWriter out = response.getWriter();
             out.println("<script> alert('用户名不存在，请重新登录');</script>");
-            return "logIn";
+            return LOG_IN;
         } else if (account.getIsFrozen() == true) {
             PrintWriter out = response.getWriter();
             out.println("<script> alert('该用户已被冻结，请重新登录');</script>");
-            return "logIn";
+            return LOG_IN;
         } else if (account.getIsCanceled() == true) {
             PrintWriter out = response.getWriter();
             out.println("<script> alert('该用户已被注销，请重新登录');</script>");
-            return "logIn";
+            return LOG_IN;
         } else if (account.getIsDelete() == true) {
             PrintWriter out = response.getWriter();
             out.println("<script> alert('该用户已被删除，请重新登录');</script>");
-            return "logIn";
+            return LOG_IN;
         } else {
             Long sellerId = account.getSellerId();
             Long buyerId = account.getBuyerId();
@@ -119,9 +120,9 @@ public class LogInAction extends ActionSupport {
             session.setAttribute("buyerid", buyerId);
 //            判断是否是管理员，如果是管理员就进入管理员界面，否则就进入主界面
             if (userName == "admin") {
-                return "manager";
+                return MANAGER;
             } else {
-                return "home";
+                return HOME;
             }
         }
     }
