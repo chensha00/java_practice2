@@ -2,7 +2,6 @@ package com.zyht.dao;
 
 import com.zyht.domain.ShopCar;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +74,7 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap);
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap);
     /**
      * @param stringShopCarMap startRow size
      * @return java.util.*
@@ -85,5 +84,5 @@ public interface ShopCarDao {
      * @date 2018/2/7
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size);
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size);
 }

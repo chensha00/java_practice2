@@ -5,7 +5,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ import java.util.Map;
  * @Date 2018/2/26
  */
 @Repository("shopCarDao")
-public class ShopCarDaoImpl implements ShopCarDao{
+public class ShopCarDaoImpl implements ShopCarDao {
     @Resource
     protected SqlSessionTemplate sqlSessionTemplate;
     /**
@@ -98,7 +97,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) {
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar." + "find", stringShopCarMap);
     }
     /**
@@ -111,7 +110,7 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) {
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar."+"findPage",stringShopCarMap);
     }
 }

@@ -2,7 +2,6 @@ package com.zyht.service;
 
 import com.zyht.domain.ShopCar;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +73,7 @@ public interface ShopCarService {
      * @return List<ShopCar>
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap);
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap);
     /**
      * @Title: queryShopCarByCondition
      * @Description: 通过条件批量查询购物车信息
@@ -84,5 +83,5 @@ public interface ShopCarService {
      * @return List<ShopCar>
      * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size);
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size);
 }
