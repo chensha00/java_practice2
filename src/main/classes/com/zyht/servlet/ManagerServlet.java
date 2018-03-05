@@ -35,31 +35,37 @@ public class ManagerServlet extends HttpServlet{
         AccountService accountService = (AccountService) context.getBean("accountService");
 //        冻结账户
         if(req.getParameter("frozen")!=null){
-            Account account = accountService.selectOne(Long.valueOf(req.getParameter("frozen")));
+            Account account = accountService.queryOne(Long.valueOf(req.getParameter("frozen")));
             account.setIsFrozen(true);
             accountService.modifyUser(account);
         }
 //        解除冻结
         if(req.getParameter("not_frozen")!=null){
-            Account account = accountService.selectOne(Long.valueOf(req.getParameter("not_frozen")));
+            Account account = accountService.queryOne(Long.valueOf(req.getParameter("not_frozen")));
             account.setIsFrozen(false);
             accountService.modifyUser(account);
         }
 //        注销账户
         if(req.getParameter("canceled")!=null){
-            Account account1 = accountService.selectOne(Long.valueOf(req.getParameter("canceled")));
+            Account account1 = accountService.queryOne(Long.valueOf(req.getParameter("canceled")));
             account1.setIsCanceled(true);
             accountService.modifyUser(account1);
         }
+
 //        删除账户
-        System.out.println(req.getParameter("delete"));
         if(req.getParameter("delete")!=null){
-            Account account2 = accountService.selectOne(Long.valueOf(req.getParameter("delete")));
+            Account account2 = accountService.queryOne(Long.valueOf(req.getParameter("delete")));
             account2.setIsDelete(true);
             accountService.modifyUser(account2);
         }
+//        恢复账户
+        if(req.getParameter("not_delete")!=null){
+            Account account2 = accountService.queryOne(Long.valueOf(req.getParameter("not_delete")));
+            account2.setIsDelete(false);
+            accountService.modifyUser(account2);
+        }
 
-        List<Account> list = accountService.selectAll();
+        List<Account> list = accountService.queryAll();
         req.setAttribute("accounts",list);
 
         req.getRequestDispatcher("/jsp/manager.jsp").forward(req,resp);
