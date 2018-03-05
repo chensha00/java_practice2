@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td class="birthdate" align="center">*账户密码</td>
-                    <td><input type="password" name="password"  /></td>
+                    <td><input type="text" name="password"  /></td>
                     <td class="birthdate" align="center">*地址</td>
                     <td><input type="text" name="permanentAddr" /></td>
                 </tr>
@@ -56,11 +56,11 @@
                 </tr>
                 <tr>
                     <td class="birthdate">*支付密码</td>
-                    <td><input  type="password" name="paypassword"></td></tr>
+                    <td><input  type="text" name="paypassword"></td></tr>
                 <tr>
                     <td class="birthdate" align="">*注册类型</td>
-                    <td><input type="checkbox" name="status" />买家</td>
-                    <td><input type="checkbox" name="status" />卖家</td>
+                    <td><input type="checkbox" name="status" value="buyer"/>买家</td>
+                    <td><input type="checkbox" name="status" value="seller"/>卖家</td>
                 </tr>
                 <tr>
                     <td></td>

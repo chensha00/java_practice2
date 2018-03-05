@@ -10,16 +10,20 @@ package com.zyht.action;/*******************************************************
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.zyht.base.BaseAction;
-import com.zyht.common.util.DateTransferUtil;
 import com.zyht.common.util.SpringContextUtil;
 import com.zyht.domain.Account;
 import com.zyht.domain.Buyer;
+import com.zyht.domain.Seller;
 import com.zyht.service.AccountService;
 import com.zyht.service.BuyerService;
+import com.zyht.service.SellerService;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
@@ -29,6 +33,7 @@ import java.util.Date;
  * @Description 注册Action
  * @date 2018/3/5
  */
+@Action
 public class EnrollAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -70,6 +75,8 @@ public class EnrollAction extends ActionSupport implements BaseAction {
         }
         response.setContentType("text/html;charset=UTF-8");
         BuyerService buyerService=(BuyerService) SpringContextUtil.getBean("buyerService");
+        SellerService sellerService=(SellerService) SpringContextUtil.getBean("sellerService");
+//        获取前台传入的参数
         String name =request.getParameter("name");
         String sex = request.getParameter("sex");
         String age=request.getParameter("age");
@@ -77,14 +84,13 @@ public class EnrollAction extends ActionSupport implements BaseAction {
         String tel = request.getParameter("tel");
         String permanentAddr = request.getParameter("permanentAddr");
         String profession =request.getParameter("profession");
-        String work_unit =request.getParameter("work_unit");
+        String workUnit =request.getParameter("work_unit");
         String saving =request.getParameter("saving");
         String payPassword=request.getParameter("paypassword");
-
+        String[] identity=request.getParameterValues("status");
         String account=request.getParameter("account");
         String password=request.getParameter("password");
         Date date=new Date();
-        String dateString= DateTransferUtil.dateToString(date);
 
         Buyer buyer = new Buyer();
         buyer.setName(name);
@@ -94,20 +100,57 @@ public class EnrollAction extends ActionSupport implements BaseAction {
         buyer.setTel(tel);
         buyer.setPermanentAddr(permanentAddr);
         buyer.setProfession(profession);
-        buyer.setWorkUnit(work_unit);
+        buyer.setWorkUnit(workUnit);
         buyer.setSaving(Double.parseDouble(saving));
-//        注册新买家
-        buyerService.insertBuyer(buyer);
-        Long buyerId=buyer.getId();
+
+        Seller seller=new Seller();
+        seller.setName(name);
+        seller.setSex(sex);
+        seller.setAge(Byte.parseByte(age));
+        seller.setIdNumber(idNumber);
+        seller.setTel(tel);
+        seller.setAddr(permanentAddr);
+        seller.setProfession(profession);
+        seller.setWorkUnit(workUnit);
+        seller.setSaving(Double.parseDouble(saving));
         AccountService accountService=(AccountService)SpringContextUtil.getBean("accountService");
         Account account1=new Account();
         account1.setAccount(account);
         account1.setPassword(password);
-        account1.setBuyerId(buyerId);
-        account1.setSellerId(null);
         account1.setAddTime(date);
         account1.setUpdateTime(date);
         account1.setPayPassword(payPassword);
+
+//        注册新用户
+        if(identity!=null&&identity.length==1){
+            if(identity[0].equals("buyer")){
+                buyerService.insertBuyer(buyer);
+                Long buyerId=buyer.getId();
+                account1.setBuyerId(buyerId);
+                account1.setSellerId(null);
+            }else {
+                sellerService.insertSeller(seller);
+                Long sellerId=seller.getId();
+                account1.setSellerId(sellerId);
+                account1.setBuyerId(null);
+            }
+        }else if(identity!=null&&identity.length==2){
+            buyerService.insertBuyer(buyer);
+            sellerService.insertSeller(seller);
+            Long buyerId=buyer.getId();
+            Long sellerId=seller.getId();
+            account1.setBuyerId(buyerId);
+            account1.setSellerId(sellerId);
+        }else {
+            try {
+                PrintWriter pw=response.getWriter();
+                pw.write("<script>alert('注册类型信息不完整，请重新注册!');</script>");
+                return ENROLL;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 //        注册新账户
         accountService.registerUser(account1);
        return LOG_IN;
