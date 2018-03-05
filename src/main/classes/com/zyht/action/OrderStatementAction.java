@@ -33,13 +33,7 @@ public class OrderStatementAction extends ActionSupport {
 
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     OrderStatementService orderStatementService = (OrderStatementService) context.getBean("orderStatementService");
-    /**
-     * @Title: showOrderStatement
-     * @Description: 展示orderStatement
-     * @author wangchuan
-     * @date 2018/3/5
-     * @throws SQLException
-     */
+
     public String showOrderStatement() throws SQLException {
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(orderStatementId!=null){
@@ -48,22 +42,11 @@ public class OrderStatementAction extends ActionSupport {
         orderStatementList=orderStatementService.queryOrderStatementByCondition(stringObjectMap,0,5);
         return "showOrderStatement";
     }
-    /**
-     * @Title: getOrderStatementId
-     * @Description: 获取OrderStatement的id
-     * @author wangchuan
-     * @date 2018/3/5
-     */
+
     public Long getOrderStatementId() {
         return orderStatementId;
     }
-    /**
-     * @Title: setOrderStatementId
-     * @Description: 设置OrderStatement的id
-     * @author wangchuan
-     * @date 2018/3/5
-     * @param orderStatementId
-     */
+
     public void setOrderStatementId(Long orderStatementId) {
         this.orderStatementId = orderStatementId;
     }
