@@ -300,6 +300,12 @@ public class SellerServiceImpl implements SellerService {
         return sellerDao.querySellerById(id);
     }
 
+    /**
+     * title: querySellerByCondition
+     * @Description: 通过条件查询
+     * @author chendong
+     * @date 2018/3/5
+     */
     @Override
     public List<Seller> querySellerByCondition(Map<String, Object> stringMap) {
         List<Seller> sellerList=sellerDao.querySellerByCondition(stringMap);
