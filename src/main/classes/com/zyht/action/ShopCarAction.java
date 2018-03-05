@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * ShopCarAction
  *
- * @author Administrator
- * @Description
+ * @author wangchuan
+ * @Description ShopCarAction
  * @Date 2018/3/2
  */
 @Action("ShopCarAction")
@@ -38,7 +38,12 @@ public class ShopCarAction extends ActionSupport {
 
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     ShopCarService shopCarService = (ShopCarService) context.getBean("shopCarService");
-
+    /**
+     * @Title: showShopCar
+     * @Description: 展示购物车
+     * @author wangchuan
+     * @date 2018/3/5
+     */
     public String showShopCar(){
 
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
@@ -51,7 +56,12 @@ public class ShopCarAction extends ActionSupport {
         }
 
     }
-
+    /**
+     * @Title: addShopCar
+     * @Description: 添加购物车
+     * @author wangchuan
+     * @date 2018/3/5
+     */
     public String addShopCar(){
         if (shopCarId==null){
             ShopCar shopCar=new ShopCar();
@@ -60,7 +70,12 @@ public class ShopCarAction extends ActionSupport {
         }
         return null;
     }
-
+    /**
+     * @Title: deleteShopCar
+     * @Description: 删除购物车
+     * @author wangchuan
+     * @date 2018/3/5
+     */
     public String deleteShopCar(){
         if (ids!=null){
             shopCarService.deleteShopCarByIds(ids) ;
@@ -68,7 +83,12 @@ public class ShopCarAction extends ActionSupport {
         }
         return null;
     }
-
+    /**
+     * @Title: updateShopCar
+     * @Description: 更新购物车
+     * @author wangchuan
+     * @date 2018/3/5
+     */
     public String updateShopCar(){
         if (shopCarId!=null){
             ShopCar shopCar=new ShopCar();
@@ -77,19 +97,41 @@ public class ShopCarAction extends ActionSupport {
         }
         return null;
     }
-
+    /**
+     * @Title: getShopCarId
+     * @Description: 获取shopCar的id
+     * @author wangchuan
+     * @date 2018/3/5
+     */
     public Long getShopCarId() {
         return shopCarId;
     }
-
+    /**
+     * @Title: setShopCarId
+     * @Description: 设置shopCar的id
+     * @author wangchuan
+     * @date 2018/3/5
+     * @param shopCarId
+     */
     public void setShopCarId(Long shopCarId) {
         this.shopCarId = shopCarId;
     }
-
+    /**
+     * @Title: getIds
+     * @Description: 获取ids
+     * @author wangchuan
+     * @date 2018/3/5
+     */
     public Long[] getIds() {
         return ids;
     }
-
+    /**
+     * @Title: setIds
+     * @Description: 设置ids
+     * @author wangchuan
+     * @date 2018/3/5
+     * @param ids
+     */
     public void setIds(Long[] ids) {
         this.ids = ids;
     }
