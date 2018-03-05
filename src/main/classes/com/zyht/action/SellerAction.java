@@ -1,11 +1,10 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.domain.Seller;
 import com.zyht.service.SellerService;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,10 +23,10 @@ import java.util.Map;
  * @date 2018/3/2
  */
 @Action("Seller")
-@Results({
-        @Result(name = "showSeller",location = "/seller.jsp")
-})
-public class SellerAction extends ActionSupport {
+//@Results({
+//        @Result(name = "showSeller",location = "/seller.jsp")
+//})
+public class SellerAction extends ActionSupport implements BaseAction{
     //    卖家ID
     private Long sellerId;
     //   存放seller信息
@@ -43,9 +42,9 @@ public class SellerAction extends ActionSupport {
         if(sellerId!=null){
             stringObjectMap.put("`SELLER_ID`",sellerId);
             sellerList=sellerService.querySellerByCondition(stringObjectMap);
-            return "showShopCar";
+            return "showSeller";
         }else {
-            return null;
+            return SELLER;
         }
 
     }
@@ -55,7 +54,7 @@ public class SellerAction extends ActionSupport {
             sellerService.deleteSellerByIds(ids) ;
             return "deleteSeller";
         }
-        return null;
+        return SELLER;
     }
 
     public String updateSeller(){
@@ -64,7 +63,7 @@ public class SellerAction extends ActionSupport {
             sellerService.updateSeller(seller);
             return "updateShopCar";
         }
-        return null;
+        return SELLER;
     }
 
 
