@@ -3,10 +3,8 @@ package com.zyht.service;
 import com.zyht.dao.ShopCarDaoImpl;
 import com.zyht.domain.ShopCar;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
-import java.sql.SQLException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +16,9 @@ import java.util.Map;
  * @Date 2018/2/26
  */
 @Service("shopCarService")
-public class ShopCarServiceImpl implements ShopCarService{
+public class ShopCarServiceImpl implements ShopCarService {
     @Autowired
-    private  ShopCarDaoImpl shopCarDao;
+    private ShopCarDaoImpl shopCarDao;
     /**
      * @Title: deleteShopCarById
      * @Description: 通过购物车ID删除
@@ -28,7 +26,6 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/20
      * @param id
      * @return java.lang.Integer
-     * @throw SQLException
      */
     @Override
     public Integer deleteShopCarById(Long id) {
@@ -42,7 +39,6 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/19
      * @param  ids
      * @return java.lang.Integer
-     * @throw SQLException
      */
     @Override
     public Integer deleteShopCarByIds(Long[] ids) {
@@ -56,7 +52,6 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/20
      * @param shopCar
      * @return Integer
-     * @throw SQLException
      */
     @Override
     public Integer updateShopCar(ShopCar shopCar) {
@@ -70,7 +65,6 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/20
      * @param shopCar
      * @return Integer
-     * @throw SQLException
      */
     @Override
     public Integer insertShopCar(ShopCar shopCar) {
@@ -84,7 +78,6 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/20
      * @param id
      * @return ShopCar
-     * @throw SQLException
      */
     @Override
     public ShopCar queryShopCarById(Long id) {
@@ -98,10 +91,9 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/20
      * @param stringShopCarMap
      * @return List<ShopCar>
-     * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) {
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap) {
         List<ShopCar> shopCarList=shopCarDao.queryShopCarByCondition(stringShopCarMap);
         return shopCarList;
     }
@@ -112,10 +104,9 @@ public class ShopCarServiceImpl implements ShopCarService{
      * @date 2018/1/20
      * @param stringShopCarMap, startRow, size
      * @return List<ShopCar>
-     * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) {
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size) {
         List<ShopCar> shopCarList=shopCarDao.queryShopCarByCondition(stringShopCarMap, startRow, size);
         return shopCarList;
     }

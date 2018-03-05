@@ -15,11 +15,6 @@
     <link href="${pageContext.request.contextPath}/css/stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<%--设置页面使用参数--%>
-<%--<%--%>
-<%--String basePath=request.getContextPath();--%>
-<%--request.setAttribute("basepath",basePath);--%>
-<%--%>--%>
 <div id="head-banner">
     <div id="blank"></div>
     <div id="account-info" class="banner">
@@ -98,19 +93,21 @@
                 error : function(e) {
                     console.log(e);
                 }
-            });
+            })
         });
 //    点击id为buy的a标签传递buyerid参数
         $("#buy").click(function (){
             var id=${sessionScope.buyerid};
+//            var id=1;
             document.getElementById("buy").href="${pageContext.request.contextPath}/GoodsServlet.htm?buyerid="+id;
         });
 //        点击收货地址的跳转
         $("#buy-addr").click(function(){
             var thisId=${sessionScope.buyerid};
+//            var thisId=1;
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/AddrServlet.htm?buyerid="+thisId,
+                url : "${pageContext.request.contextPath}/addr!addr.do?buyerId="+thisId,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
@@ -123,9 +120,10 @@
         })
         $("#buyer-addr").click(function(){
             var thisId=${sessionScope.buyerid};
+//            var thisId=1;
             $.ajax({
                 type : "POST",
-                url :"${pageContext.request.contextPath}/AddrServlet.htm?buyerid="+thisId,
+                url :"${pageContext.request.contextPath}/addr!addr.do?buyerId="+thisId,
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {

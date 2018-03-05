@@ -1,16 +1,14 @@
 package com.zyht.service;
 
 
-import com.zyht.dao.OrderStatementDao;
 import com.zyht.dao.OrderStatementDaoImpl;
 import com.zyht.domain.OrderStatement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
-import java.sql.SQLException;
+
 import java.util.List;
 import java.util.Map;
+
 /**
  * OrderStatementServiceImpl
  *
@@ -23,9 +21,9 @@ public class OrderStatementServiceImpl implements OrderStatementService {
     @Autowired
     private OrderStatementDaoImpl orderStatementDao;
     /**
-     * @Title: deleteOrderStatmentServiceById
+     * @Title: deleteOrderStatementServiceById
      * @Description: 通过流水ID删除
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/22 0022
      */
     @Override
@@ -35,9 +33,9 @@ public class OrderStatementServiceImpl implements OrderStatementService {
     }
 
     /**
-     * @Title: deleteOrderStatmentServiceImplByIds
+     * @Title: deleteOrderStatementServiceImplByIds
      * @Description: 通过ID批量删除流水
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/22 0022
      */
     @Override
@@ -49,7 +47,7 @@ public class OrderStatementServiceImpl implements OrderStatementService {
     /**
      * @Title: updateOrderStatement
      * @Description: 修改流水
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/25 0025
      */
     @Override
@@ -59,9 +57,9 @@ public class OrderStatementServiceImpl implements OrderStatementService {
     }
 
     /**
-     * @Title:insertOrderStatment
+     * @Title: insertOrderStatement
      * @Description: 添加
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/23 0023
      */
     @Override
@@ -71,9 +69,9 @@ public class OrderStatementServiceImpl implements OrderStatementService {
     }
 
     /**
-     * @Title:queryOrderStatementServiceById
+     * @Title: queryOrderStatementServiceById
      * @Description: 根据id查询
-     * @author cuixinyuan
+     * @author wamgchuan
      * @date 2018/1/23 0023
      */
     @Override
@@ -83,9 +81,9 @@ public class OrderStatementServiceImpl implements OrderStatementService {
     }
 
     /**
-     * @Title:queryOrderStatementDaoByCondition
+     * @Title: queryOrderStatementDaoByCondition
      * @Description: 查询条件
-     * @author cuixinyuan
+     * @author wangchuan
      * @date 2018/1/23 0023
      */
     @Override

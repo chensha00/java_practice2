@@ -1,135 +1,386 @@
-﻿<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <!--homepage的servlet配置 caoxin-->
-    <servlet>
-        <servlet-name>HomepageServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.HomepageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HomepageServlet</servlet-name>
-        <url-pattern>/HomepageServlet.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>PayOrderServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.PayOrderServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>PayOrderServlet</servlet-name>
-        <url-pattern>/PayOrderServlet.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AddrServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.AddrServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddrServlet</servlet-name>
-        <url-pattern>/AddrServlet.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AddrChangeServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.AddrChangeServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddrChangeServlet</servlet-name>
-        <url-pattern>/AddrChangeServlet.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.LogOutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogOutServlet</servlet-name>
-        <url-pattern>/LogOutServlet.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>orderServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.OrderServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>orderServlet</servlet-name>
-        <url-pattern>/orderServlet</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>orderDetailServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.OrderDetailServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>orderDetailServlet</servlet-name>
-        <url-pattern>/orderDetailServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>LogIn</servlet-name>
-        <servlet-class>com.zyht.servlet.LogInServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogIn</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>SellerServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.SellerServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GoodsServlet</servlet-name>
-        <servlet-class>com.zyht.servlet.GoodsServlet</servlet-class>
-    </servlet>
-   <servlet-mapping>
-       <servlet-name>GoodsServlet</servlet-name>
-       <url-pattern>/GoodsServlet.htm</url-pattern>
-   </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SellerServlet</servlet-name>
-        <url-pattern>/SellerServlet.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>OrderStatement</servlet-name>
-        <servlet-class>com.zyht.servlet.OrderStatementServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>OrderStatement</servlet-name>
-        <url-pattern>/OrderStatement.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Enroll</servlet-name>
-        <servlet-class>com.zyht.servlet.EnrollServlet</servlet-class>
-        
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Enroll</servlet-name>
-        <url-pattern>/Enroll.htm</url-pattern>
-    </servlet-mapping>
+    <display-name>zyht_web</display-name>
+    <distributable />
+    <!--<context-param>-->
+    <!--<param-name>javax.faces.CONFIG_FILES</param-name>-->
+    <!--<param-value>/log4j2.xml</param-value>-->
+    <!--</context-param>-->
+    <!--<context-param>-->
+        <!--<param-name>basepath</param-name>-->
+        <!--<param-value>/zyhtweb</param-value>-->
+    <!--</context-param>-->
+    <!-- 设置Spring的配置文件启动路径 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:applicationContext.xml
+        </param-value>
+    </context-param>
+    <!--设置profile运行环境变量 -->
+    <!--<context-param>-->
+    <!--<param-name>spring.profiles.default</param-name>-->
+    <!--<param-value>test</param-value>-->
+    <!--</context-param>-->
 
-    <servlet>
-        <servlet-name>Buy</servlet-name>
-        <servlet-class>com.zyht.servlet.BuyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Buy</servlet-name>
-        <url-pattern>/Buy.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Manager</servlet-name>
-        <servlet-class>com.zyht.servlet.ManagerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Manager</servlet-name>
-        <url-pattern>/Manager.htm</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ShopCar</servlet-name>
-        <servlet-class>com.zyht.servlet.ShopCarServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ShopCar</servlet-name>
-        <url-pattern>/ShopCar.htm</url-pattern>
-    </servlet-mapping>
+
+    <!-- spring容器启动 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- spring request -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+
+    <!-- session listener -->
+    <!--<listener>-->
+    <!--<listener-class>-->
+    <!--com.yineng.platform.listener.ServerStartListener-->
+    <!--</listener-class>-->
+    <!--</listener>-->
+
+    <!-- session listener -->
+    <!--<listener>-->
+    <!--<listener-class>-->
+    <!--com.yineng.platform.sysLog.SessionListener-->
+    <!--</listener-class>-->
+    <!--</listener>-->
+
+    <!-- springMVC 配置 -->
+    <!--<servlet>-->
+    <!--<servlet-name>action</servlet-name>-->
+    <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+    <!--<init-param>-->
+    <!--<param-name>contextConfigLocation</param-name>-->
+    <!--<param-value>classpath*:/conf/app-action.xml</param-value>-->
+    <!--</init-param>-->
+    <!--<load-on-startup>3</load-on-startup>-->
+    <!--&lt;!&ndash;设置上传文件限制&ndash;&gt;-->
+    <!--<multipart-config>-->
+    <!--<max-file-size>104857600</max-file-size>-->
+    <!--<max-request-size>104857600</max-request-size>-->
+    <!--</multipart-config>-->
+    <!--</servlet>-->
+    <!--配置springmvc的url访问路径 -->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>action</servlet-name>-->
+    <!--<url-pattern>*.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--&lt;!&ndash; 拦截二级域名，解析，实现sql路由 &ndash;&gt;-->
+    <!--<filter>-->
+    <!--<filter-name>implicitParameterFilter</filter-name>-->
+    <!--<filter-class>com.yineng.cloud.dubbo.ImplicitParameterFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>implicitParameterFilter</filter-name>-->
+    <!--<url-pattern>*.htm</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!-- cometd服务器消息推送配置start -->
+    <!--<servlet>-->
+    <!--<servlet-name>cometd</servlet-name>-->
+    <!--<servlet-class>org.cometd.server.CometDServlet</servlet-class>-->
+    <!--<load-on-startup>4</load-on-startup>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>cometd</servlet-name>-->
+    <!--<url-pattern>/cometd/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>oort</servlet-name>-->
+    <!--<servlet-class>com.yineng.platform.message.YnOortMulticastConfigServlet</servlet-class>-->
+    <!--<init-param>-->
+    <!--<param-name>oort.port</param-name>-->
+    <!--<param-value>80</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+    <!--<param-name>oort.multicast.advertiseInterval</param-name>-->
+    <!--<param-value>60000</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+    <!--<param-name>oort.multicast.connectTimeout</param-name>-->
+    <!--<param-value>30000</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+    <!--<param-name>oort.channels</param-name>-->
+    <!--<param-value>/message/*,/notice</param-value>-->
+    <!--</init-param>-->
+    <!--<load-on-startup>5</load-on-startup>-->
+    <!--</servlet>-->
+
+    <!--<filter>-->
+    <!--<filter-name>cross-origin</filter-name>-->
+    <!--<filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>cross-origin</filter-name>-->
+    <!--<url-pattern>/cometd/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!-- cometd服务器消息推送配置end -->
+
+    <!--<filter>-->
+    <!--<filter-name>encodingFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
+    <!--<init-param>-->
+    <!--<param-name>encoding</param-name>-->
+    <!--<param-value>UTF-8</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+    <!--<param-name>forceEncoding</param-name>-->
+    <!--<param-value>true</param-value>-->
+    <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>encodingFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--<filter>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>/logout</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>/j_spring_security_check</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>/j_spring_cas_security_check</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>*.htm</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>*.jsp</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<url-pattern>*.html</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--<filter>-->
+        <!--<filter-name>myfilter</filter-name>-->
+        <!--<filter-class>interceptor.MyFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>myfilter</filter-name>-->
+        <!--<url-pattern>*.htm</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
+    <!--<servlet>-->
+    <!--<servlet-name>test</servlet-name>-->
+    <!--<servlet-class>Test</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet>-->
+    <!--<servlet-name>Faces Servlet</servlet-name>-->
+    <!--<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>-->
+    <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>test</servlet-name>-->
+    <!--<url-pattern>/serlvet/test.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>Faces Servlet</servlet-name>-->
+    <!--<url-pattern>*.xhtml</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <welcome-file-list>
+        <!--<welcome-file>login.htm</welcome-file>-->
+        <welcome-file>log_in.jsp</welcome-file>
+        <!--<welcome-file>/pages/lms/portal/index.html#/resource/portalHomePage</welcome-file>-->
+    </welcome-file-list>
+    <!--<jsp-config>-->
+    <!--<taglib>-->
+    <!--<taglib-uri>http://www.jake.com</taglib-uri>-->
+    <!--<taglib-location>/WEB-INF/tag/userInfoTag.tld</taglib-location>-->
+    <!--</taglib>-->
+    <!--</jsp-config>-->
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>ServletDemo</servlet-name>-->
+        <!--<servlet-class>com.controller.TestSerlvet</servlet-class>-->
+        <!--<load-on-startup></load-on-startup>-->
+        <!--<init-param>-->
+        <!--<param-name></param-name>-->
+        <!--<param-value></param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ServletDemo</servlet-name>-->
+        <!--<url-pattern>/servlet/test.htm</url-pattern>-->
+
+    <!--</servlet-mapping>-->
+    <!--<listener>-->
+        <!--<listener-class>listener.RequestListener</listener-class>-->
+    <!--</listener>-->
+
+    <!--<listener>-->
+        <!--<listener-class>listener.SerlvetReqAttrListener</listener-class>-->
+    <!--</listener>-->
+
 </web-app>
 
 
+        <!--<!DOCTYPE web-app PUBLIC-->
+ <!--"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"-->
+ <!--"http://java.sun.com/dtd/web-app_2_3.dtd" >-->
+
+<!--<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+         <!--xmlns="http://java.sun.com/xml/ns/javaee"-->
+         <!--xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"-->
+         <!--version="3.0">-->
+    <!--&lt;!&ndash;homepage的servlet配置 caoxin&ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>HomepageServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.HomepageServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>HomepageServlet</servlet-name>-->
+        <!--<url-pattern>/HomepageServlet.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>PayOrderServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.PayOrderServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>PayOrderServlet</servlet-name>-->
+        <!--<url-pattern>/PayOrderServlet.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>AddrServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.AddrServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddrServlet</servlet-name>-->
+        <!--<url-pattern>/AddrServlet.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>AddrChangeServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.AddrChangeServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddrChangeServlet</servlet-name>-->
+        <!--<url-pattern>/AddrChangeServlet.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>LogOutServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.LogOutServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>LogOutServlet</servlet-name>-->
+        <!--<url-pattern>/LogOutServlet.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>orderServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.OrderServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>orderServlet</servlet-name>-->
+        <!--<url-pattern>/orderServlet</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!---->
+    <!--<servlet>-->
+        <!--<servlet-name>orderDetailServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.OrderDetailServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>orderDetailServlet</servlet-name>-->
+        <!--<url-pattern>/orderDetailServlet</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>LogIn</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.LogInServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>LogIn</servlet-name>-->
+        <!--<url-pattern>/Login</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>SellerServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.SellerServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet>-->
+        <!--<servlet-name>GoodsServlet</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.GoodsServlet</servlet-class>-->
+    <!--</servlet>-->
+   <!--<servlet-mapping>-->
+       <!--<servlet-name>GoodsServlet</servlet-name>-->
+       <!--<url-pattern>/GoodsServlet.htm</url-pattern>-->
+   <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>SellerServlet</servlet-name>-->
+        <!--<url-pattern>/SellerServlet.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>OrderStatement</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.OrderStatementServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>OrderStatement</servlet-name>-->
+        <!--<url-pattern>/OrderStatement.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>Enroll</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.EnrollServlet</servlet-class>-->
+        <!---->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Enroll</servlet-name>-->
+        <!--<url-pattern>/Enroll.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>Buy</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.BuyServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Buy</servlet-name>-->
+        <!--<url-pattern>/Buy.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>Manager</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.ManagerServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Manager</servlet-name>-->
+        <!--<url-pattern>/Manager.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet>-->
+        <!--<servlet-name>ShopCar</servlet-name>-->
+        <!--<servlet-class>com.zyht.servlet.ShopCarServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ShopCar</servlet-name>-->
+        <!--<url-pattern>/ShopCar.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
+<!--</web-app>-->

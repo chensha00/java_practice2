@@ -28,7 +28,6 @@ public interface OrderStatementDao {
      * @Description: 通过流水ID删除
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer deleteOrderStatementById(Long id);
 
@@ -39,7 +38,6 @@ public interface OrderStatementDao {
      * @Description: 通过流水ID删除多条
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer deleteOrderStatementByIds(Long[] ids);
     /**
@@ -49,7 +47,6 @@ public interface OrderStatementDao {
      * @Description: 更新流水信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer updateOrderStatement(OrderStatement orderStatement);
     /**
@@ -59,7 +56,6 @@ public interface OrderStatementDao {
      * @Description: 新增流水信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer insertOrderStatement(OrderStatement orderStatement);
     /**
@@ -69,7 +65,6 @@ public interface OrderStatementDao {
      * @Description: 通过id查询一条流水
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public OrderStatement queryOrderStatementById(Long id);
     /**
@@ -79,7 +74,6 @@ public interface OrderStatementDao {
      * @Description: 查询多条流水
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap);
     /**
@@ -89,7 +83,6 @@ public interface OrderStatementDao {
      * @Description: 查询多条流水并分页
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size);
 }

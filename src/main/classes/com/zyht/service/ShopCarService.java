@@ -2,7 +2,6 @@ package com.zyht.service;
 
 import com.zyht.domain.ShopCar;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param id
      * @return java.lang.Integer
-     * @throw SQLException
      */
     public Integer deleteShopCarById(Long id);
 
@@ -32,7 +30,6 @@ public interface ShopCarService {
      * @date 2018/1/19
      * @param  ids
      * @return java.lang.Integer
-     * @throw SQLException
      */
     public Integer deleteShopCarByIds(Long[] ids);
     /**
@@ -42,7 +39,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param shopCar
      * @return Integer
-     * @throw SQLException
      */
     public Integer updateShopCar(ShopCar shopCar);
     /**
@@ -52,7 +48,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param shopCar
      * @return Integer
-     * @throw SQLException
      */
     public Integer insertShopCar(ShopCar shopCar);
     /**
@@ -62,7 +57,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param id
      * @return ShopCar
-     * @throw SQLException
      */
     public ShopCar queryShopCarById(Long id);
     /**
@@ -72,9 +66,8 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param stringShopCarMap
      * @return List<ShopCar>
-     * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap);
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap);
     /**
      * @Title: queryShopCarByCondition
      * @Description: 通过条件批量查询购物车信息
@@ -82,7 +75,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param stringShopCarMap, startRow, size
      * @return List<ShopCar>
-     * @throw SQLException
      */
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size);
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size);
 }

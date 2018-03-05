@@ -17,7 +17,7 @@
 <div id="pay-head">
     <img src="${pageContext.request.contextPath}/image/pay-order-head.jpg" id="pay-pic"/>
 </div>
-<form action="${pageContext.request.contextPath}/PayOrderServlet.htm" method="post">
+<form action="${pageContext.request.contextPath}/pay-order!payOrder.do" method="post">
     <div id="pay-this-order">
         <table id="order-detail" style="text-align: center;height: 300px;width:100%;" border="1">
             <tr>

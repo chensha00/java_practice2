@@ -5,7 +5,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ import java.util.Map;
  * @Date 2018/2/26
  */
 @Repository("shopCarDao")
-public class ShopCarDaoImpl implements ShopCarDao{
+public class ShopCarDaoImpl implements ShopCarDao {
     @Resource
     protected SqlSessionTemplate sqlSessionTemplate;
     /**
@@ -28,7 +27,6 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 通过购物车ID删除
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer deleteShopCarById(Long id) {
@@ -41,7 +39,6 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 通过购物车ID删除多条
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer deleteShopCarByIds(Long[] ids) {
@@ -56,7 +53,6 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 更新购物车信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer updateShopCar(ShopCar shopCar) {
@@ -69,7 +65,6 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 新增购物车信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer insertShopCar(ShopCar shopCar) {
@@ -82,7 +77,6 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 通过id查询一条流水
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public ShopCar queryShopCarById(Long id) {
@@ -95,10 +89,9 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 查询多条购物车
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap) {
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar." + "find", stringShopCarMap);
     }
     /**
@@ -108,10 +101,9 @@ public class ShopCarDaoImpl implements ShopCarDao{
      * @Description: 查询多条购物车并分页
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
-    public List<ShopCar> queryShopCarByCondition(Map<String, String> stringShopCarMap, Integer startRow, Integer size) {
+    public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size) {
         return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar."+"findPage",stringShopCarMap);
     }
 }
