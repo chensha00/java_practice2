@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Action("OrderStatementAction")
 @Results({
-        @Result(name = "showOrderStatement", location = "/order_statement.jsp")
+        @Result(name = "showOrderStatement", location = "/jsp/order_statement.jsp")
 })
 public class OrderStatementAction extends ActionSupport {
 

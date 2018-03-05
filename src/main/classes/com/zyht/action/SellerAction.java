@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Action("Seller")
 @Results({
-        @Result(name = "showSeller",location = "/seller.jsp")
+        @Result(name = "showSeller",location = "/jsp/seller.jsp")
 })
 public class SellerAction extends ActionSupport {
     //    卖家ID
