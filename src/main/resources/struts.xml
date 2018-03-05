@@ -83,6 +83,17 @@
         <global-results>
             <result name="logIn">/jsp/log_in.jsp</result>
             <result name="manager">/jsp/manager.jsp</result>
+            <result name="enroll">/jsp/enroll.jsp</result>
+            <result name="home">/jsp/homepage.jsp</result>
+            <result name="detail">/jsp/order_detail.jsp</result>
+            <result name="orderInfo">/jsp/order_info.jsp</result>
+            <result name="statement">/jsp/order_statement.jsp</result>
+            <result name="jump">/jsp/jump_prompt.jsp</result>
+            <result name="shopCar">/jsp/shop_car.jsp</result>
+            <result name="pay">/jsp/pay_order.jsp</result>
+            <result name="relation">/jsp/goods_seller_relation.jsp</result>
+            <result name="seller">/jsp/seller.jsp</result>
+            <result name="addr">/jsp/addr.jsp</result>
         </global-results>
         <!--<global-allowed-methods>regex:.*</global-allowed-methods>-->
         <global-allowed-methods>regex:.*</global-allowed-methods>

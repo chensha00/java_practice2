@@ -9,17 +9,12 @@
 <html>
 <head>
     <title>用户注册</title>
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="This is my page">
     <link href="${pageContext.request.contextPath}/css/enroll.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="wrap">
     <div class="container" >
-        <form action="${pageContext.request.contextPath}/Enroll.htm" method="post">
+        <form action="${pageContext.request.contextPath}/action/enroll!enroll.do" method="post">
             <table align="center" width="900px">
                 <caption class="user">用户注册</caption>
                 <tr>
@@ -31,38 +26,41 @@
                 </tr>
                 <tr>
                     <td class="birthdate" align="center">*年龄</td>
-                    <td><input type="text" name="age" value=""/></td>
+                    <td><input type="text" name="age" /></td>
                     <td class="birthdate" align="center">*账户</td>
-                    <td><input type="text" name="account" value=""/></td>
+                    <td><input type="text" name="account" /></td>
                 </tr>
                 <tr>
                     <td class="birthdate" align="center">*出生日期</td>
-                    <td><input type="text" name="birthdate" value="" placeholder="时间格式为1900-01-01"/></td>
+                    <td><input type="text" name="birthdate"  placeholder="时间格式为1900-01-01"/></td>
                     <td class="birthdate" align="center">*身份证号</td>
-                    <td><input type="text" name="id_number" value=""/></td>
+                    <td><input type="text" name="id_number" /></td>
                 </tr>
                 <tr>
                     <td class="birthdate" align="center">*联系方式</td>
-                    <td><input type="text" name="tel" value=""/></td>
+                    <td><input type="text" name="tel" /></td>
                     <td class="birthdate" align="center">职位</td>
-                    <td><input type="text" name="profession" value=""/></td>
+                    <td><input type="text" name="profession" /></td>
                 </tr>
                 <tr>
-                    <td class="birthdate" align="center">*密码</td>
-                    <td><input type="password" name="password" value="" /></td>
+                    <td class="birthdate" align="center">*账户密码</td>
+                    <td><input type="password" name="password"  /></td>
                     <td class="birthdate" align="center">*地址</td>
-                    <td><input type="text" name="permanentAddr" value=""/></td>
+                    <td><input type="text" name="permanentAddr" /></td>
                 </tr>
                 <tr>
                     <td class="birthdate" align="center">*存款</td>
-                    <td><input type="text" name="saving" value=""/></td>
+                    <td><input type="text" name="saving" /></td>
                     <td class="birthdate" align="center">工作单位</td>
-                    <td><input type="text" name="work_unit" value=""/></td>
+                    <td><input type="text" name="work_unit" /></td>
                 </tr>
                 <tr>
+                    <td class="birthdate">*支付密码</td>
+                    <td><input  type="password" name="paypassword"></td></tr>
+                <tr>
                     <td class="birthdate" align="">*注册类型</td>
-                    <td><input type="checkbox" name="status" value=""/>买家</td>
-                    <td><input type="checkbox" name="status" value=""/>卖家</td>
+                    <td><input type="checkbox" name="status" />买家</td>
+                    <td><input type="checkbox" name="status" />卖家</td>
                 </tr>
                 <tr>
                     <td></td>
