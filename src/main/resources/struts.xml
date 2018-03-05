@@ -81,7 +81,8 @@
         </interceptors>
         <default-interceptor-ref name="myStack"></default-interceptor-ref>
         <global-results>
-            <result name="index">/log_in.jsp</result>
+            <result name="logIn">/jsp/log_in.jsp</result>
+            <result name="manager">/jsp/manager.jsp</result>
         </global-results>
         <!--<global-allowed-methods>regex:.*</global-allowed-methods>-->
         <global-allowed-methods>regex:.*</global-allowed-methods>
