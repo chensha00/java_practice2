@@ -61,7 +61,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
         if (sellerId!=null){
             Seller seller=new Seller();
             sellerService.updateSeller(seller);
-            return "updateShopCar";
+            return "updateSeller";
         }
         return SELLER;
     }
