@@ -57,6 +57,7 @@ public interface SellerService {
      * @Description: 通过卖家ID删除
      * @author chendong
      * @date 2018/1/19
+     * @throw SQLException
      */
     public int deleteSellerById(Long id);
 
@@ -67,6 +68,7 @@ public interface SellerService {
      * @Description: 通过ID批量删除卖家
      * @author chendong
      * @date 2018/1/19
+     * @throw SQLException
      */
     public Integer deleteSellerByIds(Long[] ids);
 
@@ -76,6 +78,7 @@ public interface SellerService {
      * @Description: 添加卖家信息
      * @author chendong
      * @date 2018/1/19
+     * @throw SQLException
      */
     public int insertSeller(Seller seller);
 
@@ -85,6 +88,7 @@ public interface SellerService {
      * @Description: 修改卖家信息
      * @author chendong
      * @date 2018/1/19
+     * @throw SQLException
      */
 
     public int updateSeller(Seller seller);
@@ -95,16 +99,16 @@ public interface SellerService {
      * @date 2018/1/19
      * @param id, connection, preparedStatement
      * @return domain.Seller
+     * @throw SQLException
      */
 
     public Seller querySellerById(Long id);
     /**
-     * @Title: querySellerById
-     * @Description: 通过条件查询卖家信息表
+     * @Title:
+     * @Description: 方法描述
      * @author chendong
-     * @date 2018/1/19
-     * @return domain.Seller
+     * @date 2018/3/5
      */
-    public List<Seller> querySellerByCondition(Map<String, Object> stringSellerMap);
+    public List<Seller> querySellerByCondition(Map<String, Object> stringMap);
 
 }
