@@ -1,7 +1,6 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.zyht.base.BaseAction;
 import com.zyht.domain.Order;
 import com.zyht.service.OrderService;
 import org.apache.struts2.ServletActionContext;
@@ -24,10 +23,10 @@ import java.util.Map;
  * @date 2018/3/2
  */
 @Action("order")
-//@Results({
-//        @Result(name = "order_info",location = "/jsp/order_info.jsp")
-//})
-public class OrderAction extends ActionSupport implements BaseAction{
+@Results({
+        @Result(name = "showOrder",location = "/jsp/order_info.jsp")
+})
+public class OrderAction extends ActionSupport {
 //    买家ID
     private Long buyerId;
 //    用于存放查询到的订单
@@ -47,7 +46,7 @@ public class OrderAction extends ActionSupport implements BaseAction{
         orderList = orderService.queryOrderByCondition(stringMap);
         request.setAttribute("orderList",orderList);
 //        在request中存放信息
-        return ORDER_INFO;
+        return "showOrder";
     }
 
     public Long getBuyerId() {
