@@ -2,6 +2,9 @@ package com.zyht.service;
 
 import com.zyht.domain.Seller;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author chendong
  * @title sellerInterface
@@ -100,5 +103,12 @@ public interface SellerService {
      */
 
     public Seller querySellerById(Long id);
+    /**
+     * @Title:
+     * @Description: 方法描述
+     * @author chendong
+     * @date 2018/3/5
+     */
+    public List<Seller> querySellerByCondition(Map<String, Object> stringMap);
 
 }

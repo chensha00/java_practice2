@@ -6,6 +6,9 @@ import com.zyht.domain.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *
@@ -296,4 +299,11 @@ public class SellerServiceImpl implements SellerService {
 //    }
         return sellerDao.querySellerById(id);
     }
+
+    @Override
+    public List<Seller> querySellerByCondition(Map<String, Object> stringMap) {
+        List<Seller> sellerList=sellerDao.querySellerByCondition(stringMap);
+        return sellerList;
+    }
+
 }
