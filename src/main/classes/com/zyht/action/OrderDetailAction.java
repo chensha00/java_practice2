@@ -3,6 +3,7 @@ package com.zyht.action;/**
  */
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.domain.OrderDetail;
 import com.zyht.service.OrderDetailService;
 import org.apache.struts2.convention.annotation.Action;
@@ -22,12 +23,11 @@ import java.util.Map;
  * @Description 类描述
  * @date 2018/3/2
  */
-@Namespace("/namespace")
 @Action("OrderDetail")
 @Results({
         @Result(name = "orderDetailResult",location = "order_detail.jsp")
 })
-public class OrderDetailAction extends ActionSupport {
+public class OrderDetailAction extends ActionSupport implements BaseAction {
     //买家信息外键
     private Long buyerId;
     //卖家信息外键
