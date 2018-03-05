@@ -43,7 +43,7 @@ public class OrderAction extends ActionSupport {
             stringMap.put("BUYER_ID",buyerId);
         }
 //        根据条件查询订单
-        orderList = orderService.queryOrderCondition(stringMap);
+        orderList = orderService.queryOrderByCondition(stringMap);
         request.setAttribute("orderList",orderList);
 //        在request中存放信息
         return "showOrder";

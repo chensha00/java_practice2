@@ -179,7 +179,7 @@ public class OrderDaoImpl extends Base<Order> implements OrderDao {
      * @date 2018/2/6 17:28
      */
     @Override
-    public List<Order> queryOrderCondition(Map<String, Object> stringOrderMap) {
+    public List<Order> queryOrderByCondition(Map<String, Object> stringOrderMap) {
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace() + "queryOrderCondition", stringOrderMap);
 //        ResultSet resultSet = null;
 //        //取出stringOrderMap中的鍵集合
