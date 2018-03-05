@@ -13,7 +13,6 @@ public interface OrderStatementService {
      * @date 2018/1/20
      * @param id
      * @return java.lang.Integer
-     * @throw SQLException
      */
     public Integer deleteOrderStatementById(Long id);
 
@@ -24,7 +23,6 @@ public interface OrderStatementService {
      * @date 2018/1/19
      * @param  ids
      * @return java.lang.Integer
-     * @throw SQLException
      */
     public Integer deleteOrderStatementByIds(Long[] ids);
     /**
@@ -34,7 +32,6 @@ public interface OrderStatementService {
      * @date 2018/1/20
      * @param orderStatement
      * @return Integer
-     * @throw SQLException
      */
 
     public Integer updateOrderStatement(OrderStatement orderStatement);
@@ -45,7 +42,6 @@ public interface OrderStatementService {
      * @date 2018/1/20
      * @param orderStatement
      * @return Integer
-     * @throw SQLException
      */
     public Integer insertOrderStatement(OrderStatement orderStatement);
     /**
@@ -55,7 +51,6 @@ public interface OrderStatementService {
      * @date 2018/1/20
      * @param id
      * @return OrderStatement
-     * @throw SQLException
      */
 
     public OrderStatement queryOrderStatementById(Long id);
@@ -66,7 +61,6 @@ public interface OrderStatementService {
      * @date 2018/1/20
      * @param stringOrderStatementMap
      * @return List<OrderStatement>
-     * @throw SQLException
      */
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap);
     /**
@@ -76,7 +70,6 @@ public interface OrderStatementService {
      * @date 2018/1/20
      * @param stringOrderStatementMap, startRow, size
      * @return List<OrderStatement>
-     * @throw SQLException
      */
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size);
 }

@@ -20,7 +20,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param id
      * @return java.lang.Integer
-     * @throw SQLException
      */
     public Integer deleteShopCarById(Long id);
 
@@ -31,7 +30,6 @@ public interface ShopCarService {
      * @date 2018/1/19
      * @param  ids
      * @return java.lang.Integer
-     * @throw SQLException
      */
     public Integer deleteShopCarByIds(Long[] ids);
     /**
@@ -41,7 +39,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param shopCar
      * @return Integer
-     * @throw SQLException
      */
     public Integer updateShopCar(ShopCar shopCar);
     /**
@@ -51,7 +48,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param shopCar
      * @return Integer
-     * @throw SQLException
      */
     public Integer insertShopCar(ShopCar shopCar);
     /**
@@ -61,7 +57,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param id
      * @return ShopCar
-     * @throw SQLException
      */
     public ShopCar queryShopCarById(Long id);
     /**
@@ -71,7 +66,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param stringShopCarMap
      * @return List<ShopCar>
-     * @throw SQLException
      */
     public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap);
     /**
@@ -81,7 +75,6 @@ public interface ShopCarService {
      * @date 2018/1/20
      * @param stringShopCarMap, startRow, size
      * @return List<ShopCar>
-     * @throw SQLException
      */
     public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size);
 }

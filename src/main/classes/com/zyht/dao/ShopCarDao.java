@@ -21,7 +21,6 @@ public interface ShopCarDao {
      * @Description: 通过购物车ID删除
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer deleteShopCarById(Long id);
 
@@ -32,7 +31,6 @@ public interface ShopCarDao {
      * @Description: 通过购物车ID删除多条
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer deleteShopCarByIds(Long[] ids);
     /**
@@ -42,7 +40,6 @@ public interface ShopCarDao {
      * @Description: 更新购物车信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer updateShopCar(ShopCar shopCar);
     /**
@@ -52,7 +49,6 @@ public interface ShopCarDao {
      * @Description: 新增购物车信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public Integer insertShopCar(ShopCar shopCar);
     /**
@@ -62,7 +58,6 @@ public interface ShopCarDao {
      * @Description: 通过id查询一条流水
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public ShopCar queryShopCarById(Long id);
     /**
@@ -72,7 +67,6 @@ public interface ShopCarDao {
      * @Description: 查询多条购物车
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap);
     /**
@@ -82,7 +76,6 @@ public interface ShopCarDao {
      * @Description: 查询多条购物车并分页
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap, Integer startRow, Integer size);
 }

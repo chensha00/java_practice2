@@ -29,7 +29,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 通过流水ID删除
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer deleteOrderStatementById(Long id) {
@@ -42,7 +41,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 通过流水ID删除多条
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer deleteOrderStatementByIds(Long[] ids) {
@@ -57,7 +55,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 更新流水信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer updateOrderStatement(OrderStatement orderStatement) {
@@ -70,7 +67,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 新增流水信息
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public Integer insertOrderStatement(OrderStatement orderStatement) {
@@ -83,7 +79,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 通过id查询一条流水
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public OrderStatement queryOrderStatementById(Long id) {
@@ -96,7 +91,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 查询多条流水
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap) {
@@ -109,7 +103,6 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      * @Description: 查询多条流水并分页
      * @author wangchuan
      * @date 2018/2/7
-     * @throw SQLException
      */
     @Override
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap, Integer startRow, Integer size) {
