@@ -1,11 +1,9 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.domain.Seller;
 import com.zyht.service.SellerService;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -23,11 +21,11 @@ import java.util.Map;
  * @Description: 卖家Action
  * @date 2018/3/2
  */
-@Action("Seller")
-@Results({
-        @Result(name = "showSeller",location = "/jsp/seller.jsp")
-})
-public class SellerAction extends ActionSupport {
+//@Action("Seller")
+//@Results({
+//        @Result(name = "showSeller",location = "/jsp/seller.jsp")
+//})
+public class SellerAction extends ActionSupport implements BaseAction{
     //    卖家ID
     private Long sellerId;
     //   存放seller信息
