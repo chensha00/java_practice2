@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author renxu
@@ -27,7 +24,7 @@ import java.util.Map;
 public class OrderDetailServiceImpl implements OrderDetailService {
     //定义一个OrderDetailDao层的对象
     @Autowired
-    static OrderDetailDao orderDetailDao;
+     OrderDetailDao orderDetailDao;
     /**
      * @Title: deleteOrderById
      * @Description: 通过订单ID删除
@@ -39,8 +36,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public int deleteOrderById(Long id){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
+     /*   Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
         Integer result = null;
         result = orderDetailDao.deleteOrderById(id);
         return result;
@@ -57,8 +54,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public int deleteOrderByIds(List ids){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
+     /*   Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
         Integer result = null;
         result = orderDetailDao.deleteOrderByIds(ids);
         return result;
@@ -75,8 +72,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public int insertOrder(OrderDetail orderDetail){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
+      /*  Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
         int result = 0;
         result = orderDetailDao.insertOrder(orderDetail);
         return result;//返回结果给用户
@@ -92,8 +89,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public String updateOrder(OrderDetail orderDetail){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
+       /* Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
         String respond = null;//返回给用户的字符串
         int result = orderDetailDao.updateOrder(orderDetail);
         return respond;//返回结果给用户
@@ -109,8 +106,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public OrderDetail queryOrderById(Long id){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
+       /* Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
         OrderDetail result = new OrderDetail();
         result = orderDetailDao.queryOrderById(id);
         return result;
@@ -126,10 +123,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
-        List<OrderDetail> result = new LinkedList<OrderDetail>();
-        result = orderDetailDao.queryOrderByCondition(stringOrderMap);
+      /*  Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
+        List<OrderDetail> result = orderDetailDao.queryOrderByCondition(stringOrderMap);
         return result;
     }
     /**
@@ -143,8 +139,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
      */
     @Override
     public List<OrderDetail> queryOrderByCondition(Map<String,Object> stringOrderMap,Integer offset,Integer size){
-        Connection connection = JdbcUtils.getConnection();
-        PreparedStatement preparedStatement = null;
+      /*  Connection connection = JdbcUtils.getConnection();
+        PreparedStatement preparedStatement = null;*/
         List<OrderDetail> result = new LinkedList<OrderDetail>();
         result = orderDetailDao.queryOrderByCondition(stringOrderMap);
         Iterator<OrderDetail> iterator = result.iterator();

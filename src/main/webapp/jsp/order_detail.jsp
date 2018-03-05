@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.zyht.domain.OrderDetail" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -18,7 +19,7 @@
 </head>
 <body>
 <div>
-    <form method="post" action="${pageContext.request.contextPath}/OrderStatement.htm"><!--跳转到本页面-->
+    <form method="post" action="${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do"><!--跳转到本页面-->
         <div>
             <h2 align="center">订单详情</h2>
             <br/>
@@ -80,7 +81,7 @@
                 </thead>
                 <tbody id="tbody"><!--通过查询结果，动态设置行数-->
                 <%
-                    List<OrderDetail> orderDetailList = (LinkedList) request.getAttribute("orderDetailList");
+                    List<OrderDetail> orderDetailList = (ArrayList) request.getAttribute("orderDetailList");
                 %>
                 <c:forEach items="${orderDetailList}" var="det">
                     <tr>
@@ -119,44 +120,58 @@
                                     ${os.stateStr}
                                 </c:if>
                             </c:forEach>
-
                         </td>
                         <td>
                                 ${det.getOrderNumber()}
                         </td>
                         <td>
-                                ${det.getCreationTime()}
+                            <fmt:formatDate type="time" value="${det.getCreationTime()}"
+                                                    pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <td>
-                                ${det.getFinishTime()}
+                            <fmt:formatDate type="time" value="${det.getFinishTime()}"
+                                            pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <c:choose>
                         <c:when test="${det.getOrderStatus()==1}"><!--当支付状态为1时发货，显示物流信息-->
                             <td>
-                                <button name="send" value="点击发货">点击发货</button>
+                                <button name="send" type="button" value="点击发货" id="clickSend">点击发货</button>
                             </td>
-                            <td>
+                            <td id="wl_info"><!--物流信息-->
                                     ${det.getPhysicalDistribution()}
                             </td>
-                            <td>
+                            <td id="pj"><!--评价-->
                                     ${det.getEvaluate()}
                             </td>
-                            <td>
+                            <td id="ly"><!--留言-->
                                     ${det.getLeaveWord()}
+                            </td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/action/OrderStatementAction!showOrderStatement.do"  name="id" value="${orders.getBuyerId()}">
+                                  <p>点击查看</p>
+                                </a>
                             </td>
                         </c:when>
                         <c:otherwise>
                             <td>
-                                <button name="send" value="点击发货" disabled>点击发货</button><!--按钮置灰-->
+                                <button name="send" value="点击发货" disabled>点击发货</button><!--按钮置灰 disabled-->
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><!--物流信息-->
+                                    ${det.getPhysicalDistribution()}
+                            </td>
+                            <td><!--评价-->
+                                    ${det.getEvaluate()}
+                            </td>
+                            <td><!--留言-->
+                                    ${det.getLeaveWord()}
+                            </td>
+                            <td>
+                                <a href="javascript:return false"  name="id" value="${orders.getBuyerId()}"><!--不可点击 javascript:return false-->
+                                    <p style="opacity: 0.2">点击查看</p><!--置灰-->
+                                </a>
+                            </td>
                         </c:otherwise>
                         </c:choose>
-                        <th>
-                            <button type="submit" name="id" value="${orders.getBuyerId()}">查看更多</button>
-                        </th>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -164,5 +179,6 @@
         </div>
     </form>
 </div>
+
 </body>
 </html>
