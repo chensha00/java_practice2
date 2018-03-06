@@ -117,7 +117,7 @@ public class LogInAction extends ActionSupport implements BaseAction {
             session.setAttribute("sellerid", sellerId);
             session.setAttribute("buyerid", buyerId);
 //            判断是否是管理员，如果是管理员就进入管理员界面，否则就进入主界面
-            if (userName == "admin") {
+            if (userName.equals("admin")) {
                 return MANAGER;
             } else {
                 return HOME;
