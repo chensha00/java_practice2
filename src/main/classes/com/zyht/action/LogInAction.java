@@ -16,8 +16,6 @@ import com.zyht.domain.Account;
 import com.zyht.service.AccountService;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,11 +34,11 @@ import java.util.Map;
  * @date 2018/3/5
  */
 @Action
-@Results({
-        @Result(name = "logIn",location = "/jsp/log_in.jsp"),
-        @Result(name = "manager",location = "/jsp/manager.jsp"),
-        @Result(name = "home",location = "/jsp/homepage.jsp")
-})
+//@Results({
+//        @Result(name = "logIn",location = "/jsp/log_in.jsp"),
+//        @Result(name = "manager",location = "/jsp/manager.jsp"),
+//        @Result(name = "home",location = "/jsp/homepage.jsp")
+//})
 public class LogInAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;

@@ -13,7 +13,7 @@
 <div class="container"></div>
 <h2>用户登录</h2>
 <br>
-<form method="post" action="${pageContext.request.contextPath}/Login"/>
+<form method="post" action="${pageContext.request.contextPath}/action/log-in!logIn.do"/>
     <label>用户名：</label>
     <input type="text" name="username"/>
     <br>
@@ -32,7 +32,7 @@
         <br>
     </p>
 </form>
-如果你还没注册，请点击<a href="enroll.jsp">这里</a>注册！
+如果你还没注册，请点击<a href="${pageContext.request.contextPath}/jsp/enroll.jsp">这里</a>注册！
 
 
 <%--<form action="servlet/CheckLogin" method="post">--%>
