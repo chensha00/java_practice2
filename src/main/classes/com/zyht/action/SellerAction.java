@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zyht.base.BaseAction;
 import com.zyht.domain.Seller;
 import com.zyht.service.SellerService;
+import org.apache.struts2.convention.annotation.Action;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,8 +22,9 @@ import java.util.Map;
  * @Description: 卖家Action
  * @date 2018/3/2
  */
-//@Action("Seller")
+@Action
 //@Results({
+//
 //        @Result(name = "showSeller",location = "/jsp/seller.jsp")
 //})
 public class SellerAction extends ActionSupport implements BaseAction{
@@ -45,13 +47,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
         }else {
             return null;
         }
-//        根据条件查询订单
-//        orderList = orderDao.queryOrderCondition(stringMap);
-//        根据条件查询商品
-//        sellerList = sellerDao.querySellerByCondition(stringMap);
 
-//        在request中存放信息
-//        将request转发给页面
     }
 
     public String deleteShopCar(){
