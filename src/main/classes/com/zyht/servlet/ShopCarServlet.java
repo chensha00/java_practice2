@@ -48,7 +48,7 @@ public class ShopCarServlet extends HttpServlet {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
         ShopCarServiceImpl shopCarService= (ShopCarServiceImpl) applicationContext.getBean("shopCarService");
         List<ShopCar> shopCarList=null;
-        Map<String,String > stringStringMap=new HashMap<String, String>();
+        Map<String,Object > stringStringMap=new HashMap<String, Object>();
         String str=req.getParameter("id");
         str="1";
         stringStringMap.put("`ID`",str);
