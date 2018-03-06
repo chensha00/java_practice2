@@ -13,8 +13,6 @@ import com.zyht.base.BaseAction;
 import com.zyht.domain.Goods;
 import com.zyht.service.GoodsService;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -44,7 +42,6 @@ public class GoodsAction extends ActionSupport implements BaseAction{
      * @author guoxin
      * @date 2018-03-05
     */
-
     public  String goodsShow(){
         Long [] ids=null;
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
@@ -74,7 +71,6 @@ public class GoodsAction extends ActionSupport implements BaseAction{
      * @author guoxin
      * @date 2018-03-05
     */
-
     public String goodsUpdate(){
         Goods goods =new Goods();
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
@@ -91,7 +87,6 @@ public class GoodsAction extends ActionSupport implements BaseAction{
      * @author guoxin
      * @date 2018-03-05
     */
-
     public String goodsDelete(){
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(goodsId!=null){
@@ -100,6 +95,14 @@ public class GoodsAction extends ActionSupport implements BaseAction{
         goodsService.deleteGoodsById(goodsId);
         return JUMP;
     }
+
+    /**
+     * @ClassName  goodsDeletes
+     * @Description 批量删除
+     * @author guoxin
+     * @date 2018-03-06
+    */
+
     public String goodsDeletes(){
         Long []ids=null ;
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
