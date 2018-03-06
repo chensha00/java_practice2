@@ -9,11 +9,10 @@ package com.zyht.action;/*******************************************************
  */
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.domain.Goods;
 import com.zyht.service.GoodsService;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -28,10 +27,10 @@ import java.util.Map;
  * @date 2018/3/2
  */
 @Action("Goods")
-@Results({
-        @Result(name = "goods",location = "/goods_seller_relation.jsp")
-})
-public class GoodsAction extends ActionSupport {
+//@Results({
+//        @Result(name = "goods",location = "/goods_seller_relation.jsp")
+//})
+public class GoodsAction extends ActionSupport implements BaseAction{
   public Long goodsId;
   public List<Goods> goodsList;
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -43,14 +42,14 @@ public class GoodsAction extends ActionSupport {
      * @author guoxin
      * @date 2018-03-05
     */
-
     public  String goodsShow(){
+        Long [] ids=null;
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
-        if(goodsId!=null){
+        if(ids!=null){
             stringObjectMap.put("`GOODS_ID`",goodsId);
         }
         goodsList=goodsService.queryGoodsByCondition(stringObjectMap, 0, 5);
-        return "goods";
+        return RELATION;
     }
 
     /**
@@ -63,7 +62,7 @@ public class GoodsAction extends ActionSupport {
    public String goodsAdd(){
        Goods goods =new Goods();
        int newGoods=goodsService.insertGoods(goods);
-       return "Goods";
+       return JUMP;
    }
 
     /**
@@ -72,7 +71,6 @@ public class GoodsAction extends ActionSupport {
      * @author guoxin
      * @date 2018-03-05
     */
-
     public String goodsUpdate(){
         Goods goods =new Goods();
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
@@ -80,7 +78,7 @@ public class GoodsAction extends ActionSupport {
             stringObjectMap.put("`GOODS_ID`",goodsId);
         }
         int newGoods=goodsService.updateGoods(goods);
-        return "goods";
+        return JUMP;
     }
 
     /**
@@ -89,23 +87,30 @@ public class GoodsAction extends ActionSupport {
      * @author guoxin
      * @date 2018-03-05
     */
-
     public String goodsDelete(){
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(goodsId!=null){
             stringObjectMap.put("`GOODS_ID`",goodsId);
         }
         goodsService.deleteGoodsById(goodsId);
-        return "goods";
+        return JUMP;
     }
+
+    /**
+     * @ClassName  goodsDeletes
+     * @Description 批量删除
+     * @author guoxin
+     * @date 2018-03-06
+    */
+
     public String goodsDeletes(){
-        Long []ids = new Long[5];
+        Long []ids=null ;
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(goodsId!=null){
-            stringObjectMap.put("`GOODS_ID`",goodsId);
+            stringObjectMap.put("`GOODS_ID`", goodsId);
         }
         goodsService.deleteGoodsByIds(ids);
-        return "goods";
+        return JUMP;
     }
 
     public Long getGoodsId() {
