@@ -1,4 +1,4 @@
-﻿package com.zyht.action;/********************************************************************
+package com.zyht.action;/********************************************************************
  /**
  * @Project: jsp_web
  * @Package com.zyht.action
@@ -99,7 +99,7 @@ public class GoodsAction extends ActionSupport {
         return "goods";
     }
     public String goodsDeletes(){
-        Long []ids = null;
+        Long []ids = new Long[5];
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(goodsId!=null){
             stringObjectMap.put("`GOODS_ID`",goodsId);

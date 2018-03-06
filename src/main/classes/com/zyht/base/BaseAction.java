@@ -42,7 +42,7 @@ public interface BaseAction {
     /**
      * 订单流水界面
      */
-    public static final String ORDER_STATEMENT="orderStatement";
+    public static final String STATEMENT="statement";
     /**
      * 跳转界面
      */

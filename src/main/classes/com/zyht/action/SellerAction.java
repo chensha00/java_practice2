@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zyht.base.BaseAction;
 import com.zyht.domain.Seller;
 import com.zyht.service.SellerService;
-import org.apache.struts2.convention.annotation.Action;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,48 +21,55 @@ import java.util.Map;
  * @Description: 卖家Action
  * @date 2018/3/2
  */
-@Action("Seller")
+//@Action("Seller")
 //@Results({
-//        @Result(name = "showSeller",location = "/seller.jsp")
+//        @Result(name = "showSeller",location = "/jsp/seller.jsp")
 //})
 public class SellerAction extends ActionSupport implements BaseAction{
     //    卖家ID
     private Long sellerId;
     //   存放seller信息
-    private Long[] ids;
 
-    List<Seller> sellerList=null;
+    List<Seller>sellerList=null;
+    private Long[] ids;
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     SellerService sellerService = (SellerService)context.getBean("sellerService");
 
     public String showSeller(){
-//        判断传入的卖家ID是否为空，并将其放入map中
-        Map<String, Object> stringObjectMap = new HashMap<String, Object>();
+        //        判断传入的卖家ID是否为空，并将其放入map中
+        Map<String, Object> stringMap = new HashMap<String, Object>();
         if(sellerId!=null){
-            stringObjectMap.put("`SELLER_ID`",sellerId);
-            sellerList=sellerService.querySellerByCondition(stringObjectMap);
+            stringMap.put("`SELLER_ID`",sellerId);
+            sellerList=sellerService.querySellerByCondition(stringMap);
             return "showSeller";
         }else {
-            return SELLER;
+            return null;
         }
+//        根据条件查询订单
+//        orderList = orderDao.queryOrderCondition(stringMap);
+//        根据条件查询商品
+//        sellerList = sellerDao.querySellerByCondition(stringMap);
 
+//        在request中存放信息
+//        将request转发给页面
     }
 
-    public String deleteSeller(){
+    public String deleteShopCar(){
         if (ids!=null){
             sellerService.deleteSellerByIds(ids) ;
-            return "deleteSeller";
+            return "deleteGoodsDelete";
         }
-        return SELLER;
+        return null;
     }
 
-    public String updateSeller(){
+    public String updateShopCar(){
         if (sellerId!=null){
+
             Seller seller=new Seller();
             sellerService.updateSeller(seller);
-            return "updateSeller";
+            return "updatePrice";
         }
-        return SELLER;
+        return null;
     }
 
 
