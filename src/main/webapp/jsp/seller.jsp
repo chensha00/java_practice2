@@ -27,7 +27,9 @@
     <h2>${goodsList.getName()}&nbsp;&nbsp;&nbsp;现余：${goodsList.getInventory()}</h2>
     <h2><i>¥</i>${goodsList.getPrice()}</h2>
     <input type="button" onClick="msgbox(1)" value="修改价格">
+    <form action="${pageContext.request.contextPath}/SellerAction" method="post">
     <input type="button" value="商品下架" onclick="document.getElementById('num').value = '';"/>
+    </form>
     <a href="<%=request.getContextPath()%>jsp/homepage.jsp"><h3><i>返回主页</i></h3></a>
 </div>
 
@@ -38,8 +40,10 @@
 </script>
 <div id='inputbox' class="box">
     <a class='x' href=''; onclick="msgbox(0); return false;">关闭</a>
-    <input type="text">
-    <input type="button" value="确认修改">
+    <form action="${pageContext.request.contextPath}/SellerAction" method="post">
+        <input type="text">
+        <input type="button" onclick="document.formName.submit()" value="确认修改">
+    </form>
 </div>
 
 
