@@ -36,25 +36,30 @@ body{
     float: left;
     height: 100%;
     width: 50%;
+    padding: 5%;
 }
 #not_frozen{
     float: right;
     height: 100%;
     width: 50%;
+    padding: 5%;
 }
 #canceled{
     height: 100%;
     width: 100%;
+    padding: 5%;
 }
 #delete{
     float: left;
     height: 34px;
     width: 50%;
+    padding: 5%;
 }
 #not_delete{
     float: right;
     height: 100%;
     width: 50%;
+    padding: 5%;
 }
 
 #footer {

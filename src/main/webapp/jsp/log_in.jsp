@@ -6,8 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.js" rel="script"></script>
 </head>
 <body>
 <div class="container"></div>
@@ -27,7 +29,10 @@
 </form>
 如果你还没注册，请点击<a href="${pageContext.request.contextPath}/jsp/enroll.jsp">这里</a>注册！
 
-
-
+<script>
+    <s:if test="message!=null">
+    alert("${message}");
+    </s:if>
+</script>
 </body>
 </html>
