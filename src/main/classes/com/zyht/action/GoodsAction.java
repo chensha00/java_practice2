@@ -1,4 +1,4 @@
-package com.zyht.action;/********************************************************************
+﻿package com.zyht.action;/********************************************************************
  /**
  * @Project: jsp_web
  * @Package com.zyht.action
@@ -35,7 +35,7 @@ public class GoodsAction extends ActionSupport {
   public Long goodsId;
   public List<Goods> goodsList;
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-    GoodsService goodsService=(GoodsService)context.getBean("GoodsServiceImpl");
+    GoodsService goodsService=(GoodsService)context.getBean("goodsService");
 
     /**
      * @ClassName goodsShow
