@@ -22,7 +22,7 @@ import java.util.Map;
  * @Description
  * @Date 2018/3/2
  */
-@Action("ShopCarAction")
+@Action
 //@Results({
 //        @Result(name = "showShopCar", location = "/shop_car.jsp"),
 //        @Result(name = "addShopCar", location = "/shop_car.jsp"),
