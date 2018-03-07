@@ -19,7 +19,7 @@
 </head>
 <body>
 <div>
-    <form method="post" action="${pageContext.request.contextPath}/action/OrderDetail!orderDetailSend.do"><!--跳转到本页面-->
+    <form method="post" action="${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do"><!--跳转到本页面-->
         <div>
             <h2 align="center">订单详情</h2>
             <br/>

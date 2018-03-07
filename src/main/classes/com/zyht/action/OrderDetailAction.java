@@ -94,15 +94,6 @@ public class OrderDetailAction extends ActionSupport implements BaseAction {
      */
     public String orderDetailResult(){
 
-        //界面点击发货时，改变支付状态值
-        if(request.getParameter("send") != null){
-            OrderDetail orderDetail = (OrderDetail) SpringContextUtil.getBean("orderDetail");
-            String id = request.getParameter("send");//获取到页面按钮传过来的值
-            Long orderId = Long.parseLong(id);
-            orderDetail = orderDetailService.queryOrderById(orderId);
-            orderDetail.setOrderStatus((byte)3);//将支付状态改为3已完成
-        }
-
         //将数据库中的数据查询出来显示到界面
         request = ServletActionContext.getRequest();
         //判断外键信息
@@ -114,9 +105,22 @@ public class OrderDetailAction extends ActionSupport implements BaseAction {
         }if(goodsId!=null){
             stringMap.put("GOODS_ID",goodsId);
         }
+
+        //界面点击发货时，改变支付状态值
+        if(request.getParameter("send") != null){
+            OrderDetail orderDetail = (OrderDetail) SpringContextUtil.getBean("orderDetail");
+            String id = request.getParameter("send");//获取到页面按钮传过来的值
+            Long orderId = Long.parseLong(id);
+            orderDetail = orderDetailService.queryOrderById(orderId);
+            orderDetail.setOrderStatus((byte)3);//将支付状态改为3已完成
+            //修改数据库中的数据
+            orderDetailService.updateOrder(orderDetail);
+        }
+
         //条件查询
         orderDetailList = orderDetailService.queryOrderByCondition(stringMap);
         request.setAttribute("orderDetailList",orderDetailList);
+
         return DETAIL;
     }
 }
