@@ -112,7 +112,7 @@ public class OrderDetailAction extends ActionSupport implements BaseAction {
             String id = request.getParameter("send");//获取到页面按钮传过来的值
             Long orderId = Long.parseLong(id);
             orderDetail = orderDetailService.queryOrderById(orderId);
-            orderDetail.setOrderStatus((byte)3);//将支付状态改为3已完成
+            orderDetail.setOrderStatus((byte)2);//将支付状态改为2已完成
             //修改数据库中的数据
             orderDetailService.updateOrder(orderDetail);
         }

@@ -133,7 +133,7 @@
                                             pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <c:choose>
-                        <c:when test="${det.getOrderStatus()==2}"><!--当支付状态为2支付成功时发货，显示物流信息-->
+                        <c:when test="${det.getOrderStatus()==1}"><!--当支付状态为1支付成功时发货，显示物流信息-->
                             <td>
                                 <button name="send" type="submit" value="${det.getId()}" id="clickSend">点击发货</button>
                             </td>
