@@ -15,6 +15,7 @@
     <link href="${pageContext.request.contextPath}/css/stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+
 <div id="this-form">
     <form action="${pageContext.request.contextPath}/action/addr-change!addrChange.do"  method="post">
         <input type="hidden" value="${buyerid}" name="buyerid"/>
@@ -28,15 +29,10 @@
     </form>
 </div>
 <script>
-    <s:if test="message!=null">
-    alert("${message}");
-    </s:if>
-
-    $(function(){
         $("#goback").click(function(){
             window.location.href="${pageContext.request.contextPath}/jsp/homepage.jsp";
         })
-    })
+
 </script>
 </body>
 </html>

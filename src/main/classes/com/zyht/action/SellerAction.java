@@ -40,9 +40,11 @@ public class SellerAction extends ActionSupport implements BaseAction{
     public String showSeller(){
         //        判断传入的卖家ID是否为空，并将其放入map中
         Map<String, Object> stringMap = new HashMap<String, Object>();
+        System.out.println(sellerId);
         if(sellerId!=null){
             stringMap.put("`SELLER_ID`",sellerId);
             sellerList=sellerService.querySellerByCondition(stringMap);
+            System.out.println(sellerList.get(0).getName());
             return "showSeller";
         }else {
             return null;
