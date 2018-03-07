@@ -1,4 +1,4 @@
-package com.zyht.action;/********************************************************************
+﻿package com.zyht.action;/********************************************************************
  /**
  * @Project: jsp_web
  * @Package com.zyht.action
@@ -42,16 +42,26 @@ public class GoodsAction extends ActionSupport implements BaseAction{
      * @author guoxin
      * @date 2018-03-05
     */
-    public  String goodsShow(){
-        Long [] ids=null;
+    public  String goodsShows(){
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
-        if(ids!=null){
-            stringObjectMap.put("`GOODS_ID`",goodsId);
-        }
-        goodsList=goodsService.queryGoodsByCondition(stringObjectMap, 0, 5);
+
+            goodsList=goodsService.queryGoodsByCondition(stringObjectMap);
+
         return RELATION;
     }
+    /**
+     * @ClassName goodsShow
+     * @Description 查询单个商品
+     * @author guoxin
+     * @date 2018-03-07
+    */
 
+    public  String goodsShow(){
+        Goods goods=new Goods();
+        if(goodsId!=null)
+            goods=goodsService.queryGoodsById(goodsId);
+        return RELATION;
+    }
     /**
      * @ClassName goodsAdd
      * @Description 添加商品
