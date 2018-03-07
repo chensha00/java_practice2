@@ -13,7 +13,7 @@
     </resultMap>
     <!--定义查询列 -->
     <sql id="columns">
-        `ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`
+        `ID`,`USER_ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`
     </sql>
     <!-- 查询所有-->
     <select id="find" resultMap="shopCar">
@@ -26,9 +26,12 @@
     <!-- 按条件查询-->
     <select id="findByCondition" parameterType="java.util.Map" resultMap="shopCar">
         SELECT <include refid="columns"/> FROM `shop_car`
-        <where> 1=1
+        <where>
             <if test="id!=null">
                 AND `ID`=${id}
+            </if>
+            <if test="userId!=null">
+                AND `USER_ID`=#{userId}
             </if>
             <if test="orderDetailId!=null">
                 AND `GOODS_ID`=#{goodsId}
@@ -52,7 +55,7 @@
         SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID` = #{_param}
     </select>
     <!-- 添加-->
-    <insert id="add" parameterType="com.zyht.domain.ShopCar">
+    <insert id="add" parameterType="com.zyht.domain.ShopCar" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO `shop_car` (`ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`) VALUES
         (DEFAULT ,${goodsId},${buyNum},${goodsPrice},#{goodsName},#{buyerId})
     </insert>

@@ -28,7 +28,7 @@ import java.util.Map;
 //})
 public class OrderStatementAction extends ActionSupport implements BaseAction{
 
-    private Long orderStatementId;
+    private Long orderDetailId;
 
     List<OrderStatement> orderStatementList=null;
 
@@ -37,19 +37,19 @@ public class OrderStatementAction extends ActionSupport implements BaseAction{
 
     public String showOrderStatement() throws SQLException {
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
-        if(orderStatementId!=null){
-            stringObjectMap.put("`ORDER_STATEMENT_ID`",orderStatementId);
-            orderStatementList=orderStatementService.queryOrderStatementByCondition(stringObjectMap,0,5);
+        if(orderDetailId!=null){
+            stringObjectMap.put("`ORDER_DETAIL_ID`",orderDetailId);
+            orderStatementList=orderStatementService.queryOrderStatementByCondition(stringObjectMap);
             return STATEMENT;
         }
         return null;
     }
 
-    public Long getOrderStatementId() {
-        return orderStatementId;
+    public Long getOrderDetailId() {
+        return orderDetailId;
     }
 
-    public void setOrderStatementId(Long orderStatementId) {
-        this.orderStatementId = orderStatementId;
+    public void setOrderDetailId(Long orderDetailId) {
+        this.orderDetailId = orderDetailId;
     }
 }
