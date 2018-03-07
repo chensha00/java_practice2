@@ -94,7 +94,7 @@ public class OrderStatementDaoImpl implements OrderStatementDao {
      */
     @Override
     public List<OrderStatement> queryOrderStatementByCondition(Map<String, Object> stringOrderStatementMap) {
-        return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderStatement."+"find",stringOrderStatementMap);
+        return this.sqlSessionTemplate.selectList("com.zyht.domain.OrderStatement."+"findByCondition",stringOrderStatementMap);
     }
     /**
      * @param stringOrderStatementMap startRow size

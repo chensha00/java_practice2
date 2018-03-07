@@ -58,7 +58,7 @@ public class OrderDetail {
      */
     private Boolean isSuccess;
     /**
-     * 订单状态:1--待支付,2--支付成功,3--已完成，4--支付失败，
+     * 订单状态:0--待支付1,--支付成功,2--已完成，3--支付失败，
      */
     private Byte orderStatus;
     /**
