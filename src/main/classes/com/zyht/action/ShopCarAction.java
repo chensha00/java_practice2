@@ -1,6 +1,8 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.Base;
+import com.zyht.base.BaseAction;
 import com.zyht.domain.ShopCar;
 import com.zyht.service.ShopCarService;
 import org.apache.struts2.convention.annotation.Action;
@@ -21,14 +23,13 @@ import java.util.Map;
  * @Date 2018/3/2
  */
 @Action("ShopCarAction")
-@Results({
-        @Result(name = "showShopCar", location = "/shop_car.jsp"),
-        @Result(name = "addShopCar", location = "/shop_car.jsp"),
-        @Result(name = "deleteShopCar", location = "/shop_car.jsp"),
-        @Result(name = "updateShopCar", location = "/shop_car.jsp"),
-})
-
-public class ShopCarAction extends ActionSupport {
+//@Results({
+//        @Result(name = "showShopCar", location = "/shop_car.jsp"),
+//        @Result(name = "addShopCar", location = "/shop_car.jsp"),
+//        @Result(name = "deleteShopCar", location = "/shop_car.jsp"),
+//        @Result(name = "updateShopCar", location = "/shop_car.jsp"),
+//})
+public class ShopCarAction extends ActionSupport implements BaseAction{
 
     private Long shopCarId;
 
@@ -45,7 +46,7 @@ public class ShopCarAction extends ActionSupport {
         if(shopCarId!=null){
             stringObjectMap.put("`SHOP_CAR_ID`",shopCarId);
             shopCarList=shopCarService.queryShopCarByCondition(stringObjectMap,0,5);
-            return "showShopCar";
+            return SHOP_CAR;
         }else {
             return null;
         }
@@ -56,7 +57,7 @@ public class ShopCarAction extends ActionSupport {
         if (shopCarId==null){
             ShopCar shopCar=new ShopCar();
             shopCarService.insertShopCar(shopCar);
-            return "addShopCar";
+            return SHOP_CAR;
         }
         return null;
     }
@@ -64,7 +65,7 @@ public class ShopCarAction extends ActionSupport {
     public String deleteShopCar(){
         if (ids!=null){
             shopCarService.deleteShopCarByIds(ids) ;
-            return "deleteShopCar";
+            return SHOP_CAR;
         }
         return null;
     }
@@ -73,7 +74,7 @@ public class ShopCarAction extends ActionSupport {
         if (shopCarId!=null){
             ShopCar shopCar=new ShopCar();
             shopCarService.updateShopCar(shopCar);
-            return "updateShopCar";
+            return SHOP_CAR;
         }
         return null;
     }

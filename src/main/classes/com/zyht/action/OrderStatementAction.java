@@ -1,6 +1,7 @@
 package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.domain.OrderStatement;
 import com.zyht.service.OrderStatementService;
 import org.apache.struts2.convention.annotation.Action;
@@ -22,10 +23,10 @@ import java.util.Map;
  * @Date 2018/3/2
  */
 @Action("OrderStatementAction")
-@Results({
-        @Result(name = "showOrderStatement", location = "/order_statement.jsp")
-})
-public class OrderStatementAction extends ActionSupport {
+//@Results({
+//        @Result(name = "showOrderStatement", location = "/order_statement.jsp")
+//})
+public class OrderStatementAction extends ActionSupport implements BaseAction{
 
     private Long orderStatementId;
 
@@ -38,9 +39,10 @@ public class OrderStatementAction extends ActionSupport {
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(orderStatementId!=null){
             stringObjectMap.put("`ORDER_STATEMENT_ID`",orderStatementId);
+            orderStatementList=orderStatementService.queryOrderStatementByCondition(stringObjectMap,0,5);
+            return STATEMENT;
         }
-        orderStatementList=orderStatementService.queryOrderStatementByCondition(stringObjectMap,0,5);
-        return "showOrderStatement";
+        return null;
     }
 
     public Long getOrderStatementId() {
