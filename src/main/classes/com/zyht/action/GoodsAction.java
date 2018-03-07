@@ -1,7 +1,7 @@
-package classes.com.zyht.action;/********************************************************************
+﻿package com.zyht.action;/********************************************************************
  /**
  * @Project: jsp_web
- * @Package classes.com.zyht.action
+ * @Package com.zyht.action
  * @author guohongjin
  * @date 2018/3/2 17:50
  * @Copyright: 2018 www.zyht.com Inc. All rights reserved.
@@ -9,9 +9,9 @@ package classes.com.zyht.action;/***********************************************
  */
 
 import com.opensymphony.xwork2.ActionSupport;
-import classes.com.zyht.base.BaseAction;
-import classes.com.zyht.domain.Goods;
-import classes.com.zyht.service.GoodsService;
+import com.zyht.base.BaseAction;
+import com.zyht.domain.Goods;
+import com.zyht.service.GoodsService;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -37,21 +37,18 @@ public class GoodsAction extends ActionSupport implements BaseAction{
     GoodsService goodsService=(GoodsService)context.getBean("goodsService");
 
     /**
-     * @ClassName goodsShows
+     * @ClassName goodsShow
      * @Description 查询商品
      * @author guoxin
      * @date 2018-03-05
     */
     public  String goodsShows(){
-        Long [] ids=null;
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
-        if(ids!=null){
-            stringObjectMap.put("`GOODS_ID`",goodsId);
-        }
-        goodsList=goodsService.queryGoodsByCondition(stringObjectMap, 0, 5);
+
+            goodsList=goodsService.queryGoodsByCondition(stringObjectMap);
+
         return RELATION;
     }
-
     /**
      * @ClassName goodsShow
      * @Description 查询单个商品
