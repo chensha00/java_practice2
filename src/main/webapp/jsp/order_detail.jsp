@@ -89,10 +89,10 @@
                                 ${det.getId()}
                         </td>
                         <td>
-                                ${det.getSellerId()}
+                                ${det.getBuyerId()}
                         </td>
                         <td>
-                                ${det.getBuyerId()}
+                                ${det.getSellerId()}
                         </td>
                         <td>
                                 ${det.getGoodsId()}
@@ -133,57 +133,46 @@
                                             pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <c:choose>
-                        <c:when test="${det.getOrderStatus()==1}"><!--当支付状态为1支付成功时发货，显示物流信息-->
+                            <c:when test="${det.getOrderStatus()==1}"><!--当支付状态为1支付成功时发货-->
+                                <td>
+                                    <button name="send" type="submit" value="${det.getId()}" id="clickSend">点击发货</button>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
                             <td>
-                                <button name="send" type="submit" value="${det.getId()}" id="clickSend">点击发货</button>
+                                <button name="send" type="submit" value="点击发货" disabled>点击发货</button><!--按钮置灰 disabled-->
                             </td>
-                            <td id="wl_info"><!--物流信息-->
+                            </c:otherwise>
+                        </c:choose>
+
+                        <td id="wl_info"><!--物流信息-->
                                     ${det.getPhysicalDistribution()}
                             </td>
-                            <td id="pj"><!--评价-->
+                        <td id="pj"><!--评价-->
                                     ${det.getEvaluate()}
                             </td>
-                            <td id="ly"><!--留言-->
+                        <td id="ly"><!--留言-->
                                     ${det.getLeaveWord()}
                             </td>
-                            <td>
-                                <a href="${pageContext.request.contextPath}/action/order-statement!showOrderStatement.do"  name="id" value="${orders.getBuyerId()}">
-                                  <p>点击查看</p>
-                                </a>
+                        <c:choose>
+                            <c:when test="${det.getOrderStatus()==2}"><!--当支付状态为2支付成功时可查看订单详情-->
+                           <td>
+                            <a href="${pageContext.request.contextPath}/action/order-statement!showOrderStatement.do"  name="id" value="${orders.getBuyerId()}">
+                                <p>点击查看</p>
+                            </a>
                             </td>
                         </c:when>
                         <c:otherwise>
                             <td>
-                                <button name="send" value="点击发货" disabled>点击发货</button><!--按钮置灰 disabled-->
-                            </td>
-                            <td><!--物流信息-->
-                                    ${det.getPhysicalDistribution()}
-                            </td>
-                            <td><!--评价-->
-                                    ${det.getEvaluate()}
-                            </td>
-                            <td><!--留言-->
-                                    ${det.getLeaveWord()}
-                            </td>
-                            <td>
-                                <a href="javascript:return false"  name="id" value="${orders.getBuyerId()}"><!--不可点击 javascript:return false-->
-                                    <p style="opacity: 0.2">点击查看</p><!--置灰-->
-                                </a>
+                            <a href="javascript:return false"  name="id" value="${orders.getBuyerId()}"><!--不可点击 javascript:return false-->
+                                <p style="opacity: 0.2">点击查看</p><!--置灰-->
+                            </a>
                             </td>
                         </c:otherwise>
                         </c:choose>
+                        </td>
                     </tr>
                 </c:forEach>
-
-            <%--    <script  type="text/javascript">
-                    $(document).ready(function(){
-                        $("#clickSend").click(function(){
-                            <!--将支付状态改为3支付完成，并更新页面-->
-
-                            window.location.href("${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do");
-                    });
-                    });
-                </script>--%>
                 </tbody>
             </table>
         </div>
