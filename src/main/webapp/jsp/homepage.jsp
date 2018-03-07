@@ -39,7 +39,6 @@
             <c:when test="${sessionScope.sellerid ne null&&sessionScope.sellerid ne 0&&(sessionScope.buyerid ne null||sessionScope.buyerid ne 0) }">
                 <button id="shop" class="menu" type="submit" name="shop" value="shop" >我的店铺</button>
                 <button id="sell-orders" class="menu" type="button" name="sell-orders" value="sell-orders" >我的出售订单</button>
-                <button id="buy-addr" class="menu" type="button" name="buy-addr" value="buy-addr">收货地址</button>
             </c:when>
             <c:otherwise>
                 <button  id="buy-orders" class="menu" type="button" name="buy-orders" value="buy-orders" >我的购买订单</button>
@@ -49,7 +48,13 @@
     </form>
 </div>
 <%--展示信息区域--%>
-<div id="display" class="show"></div>
+<div id="display" class="show">
+    <span id="message">
+        <s:if test="message!=null">
+        ${message}
+        </s:if>
+    </span>
+</div>
 <script>
     $(function(){
 //    我的购买订单跳转请求

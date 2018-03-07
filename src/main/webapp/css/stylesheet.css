@@ -109,7 +109,9 @@ span{
     margin-top:50px;
     background-color: lightgrey;
 }
-
+#message{
+    margin-left: 40%;
+}
 /*设置id为direction元素的样式*/
 #direction{
     width: 15%;

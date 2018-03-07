@@ -133,9 +133,9 @@
                                             pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <c:choose>
-                        <c:when test="${det.getOrderStatus()==1}"><!--当支付状态为1时发货，显示物流信息-->
+                        <c:when test="${det.getOrderStatus()==2}"><!--当支付状态为2支付成功时发货，显示物流信息-->
                             <td>
-                                <button name="send" type="button" value="点击发货" id="clickSend">点击发货</button>
+                                <button name="send" type="submit" value="${det.getId()}" id="clickSend">点击发货</button>
                             </td>
                             <td id="wl_info"><!--物流信息-->
                                     ${det.getPhysicalDistribution()}
@@ -147,7 +147,7 @@
                                     ${det.getLeaveWord()}
                             </td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/action/OrderStatementAction!showOrderStatement.do"  name="id" value="${orders.getBuyerId()}">
+                                <a href="${pageContext.request.contextPath}/action/order-statement!showOrderStatement.do"  name="id" value="${orders.getBuyerId()}">
                                   <p>点击查看</p>
                                 </a>
                             </td>
@@ -174,6 +174,16 @@
                         </c:choose>
                     </tr>
                 </c:forEach>
+
+            <%--    <script  type="text/javascript">
+                    $(document).ready(function(){
+                        $("#clickSend").click(function(){
+                            <!--将支付状态改为3支付完成，并更新页面-->
+
+                            window.location.href("${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do");
+                    });
+                    });
+                </script>--%>
                 </tbody>
             </table>
         </div>
