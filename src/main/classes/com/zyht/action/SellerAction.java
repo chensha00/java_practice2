@@ -47,7 +47,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
             System.out.println(sellerList.get(0).getName());
             return "showSeller";
         }else {
-            return null;
+            return SELLER;
         }
 
     }
@@ -57,7 +57,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
             sellerService.deleteSellerByIds(ids) ;
             return "deleteGoodsDelete";
         }
-        return null;
+        return SELLER;
     }
 
     public String updateShopCar(){
@@ -67,7 +67,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
             sellerService.updateSeller(seller);
             return "updatePrice";
         }
-        return null;
+        return SELLER;
     }
 
 
