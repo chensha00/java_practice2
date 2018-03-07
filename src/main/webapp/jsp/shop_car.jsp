@@ -30,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-                <c:if test="${totalMoney} gt 0">
+                <c:if test="not empty ${goodsList}">
                     <c:forEach var="goods" items="goodsList">
                         <tr>
                             <td style="overflow: hidden;">
@@ -50,8 +50,8 @@
             <tr>
                 <td colspan="6">
                     <span><label><input type="checkbox" checked="checked" class="checkAll" id="checkAll"/>全部</label></span>
-                    <span style="width:150px;">合计￥ <i id="total_price">${totalMoney}元</i></span>
-                    <form id="subimtOrderForm" action="${ctx}/customer/submitOrder" method="post">
+                    <span style="width:150px;">合计￥ <i id="total_price">${goods.price}*${goods.buyMoney}元</i></span>
+                    <form id="subimtOrderForm" action="${pageContext.request.contextPath}/action/buy!buy.do" method="post">
                         <input type="hidden" name="goodsIdArrays" id="goodsIdArrays"/>
                         <div class="pay" style=" float: right; margin-right:50px;">
                             <a href="javascript:void(0)" id="submitOrderBtn" style="font-size: 20px;">结算</a>
@@ -100,15 +100,15 @@
     function deleteCar(goodsId){
         var d = dialog({
             title: '温馨提示',
-            content: '<img src=${ctx}/img/logo.jpg><br><font size=6 color=red>您确定要删除该数据吗？</font>',
+            content: '<img src=${pageContext.request.contextPath}/image/orderStatementLogo.jpg><br><font size=6 color=red>您确定要删除该商品吗？</font>',
             okValue: '确定',
             ok:function(){
                 this.title("请稍等...");
-                var url ="${ctx}/customer/deleteCar";
+                var url ="${pageContext.request.contextPath}/customer/deleteCar";
                 var params = {"goodsId":goodsId};
                 $.post(url,params,function(data){
                     if(data.status == 0){
-                        window.location="${ctx}/customer/showBuyCar";
+                        window.location="${pageContext.request.contextPath}/customer/showBuyCar";
                         $("#goods_"+goodsId).fadeToggle(500,function(){
                             this.remove();
 
@@ -122,7 +122,7 @@
                     }else{
                         var d = dialog({
                             title: '温馨提示',
-                            content: '<img src=${ctx}/img/logo.jpg><br><br><font size=5 color=red>删除失败！</font>'
+                            content: '<img src=${pageContext.request.contextPath}/image/orderStatementLogo.jpg><br><br><font size=5 color=red>删除失败！</font>'
                         });
                         d.show();
                         setTimeout(function () {
@@ -173,7 +173,7 @@
         if(boxs.length == 0){
             var d = dialog({
                 title: '温馨提示',
-                content: '<img src=${ctx}/img/logo.jpg><br><font size=6 color=red>亲，请选择需要结算的商品！</font>'
+                content: '<img src=${pageContext.request.contextPath}/image/orderStatementLogo.jpg><br><font size=6 color=red>亲，请选择需要结算的商品！</font>'
             });
             d.show();
             setTimeout(function () {
