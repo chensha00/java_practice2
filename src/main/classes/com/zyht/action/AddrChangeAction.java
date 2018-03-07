@@ -9,13 +9,12 @@ package com.zyht.action;/*******************************************************
  */
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zyht.base.BaseAction;
 import com.zyht.common.util.SpringContextUtil;
 import com.zyht.domain.Buyer;
 import com.zyht.service.BuyerService;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,12 +27,13 @@ import java.io.UnsupportedEncodingException;
  * @date 2018/3/4
  */
 @Action
-@Results({
-        @Result(name ="home" ,location = "/jsp/homepage.jsp")
-})
-public class AddrChangeAction extends ActionSupport {
+//@Results({
+//        @Result(name ="home" ,location = "/jsp/homepage.jsp")
+//})
+public class AddrChangeAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private String message;
 
     public HttpServletRequest getRequest() {
         return request;
@@ -51,6 +51,14 @@ public class AddrChangeAction extends ActionSupport {
         this.response = response;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public String addrChange(){
 //        获取buyerService对象
         BuyerService buyerService=(BuyerService) SpringContextUtil.getBean("buyerService");
@@ -64,10 +72,20 @@ public class AddrChangeAction extends ActionSupport {
         }
         response.setContentType("text/html;charset=utf-8");
         Long buyerId=Long.parseLong(request.getParameter("buyerid"));
-        String addr=request.getParameter("myaddr");
         Buyer buyer=buyerService.queryBuyerById(buyerId);
-        buyer.setPermanentAddr(addr);
-        buyerService.updateBuyer(buyer);
-        return "home";
+        String formerAddr=buyer.getPermanentAddr();
+        String addr=request.getParameter("myaddr");
+        if(addr!=null&&addr!=""){
+            if(formerAddr.equals(addr)){
+                message="地址并未修改";
+            }else{
+                message="地址修改成功";
+                buyer.setPermanentAddr(addr);
+                buyerService.updateBuyer(buyer);
+            }
+        }else {
+            message="地址为空！";
+        }
+        return HOME;
     }
 }
