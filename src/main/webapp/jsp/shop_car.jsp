@@ -30,24 +30,21 @@
             </tr>
             </thead>
             <tbody>
-            <#if totalMoney gt 0>
-                <#list goodsList as goods>
-                    <tr>
-
-                        <td style="overflow: hidden;">
-                            <input type="checkbox" checked="checked" value="${goods.id}" class="checkAll" id="box_${goods.id}" style=" float:left;"/></td>
-
-                        <td style=" margin-top:25px; font-size: 18px; padding-left: 85px;">${goods.name}</td>
-                        <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.goodsNum}</td>
-                        <input type="hidden" value="${goods.goodsNum}" id="num_${goods.id}"/>
-                        <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.price}</td>
-                        <input type="hidden" value="${goods.price}" id="price_${goods.id}"/>
-                        <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.buyMoney}</td>
-                        <td ><a href="javascript:void(0)" style=" margin-top:25px; font-size: 18px;" onclick="deleteCar(${goods.id})">删除</a></td>
-
-                    </tr>
-                </#list>
-            </#if>
+                <c:if test="${totalMoney} gt 0">
+                    <c:forEach var="goods" items="goodsList">
+                        <tr>
+                            <td style="overflow: hidden;">
+                                <input type="checkbox" checked="checked" value="${goods.id}" class="checkAll" id="box_${goods.id}" style=" float:left;"/></td>
+                            <td style=" margin-top:25px; font-size: 18px; padding-left: 85px;">${goods.name}</td>
+                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.goodsNum}</td>
+                                <input type="hidden" value="${goods.goodsNum}" id="num_${goods.id}"/>
+                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.price}</td>
+                                <input type="hidden" value="${goods.price}" id="price_${goods.id}"/>
+                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.buyMoney}</td>
+                            <td ><a href="javascript:void(0)" style=" margin-top:25px; font-size: 18px;" onclick="deleteCar(${goods.id})">删除</a></td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
             </tbody>
             <tfoot>
             <tr>
