@@ -56,7 +56,7 @@
         SELECT <include refid="columns"/> FROM `order_statement` WHERE `ID` = #{_param}
     </select>
     <!-- 添加-->
-    <insert id="add" parameterType="com.zyht.domain.OrderStatement">
+    <insert id="add" parameterType="com.zyht.domain.OrderStatement" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO `order_statement` (``ID,`ORDER_DETAIL_ID`,`BUYER_ID`,`SELLER_ID`,`NUMBER`,`AMOUNT`,`FINISH_TIME`) VALUES
         (DEFAULT ,${orderDetailId},${buyerId},${sellerId},#{number},#{amount},#{finishTime})
     </insert>

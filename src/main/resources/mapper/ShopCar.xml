@@ -52,7 +52,7 @@
         SELECT <include refid="columns"/> FROM `shop_car` WHERE `ID` = #{_param}
     </select>
     <!-- 添加-->
-    <insert id="add" parameterType="com.zyht.domain.ShopCar">
+    <insert id="add" parameterType="com.zyht.domain.ShopCar" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO `shop_car` (`ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`) VALUES
         (DEFAULT ,${goodsId},${buyNum},${goodsPrice},#{goodsName},#{buyerId})
     </insert>
