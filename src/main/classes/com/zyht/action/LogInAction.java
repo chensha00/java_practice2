@@ -42,6 +42,7 @@ import java.util.Map;
 public class LogInAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private String message;
 
     public HttpServletRequest getRequest() {
         return request;
@@ -58,6 +59,15 @@ public class LogInAction extends ActionSupport implements BaseAction {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public String logIn()throws IOException {
 
         //        获取request,response,session对象
@@ -97,19 +107,19 @@ public class LogInAction extends ActionSupport implements BaseAction {
 //        判断账户状态，看用户是否存在/冻结/注销/删除
         if (account == null) {
             PrintWriter out = response.getWriter();
-            out.println("<script> alert('用户名不存在，请重新登录');</script>");
+           message="用户名不存在，请重新登录";
             return LOG_IN;
         } else if (account.getIsFrozen() == true) {
             PrintWriter out = response.getWriter();
-            out.println("<script> alert('该用户已被冻结，请重新登录');</script>");
+            message="该用户已被冻结，请重新登录";
             return LOG_IN;
         } else if (account.getIsCanceled() == true) {
             PrintWriter out = response.getWriter();
-            out.println("<script> alert('该用户已被注销，请重新登录');</script>");
+            message="该用户已被注销，请重新登录";
             return LOG_IN;
         } else if (account.getIsDelete() == true) {
             PrintWriter out = response.getWriter();
-            out.println("<script> alert('该用户已被删除，请重新登录');</script>");
+            message="该用户已被删除，请重新登录";
             return LOG_IN;
         } else {
             Long sellerId = account.getSellerId();
