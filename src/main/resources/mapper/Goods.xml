@@ -26,7 +26,7 @@
         SELECT <include refid="columns"/> FROM goods WHERE ID=#{_param}
     </select>
     <!-- 添加-->
-    <insert id="insert" parameterType="com.zyht.domain.Goods">
+    <insert id="insert" parameterType="com.zyht.domain.Goods" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO `goods` (`ID`,`NAME`,`NUMBER`,`TYPE`,`PRICE`,`ADDR`,`MAKE_TIME`,`EXPIRATION_TIME`,`UNIT`) VALUES (DEFAULT,#{name},#{number},#{type},${price},#{addr},#{makeTime},#{expirationTime},#{unit})
     </insert>
     <!-- 更新-->
