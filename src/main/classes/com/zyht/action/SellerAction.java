@@ -52,7 +52,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
 
     }
 
-    public String deleteShopCar(){
+    public String deleteGoodsDelete(){
         if (ids!=null){
             sellerService.deleteSellerByIds(ids) ;
             return "deleteGoodsDelete";
@@ -60,7 +60,7 @@ public class SellerAction extends ActionSupport implements BaseAction{
         return SELLER;
     }
 
-    public String updateShopCar(){
+    public String updatePrice(){
         if (sellerId!=null){
 
             Seller seller=new Seller();
