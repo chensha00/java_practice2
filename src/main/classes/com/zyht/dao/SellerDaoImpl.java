@@ -134,7 +134,7 @@ public class SellerDaoImpl extends Base<Seller> implements SellerDao{
 //        connection.commit();
 //        return Seller;
 //    }
-        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"insertSeller",seller);
+        return this.sqlSessionTemplate.insert(getMybaitsNameSpace()+"insert",seller);
     }
 
     /**
