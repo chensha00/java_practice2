@@ -12,17 +12,17 @@
     <link href="${pageContext.request.contextPath}/css/order_statement.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/HomepageServlet.htm" class="top">
+<a href="${pageContext.request.contextPath}/action/log-in!logIn.do" class="top">
     <img class="logo" alt="这里是个logo" src="${pageContext.request.contextPath}/image/orderStatementLogo.jpg"/>
 </a>
 <span>流水表</span>
 
 <div class="likeMore">
     <p>猜你喜欢</p>
-    <a href="${pageContext.request.contextPath}/HomepageServlet.htm"><img class="like1" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
-    <a href="${pageContext.request.contextPath}/HomepageServlet.htm"><img class="like2" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
-    <a href="${pageContext.request.contextPath}/HomepageServlet.htm"><img class="like3" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
-    <a href="${pageContext.request.contextPath}/HomepageServlet.htm"><img class="like4" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
+    <a href="${pageContext.request.contextPath}/action/log-in!logIn.do"><img class="like1" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
+    <a href="${pageContext.request.contextPath}/action/log-in!logIn.do"><img class="like2" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
+    <a href="${pageContext.request.contextPath}/action/log-in!logIn.do"><img class="like3" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
+    <a href="${pageContext.request.contextPath}/action/log-in!logIn.do"><img class="like4" src="${pageContext.request.contextPath}/image/orderStatementImg.jpg" alt="这是张图片"/></a>
 </div>
 
 <div class="order">

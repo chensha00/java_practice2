@@ -30,9 +30,14 @@
 <div id="menu" class="show">
     <form action="${pageContext.request.contextPath}/action/seller!showSeller.do?sellerId="+${sessionScope.sellerid} method="post">
         <c:choose>
-            <c:when test="${sessionScope.sellerid ne null&&sessionScope.sellerid ne 0 }">
+            <c:when test="${sessionScope.sellerid ne null&&sessionScope.sellerid ne 0&&sessionScope.buyerid ne null&&sessionScope.buyerid ne 0 }">
                 <button id="shop" class="menu" type="submit" name="shop" value="shop" >我的店铺</button>
                 <button id="sell-buy-orders" class="menu" type="button" name="buy-orders" value="buy-orders">我的购买订单</button>
+                <button id="sell-orders" class="menu" type="button" name="sell-orders" value="sell-orders" >我的出售订单</button>
+                <button id="buy-addr" class="menu" type="button" name="buy-addr" value="buy-addr">收货地址</button>
+            </c:when>
+            <c:when test="${sessionScope.sellerid ne null&&sessionScope.sellerid ne 0&&(sessionScope.buyerid ne null||sessionScope.buyerid ne 0) }">
+                <button id="shop" class="menu" type="submit" name="shop" value="shop" >我的店铺</button>
                 <button id="sell-orders" class="menu" type="button" name="sell-orders" value="sell-orders" >我的出售订单</button>
                 <button id="buy-addr" class="menu" type="button" name="buy-addr" value="buy-addr">收货地址</button>
             </c:when>
@@ -49,10 +54,9 @@
     $(function(){
 //    我的购买订单跳转请求
         $("#sell-buy-orders").click(function(){
-            var value=${sessionScope.buyerid};
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/action/order!showOrder.do?buyerId="+value,
+                url : "${pageContext.request.contextPath}/action/order!showOrder.do?buyerId="+${sessionScope.buyerid},
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
@@ -65,10 +69,9 @@
         })
 
         $("#buy-orders").click(function(){
-            var value=${sessionScope.buyerid};
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/action/order!showOrder.do?buyerId="+value,
+                url : "${pageContext.request.contextPath}/action/order!showOrder.do?buyerId="+${sessionScope.buyerid},
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
@@ -82,10 +85,9 @@
         })
 //    我的出售订单跳转请求
         $("#sell-orders").click(function(){
-            var value=${sessionScope.sellerid};
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do?sellerId="+value,
+                url : "${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do?sellerId="+${sessionScope.sellerid},
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
@@ -99,17 +101,15 @@
         });
 //    点击id为buy的a标签传递buyerid参数
         $("#buy").click(function (){
-            var id=${sessionScope.buyerid};
 //            var id=1;
-            document.getElementById("buy").href="${pageContext.request.contextPath}/action/Goods!goodsShow.do?buyerid="+id;
+            document.getElementById("buy").href="${pageContext.request.contextPath}/action/Goods!goodsShow.do?buyerid="+${sessionScope.buyerid};
         });
 //        点击收货地址的跳转
         $("#buy-addr").click(function(){
-            var thisId=${sessionScope.buyerid};
 //            var thisId=1;
             $.ajax({
                 type : "POST",
-                url : "${pageContext.request.contextPath}/action/addr!addr.do?buyerId="+thisId,
+                url : "${pageContext.request.contextPath}/action/addr!addr.do?buyerId="+${sessionScope.buyerid},
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {
@@ -122,11 +122,10 @@
             });
         })
         $("#buyer-addr").click(function(){
-            var thisId=${sessionScope.buyerid};
 //            var thisId=1;
             $.ajax({
                 type : "POST",
-                url :"${pageContext.request.contextPath}/action/addr!addr.do?buyerId="+thisId,
+                url :"${pageContext.request.contextPath}/action/addr!addr.do?buyerId="+${sessionScope.buyerid},
                 dataType : "text",
                 contentType:"application/x-www-form-urlencoded",
                 success : function(data) {

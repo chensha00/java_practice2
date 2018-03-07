@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 </head>
 <body>
 <div id="this-form">
-    <form action="${pageContext.request.contextPath}/AddrChangeServlet.htm"  method="post">
+    <form action="${pageContext.request.contextPath}/action/addr-change!addrChange.do"  method="post">
         <input type="hidden" value="${buyerid}" name="buyerid"/>
         <table border="1" >
             <tr><td>地址</td>
@@ -27,6 +28,10 @@
     </form>
 </div>
 <script>
+    <s:if test="message!=null">
+    alert("${message}");
+    </s:if>
+
     $(function(){
         $("#goback").click(function(){
             window.location.href="${pageContext.request.contextPath}/jsp/homepage.jsp";

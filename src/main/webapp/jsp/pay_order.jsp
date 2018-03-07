@@ -30,12 +30,12 @@
             </tr>
             <c:forEach items="${requestScope.buyList}" var="list">
                 <tr>
-                    <td>${list.getId()}</td>
-                    <td>${list.getSellerId()}</td>
-                    <td>${list.getGoodsId()}</td>
-                    <td>${list.getAmount}</td>
-                    <td>${list.getOrderNumber()}</td>
-                    <td>${list.getCreationTime()}</td>
+                    <td>${list.id}</td>
+                    <td>${list.sellerId}</td>
+                    <td>${list.goodsId}</td>
+                    <td>${list.amount}</td>
+                    <td>${list.orderNumber}</td>
+                    <td>${list.creationTime}</td>
                 </tr>
             </c:forEach>
             <tr><td colspan="2">支付密码</td>

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <title>用户注册</title>
@@ -44,7 +45,7 @@
                 </tr>
                 <tr>
                     <td class="birthdate" align="center">*账户密码</td>
-                    <td><input type="text" name="password"  /></td>
+                    <td><input type="text" name="password" placeholder="六位密码" /></td>
                     <td class="birthdate" align="center">*地址</td>
                     <td><input type="text" name="permanentAddr" /></td>
                 </tr>
@@ -56,7 +57,7 @@
                 </tr>
                 <tr>
                     <td class="birthdate">*支付密码</td>
-                    <td><input  type="text" name="paypassword"></td></tr>
+                    <td><input  type="text" name="paypassword" placeholder="六位密码"></td></tr>
                 <tr>
                     <td class="birthdate" align="">*注册类型</td>
                     <td><input type="checkbox" name="status" value="buyer"/>买家</td>
@@ -77,5 +78,10 @@
         </form>
     </div>
 </div>
+<script>
+    <s:if test="message!=null">
+    alert("${message}")
+    </s:if>
+</script>
 </body>
 </html>

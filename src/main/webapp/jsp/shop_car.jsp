@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/artDialog-6.0.2/css/ui-dialog.css"/>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/HomepageServlet.htm" class="top">
+<a href="${pageContext.request.contextPath}/action/log-in!logIn.do" class="top">
     <img class="logo" alt="这里是个logo" src="${pageContext.request.contextPath}/image/orderStatementLogo.jpg"/>
 </a>
 
