@@ -145,7 +145,7 @@
     `AMOUNT`=${amount},
     `IS_SUCCESS`=${isSuccess},
     `ORDER_STATUS`=${orderStatus},
-    `ORDER_NUMBER`=${orderNumber},
+    `ORDER_NUMBER`=#{orderNumber},
     `CREATION_TIME`=#{creationTime},
     `FINISH_TIME`=#{finishTime},
     `PHYSICAL_DISTRIBUTION`=#{physicalDistribution},
