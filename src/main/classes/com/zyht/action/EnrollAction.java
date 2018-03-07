@@ -22,8 +22,6 @@ import org.apache.struts2.convention.annotation.Action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
@@ -37,6 +35,7 @@ import java.util.Date;
 public class EnrollAction extends ActionSupport implements BaseAction {
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private String message;
 
     public HttpServletRequest getRequest() {
         return request;
@@ -53,6 +52,15 @@ public class EnrollAction extends ActionSupport implements BaseAction {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     /**
      * @Title: enroll
      * @Description: 注册
@@ -142,17 +150,15 @@ public class EnrollAction extends ActionSupport implements BaseAction {
             account1.setBuyerId(buyerId);
             account1.setSellerId(sellerId);
         }else {
-            try {
-                PrintWriter pw=response.getWriter();
-                pw.write("<script>alert('注册类型信息不完整，请重新注册!');</script>");
+//                PrintWriter pw=response.getWriter();
+//                pw.write("<script>alert('注册类型信息不完整，请重新注册!');</script>");
+                message="注册失败，请重新按要求填写个人信息！";
                 return ENROLL;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
 //        注册新账户
         accountService.registerUser(account1);
+        message="注册成功，可以登录网站！";
        return LOG_IN;
     }
 }
