@@ -25,9 +25,11 @@
 <div class="pho"><img class="pictureone" src="${pageContext.request.contextPath}/img/HP.png" alt="商品样式图"/></div>
 <form name="Jump" action="" method="get">
     <div class="goodsDiv">
-        <p class="details">商品名字：${goodsSellerRelation.get(0).getName()}</p>
-        <p class="details">单价为：${goodsSellerRelation.get(0).getPrice()}</p>
-        <p class="details">数量：${goodsSellerRelation.get(0).getInventory()}</p>
+<c:forEach items="${goods}" var="goods">
+        <p class="details">商品名字：${goods.get(0).getName()}</p>
+        <p class="details">单价为：${goods.get(0).getPrice()}</p>
+        <p class="details">数量：${goods.get(0).getInventory()}</p>
+    </c:forEach>
         <div class="know">
             <input id="min" type="button" value="-" />
             <input id="text_box" name="goodsNumber" type="text" value="1" style="width:25px;" />
