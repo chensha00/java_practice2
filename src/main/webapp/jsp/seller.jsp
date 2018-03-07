@@ -81,13 +81,11 @@
     <meta charset="UTF-8">
     <title>卖家店铺</title>
     <link href="${pageContext.request.contextPath}/css/seller.css" rel="stylesheet" type="text/css"/>
-
 </head>
 <body>
 <div>
     <span>我的商品列表</span>
 </div>
-
 <%--<c:forEach items="${requestScope.goodsSellerRelationList}" var="goodsList">--%>
 <div class="list">
     <li><h3>全场满99包邮 满200减50!!!</h3></li>
@@ -109,7 +107,6 @@ end function
 </script>
     <a href="<%=request.getContextPath()%>/jsp/homepage.jsp"><h3><i>返回主页</i></h3></a>
 </div>
-
 <script>
     function msgbox(n){
         document.getElementById('inputbox').style.display=n?'block':'none';     /* 点击按钮打开/关闭 对话框 */
@@ -122,7 +119,6 @@ end function
         <input type="button" onclick="document.formName.submit()" value="确认修改">
     </form>
 </div>
-
 <%--</c:forEach>--%>
 </body>
 </html>
