@@ -10,6 +10,8 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,10 @@ public class OrderStatementAction extends ActionSupport implements BaseAction{
 
     private Long orderDetailId;
 
+    private HttpServletRequest request;
+
+    private HttpServletResponse response;
+
     List<OrderStatement> orderStatementList=null;
 
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -40,6 +46,7 @@ public class OrderStatementAction extends ActionSupport implements BaseAction{
         if(orderDetailId!=null){
             stringObjectMap.put("`ORDER_DETAIL_ID`",orderDetailId);
             orderStatementList=orderStatementService.queryOrderStatementByCondition(stringObjectMap);
+            request.setAttribute("orderStatementList",orderStatementList);
             return STATEMENT;
         }
         return null;
@@ -51,5 +58,29 @@ public class OrderStatementAction extends ActionSupport implements BaseAction{
 
     public void setOrderDetailId(Long orderDetailId) {
         this.orderDetailId = orderDetailId;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public List<OrderStatement> getOrderStatementList() {
+        return orderStatementList;
+    }
+
+    public void setOrderStatementList(List<OrderStatement> orderStatementList) {
+        this.orderStatementList = orderStatementList;
     }
 }

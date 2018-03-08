@@ -11,6 +11,8 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,10 @@ public class ShopCarAction extends ActionSupport implements BaseAction{
 
     List<ShopCar> shopCarList=null;
 
+    private HttpServletRequest request;
+
+    private HttpServletResponse response;
+
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     ShopCarService shopCarService = (ShopCarService) context.getBean("shopCarService");
 
@@ -48,6 +54,7 @@ public class ShopCarAction extends ActionSupport implements BaseAction{
         if(accountId!=null){
             stringObjectMap.put("`ACCOUNT_ID`",accountId);
             shopCarList=shopCarService.queryShopCarByCondition(stringObjectMap);
+            request.setAttribute("shopCarList",shopCarList);
             return SHOP_CAR;
         }else {
             return null;
@@ -103,5 +110,29 @@ public class ShopCarAction extends ActionSupport implements BaseAction{
 
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public List<ShopCar> getShopCarList() {
+        return shopCarList;
+    }
+
+    public void setShopCarList(List<ShopCar> shopCarList) {
+        this.shopCarList = shopCarList;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
     }
 }
