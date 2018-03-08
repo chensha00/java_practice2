@@ -89,12 +89,4 @@ public interface SellerDao {
      * @throw SQLException
      */
     public List<Seller> querySellerByConditionPage(Map<String,Object> stringSellerMap);
-
-    /**
-     * @Title: updatePrice
-     * @Description: 修改价格
-     * @author chendong
-     * @date 2018/3/7
-     */
-    public int updatePrice(Seller seller);
 }

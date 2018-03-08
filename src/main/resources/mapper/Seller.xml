@@ -109,9 +109,6 @@
         <![CDATA[
         ]]>
     </update>
-    <update id="updatePrice" parameterType="com.zyht.domain.Goods">
-        UPDATE goods SET PRICE=#{price}WHERE ID={id}
-    </update>
 
 <!--按id删除-->
     <delete id="deleteById" parameterType="java.lang.Long">

@@ -75,3 +75,4 @@ target
 .git
 web
 pom.xml
+src/main/resources/db.properties

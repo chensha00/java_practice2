@@ -2,7 +2,9 @@ package com.zyht.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.zyht.base.BaseAction;
+import com.zyht.domain.Goods;
 import com.zyht.domain.Seller;
+import com.zyht.service.GoodsService;
 import com.zyht.service.SellerService;
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.context.ApplicationContext;
@@ -30,12 +32,14 @@ import java.util.Map;
 public class SellerAction extends ActionSupport implements BaseAction{
     //    卖家ID
     private Long sellerId;
+    //    商品ID
+    private Long goodsId;
     //   存放seller信息
-
     List<Seller>sellerList=null;
     private Long[] ids;
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     SellerService sellerService = (SellerService)context.getBean("sellerService");
+    GoodsService goodsService = (GoodsService)context.getBean("goodsService");
 
     public String showSeller(){
         //        判断传入的卖家ID是否为空，并将其放入map中
@@ -45,26 +49,28 @@ public class SellerAction extends ActionSupport implements BaseAction{
             stringMap.put("`SELLER_ID`",sellerId);
             sellerList=sellerService.querySellerByCondition(stringMap);
             System.out.println(sellerList.get(0).getName());
-            return "showSeller";
-        }else {
             return SELLER;
+        }else {
+            return null;
         }
 
     }
 
     public String deleteGoodsDelete(){
         if (ids!=null){
-            sellerService.deleteSellerByIds(ids) ;
+//            sellerService.deleteSellerByIds(ids) ;
+            goodsService.deleteGoodsByIds(ids);
             return "deleteGoodsDelete";
         }
         return SELLER;
     }
 
     public String updatePrice(){
-        if (sellerId!=null){
-
-            Seller seller=new Seller();
-            sellerService.updateSeller(seller);
+        if (goodsId!=null){
+//            Seller seller=new Seller();
+            Goods goods=new Goods();
+            goodsService.updateGoods(goods);
+//            sellerService.updateSeller(seller);
             return "updatePrice";
         }
         return SELLER;
