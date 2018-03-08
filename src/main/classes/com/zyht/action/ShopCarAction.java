@@ -31,7 +31,7 @@ import java.util.Map;
 //})
 public class ShopCarAction extends ActionSupport implements BaseAction{
 
-    private Long userId;
+    private Long accountId;
 
     private Long shopCarId;
 
@@ -45,8 +45,8 @@ public class ShopCarAction extends ActionSupport implements BaseAction{
     public String showShopCar(){
 
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
-        if(userId!=null){
-            stringObjectMap.put("`USER_ID`",userId);
+        if(accountId!=null){
+            stringObjectMap.put("`ACCOUNT_ID`",accountId);
             shopCarList=shopCarService.queryShopCarByCondition(stringObjectMap);
             return SHOP_CAR;
         }else {
@@ -97,11 +97,11 @@ public class ShopCarAction extends ActionSupport implements BaseAction{
         this.ids = ids;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 }

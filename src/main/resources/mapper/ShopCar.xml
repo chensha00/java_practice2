@@ -5,6 +5,7 @@
     <!-- 定义结果集-->
     <resultMap id="shopCar" type="com.zyht.domain.ShopCar">
         <id property="id" column="ID" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="accountId" column="ACCOUNT_ID" jdbcType="BIGINT"/>
         <result property="goodsId" column="GOODS_ID" jdbcType="BIGINT"/>
         <result property="buyNum" column="BUY_NUM" jdbcType="DECIMAL"/>
         <result property="goodsPrice" column="GOODS_PRICE" jdbcType="DECIMAL"/>
@@ -13,7 +14,7 @@
     </resultMap>
     <!--定义查询列 -->
     <sql id="columns">
-        `ID`,`USER_ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`
+        `ID`,`ACCOUNT_ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`
     </sql>
     <!-- 查询所有-->
     <select id="find" resultMap="shopCar">
@@ -30,8 +31,8 @@
             <if test="id!=null">
                 AND `ID`=${id}
             </if>
-            <if test="userId!=null">
-                AND `USER_ID`=#{userId}
+            <if test="accountId!=null">
+                AND `ACCOUNT_ID`=#{accountId}
             </if>
             <if test="orderDetailId!=null">
                 AND `GOODS_ID`=#{goodsId}
@@ -56,12 +57,12 @@
     </select>
     <!-- 添加-->
     <insert id="add" parameterType="com.zyht.domain.ShopCar" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
-        INSERT INTO `shop_car` (`ID`,`USER_ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`) VALUES
-        (DEFAULT,${userId},${goodsId},${buyNum},${goodsPrice},#{goodsName},#{buyerId})
+        INSERT INTO `shop_car` (`ID`,`ACCOUNT_ID`,`GOODS_ID`,`BUY_NUM`,`GOODS_PRICE`,`GOODS_NAME`,`BUYER_ID`) VALUES
+        (DEFAULT,${accountId},${goodsId},${buyNum},${goodsPrice},#{goodsName},#{buyerId})
     </insert>
     <!-- 编辑-->
     <update id="update" parameterType="com.zyht.domain.ShopCar">
-        UPDATE `shop_car` SET `USER_ID`=${userId},`GOODS_ID`=${goodsId},`BUY_NUM`=${buyNum},`GOODS_PRICE`=${goodsPrice},
+        UPDATE `shop_car` SET `ACCOUNT_ID`=${accountId},`GOODS_ID`=${goodsId},`BUY_NUM`=${buyNum},`GOODS_PRICE`=${goodsPrice},
         `GOODS_NAME`=#{goodsName},`BUYER_ID`=#{buyerId} WHERE `ID`=#{_param}
         <![CDATA[
         ]]>
