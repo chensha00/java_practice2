@@ -31,7 +31,7 @@
         <div id="formdiv">
             <fieldset>
                 <legend>订单信息</legend>
-                <form id="myForm" action="${pageContext.request.contextPath}/action/orderStatement!showOrder.do"
+                <form id="myForm" action="${pageContext.request.contextPath}/action/OrderDetail!orderDetailResult.do"
                       method="post">
                     <table id="mytable" border="1">
                         <thead>
@@ -51,46 +51,44 @@
                         <c:forEach items="${requestScope.orderList}" var="orders">
                             <tr>
                                 <td>
-                                        ${orders.getId()}
+                                        ${orders.id}
                                 </td>
                                 <td>
-                                        ${orders.getNumber()}
+                                        ${orders.number}
                                 </td>
                                 <td>
-                                        ${orders.getBuyerId()}
+                                        ${orders.buyerId}
                                 </td>
                                 <td>
-                                        ${orders.getAmount()}
+                                        ${orders.amount}
                                 </td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${orders.getIsSuccess()== true}">
+                                        <c:when test="${orders.isSuccess}">
                                             ${"成功"}
                                         </c:when>
                                         <c:otherwise>
                                             ${"失败"}
                                         </c:otherwise>
                                     </c:choose>
-
                                 </td>
                                 <td>
                                     <c:forEach var="os" items="<%=OrderState.values()%>">
-                                        <c:if test="${orders.getOrderStatus()== os.stateNum}">
+                                        <c:if test="${orders.orderStatus == os.stateNum}">
                                             ${os.stateStr}
                                         </c:if>
                                     </c:forEach>
-
                                 </td>
                                 <td>
-                                    <fmt:formatDate type="time" value="${orders.getCreationTime()}"
+                                    <fmt:formatDate type="time" value="${orders.creationTime}"
                                                     pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                                 <td>
-                                    <fmt:formatDate type="time" value="${orders.getFinishTime()}"
+                                    <fmt:formatDate type="time" value="${orders.finishTime}"
                                                     pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                                 <th>
-                                    <button id="mybutton" type="submit" name="myorder" value="${orders.getId()}">查看更多</button>
+                                    <button id="mybutton" type="submit" name="myorder" value="${orders.id}">查看更多</button>
                                 </th>
                             </tr>
                         </c:forEach>

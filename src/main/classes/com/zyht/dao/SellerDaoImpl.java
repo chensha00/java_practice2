@@ -264,4 +264,5 @@ public class SellerDaoImpl extends Base<Seller> implements SellerDao{
 //    }
         return this.sqlSessionTemplate.selectList(getMybaitsNameSpace()+"queryByConditionWithPage",stringSellerMap);
     }
+
 }

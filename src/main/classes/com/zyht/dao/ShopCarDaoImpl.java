@@ -92,7 +92,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
      */
     @Override
     public List<ShopCar> queryShopCarByCondition(Map<String, Object> stringShopCarMap) {
-        return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar." + "find", stringShopCarMap);
+        return this.sqlSessionTemplate.selectList("com.zyht.domain.ShopCar." + "findByCondition", stringShopCarMap);
     }
     /**
      * @param stringShopCarMap startRow size
