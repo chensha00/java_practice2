@@ -30,18 +30,18 @@
             </tr>
             </thead>
             <tbody>
-                <c:if test="not empty ${goodsList}">
-                    <c:forEach var="goods" items="goodsList">
+                <c:if test="not empty ${shopCarList}">
+                    <c:forEach var="shopCar" items="shopCarList">
                         <tr>
                             <td style="overflow: hidden;">
-                                <input type="checkbox" checked="checked" value="${goods.id}" class="checkAll" id="box_${goods.id}" style=" float:left;"/></td>
-                            <td style=" margin-top:25px; font-size: 18px; padding-left: 85px;">${goods.name}</td>
-                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.goodsNum}</td>
-                                <input type="hidden" value="${goods.goodsNum}" id="num_${goods.id}"/>
-                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.price}</td>
-                                <input type="hidden" value="${goods.price}" id="price_${goods.id}"/>
-                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${goods.buyMoney}</td>
-                            <td ><a href="javascript:void(0)" style=" margin-top:25px; font-size: 18px;" onclick="deleteCar(${goods.id})">删除</a></td>
+                                <input type="checkbox" checked="checked" value="${shopCar.id}" class="checkAll" id="box_${shopCar.id}" style=" float:left;"/></td>
+                            <td style=" margin-top:25px; font-size: 18px; padding-left: 85px;">${shopCar.goodsName}</td>
+                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${shopCar.buyNum}</td>
+                                <input type="hidden" value="${shopCar.buyNum}" id="num_${shopCar.id}"/>
+                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${shopCar.goodsPrice}</td>
+                                <input type="hidden" value="${shopCar.goodsPrice}" id="price_${shopCar.id}"/>
+                            <td style=" margin-top:25px; font-size: 18px; margin-left:50px;">${shopCar.goodsPrice}*${shopCar.buyNum}</td>
+                            <td ><a href="javascript:void(0)" style=" margin-top:25px; font-size: 18px;" onclick="deleteCar(${shopCar.id})">删除</a></td>
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -50,7 +50,7 @@
             <tr>
                 <td colspan="6">
                     <span><label><input type="checkbox" checked="checked" class="checkAll" id="checkAll"/>全部</label></span>
-                    <span style="width:150px;">合计￥ <i id="total_price">${goods.price}*${goods.buyMoney}元</i></span>
+                    <span style="width:150px;">合计￥ <i id="total_price">${shopCar.goodsPrice}*${shopCar.buyNum}元</i></span>
                     <form id="subimtOrderForm" action="${pageContext.request.contextPath}/action/buy!buy.do" method="post">
                         <input type="hidden" name="goodsIdArrays" id="goodsIdArrays"/>
                         <div class="pay" style=" float: right; margin-right:50px;">
