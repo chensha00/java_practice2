@@ -40,7 +40,12 @@ public class OrderStatementAction extends ActionSupport implements BaseAction{
 
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     OrderStatementService orderStatementService = (OrderStatementService) context.getBean("orderStatementService");
-
+    /**
+     * @Title: showOrderStatement
+     * @Description: 展示订单流水表
+     * @author wangchuan
+     * @date 2018/3/8
+     */
     public String showOrderStatement() throws SQLException {
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(orderDetailId!=null){
