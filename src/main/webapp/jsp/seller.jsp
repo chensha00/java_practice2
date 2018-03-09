@@ -1,3 +1,6 @@
+<%@ page import="com.zyht.domain.GoodsSellerRelation" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%--
 /**
 * @Title:seller.jsp
@@ -86,7 +89,10 @@
 <div>
     <span>我的商品列表</span>
 </div>
-<%--<c:forEach items="${requestScope.goodsSellerRelationList}" var="goodsList">--%>
+<%--<%--%>
+    <%--List<GoodsSellerRelation> goodsSellerRelationList = (ArrayList) request.getAttribute("goodsSellerRelationList");--%>
+<%--%>--%>
+<c:forEach items="${requestScope.goodsSellerRelationList}" var="goodsList">
 <div class="list">
     <li><h3>全场满99包邮 满200减50!!!</h3></li>
     <img  src="${pageContext.request.contextPath}/image/yangshitu.png"/>
@@ -119,7 +125,7 @@ end function
         <input type="button" onclick="document.formName.submit()" value="确认修改">
     </form>
 </div>
-<%--</c:forEach>--%>
+</c:forEach>
 </body>
 </html>
 

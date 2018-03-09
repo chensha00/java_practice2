@@ -107,7 +107,7 @@
 //    点击id为buy的a标签传递buyerid参数
         $("#buy").click(function (){
 //            var id=1;
-            document.getElementById("buy").href="${pageContext.request.contextPath}/action/Goods!goodsShow.do?buyerid="+${sessionScope.buyerid};
+            document.getElementById("buy").href="${pageContext.request.contextPath}/action/Goods!goodsShows.do?buyerid="+${sessionScope.buyerid};
         });
 //        点击收货地址的跳转
         $("#buy-addr").click(function(){
