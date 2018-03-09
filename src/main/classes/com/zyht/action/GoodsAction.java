@@ -11,6 +11,8 @@
 import com.opensymphony.xwork2.ActionSupport;
 import com.zyht.base.BaseAction;
 import com.zyht.domain.Goods;
+import com.zyht.domain.GoodsSellerRelation;
+import com.zyht.service.GoodsSellerRelationService;
 import com.zyht.service.GoodsService;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -33,11 +35,14 @@ import java.util.Map;
 //        @Result(name = "goods",location = "/goods_seller_relation.jsp")
 //})
 public class GoodsAction extends ActionSupport implements BaseAction{
-  public Long goodsId;
-  public List<Goods> goodsList;
+    public Long goodsId;
+    public List<Goods> goodsList;
     private HttpServletRequest request;
+    public  Long buyerId;
+    public GoodsSellerRelation goodsSellerRelation;
     ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     GoodsService goodsService=(GoodsService)context.getBean("goodsService");
+    GoodsSellerRelationService goodsSellerRelationService=(GoodsSellerRelationService)context.getBean("goodsSellerRelationService");
 
     /**
      * @ClassName goodsShows
@@ -50,11 +55,26 @@ public class GoodsAction extends ActionSupport implements BaseAction{
         Long [] ids=null;
         Map<String, Object> stringObjectMap = new HashMap<String, Object>();
         if(ids!=null){
-            stringObjectMap.put("`GOODS_ID`",goodsId);
+            goodsList=goodsService.queryGoodsByCondition(stringObjectMap);
         }
-        goodsList=goodsService.queryGoodsByCondition(stringObjectMap, 0, 5);
+
         request.setAttribute("goodsAll",stringObjectMap);
         return RELATION;
+    }
+
+
+    /**
+     * @ClassName goodsSellerRelationShow
+     * @Description 关系表查询ID
+     * @author guoxin
+     * @date 2018-03-09
+    */
+
+    public  String goodsSellerRelationShow(){
+       if(buyerId!=null){
+         goodsSellerRelation=  goodsSellerRelationService.queryGoodsSellerRelationById(buyerId);
+       }
+            return RELATION;
     }
     /**
      * @ClassName goodsShow
@@ -63,6 +83,8 @@ public class GoodsAction extends ActionSupport implements BaseAction{
      * @date 2018-03-07
     */
     public  String goodsShow(){
+        goodsSellerRelation=  goodsSellerRelationService.queryGoodsSellerRelationById(buyerId);
+        goodsId=goodsSellerRelation.getGoodsId();
         request = ServletActionContext.getRequest();
         Goods goods=new Goods();
         if(goodsId!=null)
@@ -131,7 +153,15 @@ public class GoodsAction extends ActionSupport implements BaseAction{
     }
 
     public void setGoodsId(Long goodsId) {
-        goodsId = goodsId;
+        this.goodsId = goodsId;
+    }
+
+    public Long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
     }
 
     public HttpServletRequest getRequest() {
