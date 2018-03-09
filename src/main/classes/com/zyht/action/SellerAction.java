@@ -49,9 +49,9 @@ public class SellerAction extends ActionSupport implements BaseAction{
             stringMap.put("`SELLER_ID`",sellerId);
             sellerList=sellerService.querySellerByCondition(stringMap);
             System.out.println(sellerList.get(0).getName());
-            return SELLER;
+            return "showSeller";
         }else {
-            return null;
+            return SELLER;
         }
 
     }
