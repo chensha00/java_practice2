@@ -27,7 +27,7 @@
     <div class="goodsDiv">
         <p class="details">商品名字：${goods.getName()}</p>
         <p class="details">单价为：${goods.getPrice()}</p>
-        <p class="details">数量：${goods.getInventory()}</p>
+        <p class="details">数量：${goodsSellerRelation.getInventory()}</p>
         <div class="know">
             <input id="min" type="button" value="-" />
             <input id="text_box" name="goodsNumber" type="text" value="1" style="width:25px;" />
