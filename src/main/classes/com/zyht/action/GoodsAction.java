@@ -1,4 +1,4 @@
-package com.zyht.action;/********************************************************************
+﻿package com.zyht.action;/********************************************************************
  /**
  * @Project: jsp_web
  * @Package classes.com.zyht.action
@@ -62,34 +62,21 @@ public class GoodsAction extends ActionSupport implements BaseAction{
         return RELATION;
     }
 
-
-    /**
-     * @ClassName goodsSellerRelationShow
-     * @Description 关系表查询ID
-     * @author guoxin
-     * @date 2018-03-09
-    */
-
-    public  String goodsSellerRelationShow(){
-       if(buyerId!=null){
-         goodsSellerRelation=  goodsSellerRelationService.queryGoodsSellerRelationById(buyerId);
-       }
-            return RELATION;
-    }
     /**
      * @ClassName goodsShow
      * @Description 查询单个商品
      * @author guoxin
      * @date 2018-03-07
     */
-    public  String goodsShow(){
-        goodsSellerRelation=  goodsSellerRelationService.queryGoodsSellerRelationById(buyerId);
+   public  String goodsShow(){
+        goodsSellerRelation=goodsSellerRelationService.queryGoodsSellerRelationById(buyerId);
         goodsId=goodsSellerRelation.getGoodsId();
         request = ServletActionContext.getRequest();
         Goods goods=new Goods();
         if(goodsId!=null)
             goods=goodsService.queryGoodsById(goodsId);
         request.setAttribute("goods",goods);
+        request.setAttribute("goodsSellerRelation",goodsSellerRelation);
         return RELATION;
     }
     /**
